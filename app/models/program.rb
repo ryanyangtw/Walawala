@@ -24,6 +24,7 @@ class Program < ActiveRecord::Base
   has_many :program_category
   has_many :categories, through: :program_category
 
-
+  has_many :votes
+  has_many :voter, through: :votes, source: :user
 
 end
