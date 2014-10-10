@@ -26,6 +26,67 @@ gem 'sdoc', '~> 0.4.0',          group: :doc
 # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
 gem 'spring',        group: :development
 
+
+
+#customize gem
+gem 'jquery-turbolinks'
+gem 'bootstrap-sass', '~> 3.2.0.0'
+gem 'devise', '~> 3.4.0'
+gem "settingslogic"
+
+gem 'omniauth-facebook'
+gem 'open_uri_redirections'
+#gem "devise-i18n"
+# add for chinese message with devise
+gem 'i18n', github: 'svenfuchs/i18n'
+#Pry is a ddebug tool
+
+
+gem 'simple_form', '~> 3.0.2'
+#gem 'jquery-turbolinks'
+gem 'will_paginate' , '~> 3.0'
+gem 'will_paginate-bootstrap' 
+
+
+gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
+
+
+#add for seo
+gem 'seo_helper', '~> 1.0', :git => 'git://github.com/techbang/seo_helper.git'
+gem 'sitemap_generator'
+
+#fb open graph
+gem 'open_graph_helper', :github => 'techbang/open_graph_helper'
+
+
+gem 'rack-cache', '~> 1.2'
+
+#Grape is a REST-like API micro-framework
+gem 'grape', '~> 0.8.0'
+gem 'grape-swagger', '~> 0.7.2'
+gem 'grape-rabl', '~> 0.3.0'
+#gem 'rack-cors', '~> 0.2.9'
+
+
+
+group :development, :test do
+  #gem 'pry', '~> 0.10.0'
+  #gem 'guard-livereload'
+  #gem 'annotate', '~> 2.6.5'
+  gem 'pry'
+  gem 'meta_request'
+  gem 'better_errors'
+  gem "binding_of_caller"
+  gem 'guard-livereload'
+  gem 'annotate', '~> 2.6.5'
+  gem 'awesome_print', :require => false
+  gem 'hirb', :require => false
+  gem 'hirb-unicode', :require => false
+end
+
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
