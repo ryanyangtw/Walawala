@@ -34,7 +34,7 @@ class DeviseCreateUsers < ActiveRecord::Migration
       t.string :name
       t.string :provider
       t.string :uid
-      t.strimg :avatar
+      t.string :avatar
       t.string :authentication_token
 
       t.timestamps
