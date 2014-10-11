@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   
   root to: "pages#home"
-  #devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , :registrations => "registrations" }
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , :registrations => "registrations" }
 
-  devise_for :users
+  #devise_for :users
+  #devise_for :users, :controllers=>{ :registrations=>"registrations"}
 
   resources :programs do 
     resources :episodes
@@ -24,13 +25,13 @@ Rails.application.routes.draw do
   
   resources :episodes ,:only=>[:show]
   resources :categories
-  resources :evaluations
+  resources :tags
   
   
 
   #add for grape api
   #mount Walawala::API => '/api'
-  #mount API::Root => '/'
+  mount API::Root => '/'
 
 
   # The priority is based upon order of creation: first created -> highest priority.

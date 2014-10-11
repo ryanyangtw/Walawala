@@ -10,8 +10,8 @@
       </button>
       <%= link_to "Walawala", root_path, class:"navbar-brand" %>
 
-      <%# @q = Program.ransack(params[:q])%>
-      <%#= render :partial=>'shared/ransack_form', :locals=>{:q => @q}%>
+      <% @q = Program.ransack(params[:q])%>
+      <%= render :partial=>'shared/ransack_form', :locals=>{:q => @q}%>
      
     </div>
 
@@ -25,14 +25,14 @@
         
         <% if user_signed_in? %>
 
-        <li><%#= link_to("設定評價", evaluations_path) %></li>
+        <li><%= link_to("設定標簽", tags_path) %></li>
         
-        <li><%#= link_to("節目分類", categories_path) %></li>
+        <li><%= link_to("節目分類", categories_path) %></li>
 
-        <li><%#= link_to("新增節目", new_program_path)%>
+        <li><%= link_to("新增節目", new_program_path)%>
         </li>
 
-        <li><%= image_tag(current_user.avatar.url(:small)) if current_user.avatar.present?%>
+        <li><%= image_tag(current_user.avatar.url(:small) ) if current_user.avatar.present?%>
         </li>
         <li><%= link_to(current_user.name, root_path)%>
         </li>
@@ -43,7 +43,7 @@
         <% else %>
           <li><%= link_to "註冊", new_user_registration_path%></li>
           <li><%= link_to "登入", new_user_session_path%></li>
-          <li><%#= link_to "FB登入", user_omniauth_authorize_path(:facebook) %></li>
+          <li><%= link_to "FB登入", user_omniauth_authorize_path(:facebook) %></li>
         <% end %>
         
         

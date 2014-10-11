@@ -13,6 +13,19 @@
 
 class Episode < ActiveRecord::Base
 
-  belongs_to :program
+  mount_uploader :audio, AudioUploader
+
+  belongs_to :program, touch: true
   has_many :votes
+
+  validates :audio, presence: true 
+
+
+  #def update_program
+  # self.program.update_last_episode_uploaded_at(self.created_at)
+  #end
+
+  def audio_url
+   self.audio.url if self.audio.present?
+  end
 end

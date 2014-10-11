@@ -16,4 +16,6 @@ class Category < ActiveRecord::Base
 
   has_many :user_categories
   has_many :subscriber , through: :user_categories, source: :user
+
+  validates :title, :presence => true
 end

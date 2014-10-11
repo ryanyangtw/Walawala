@@ -11,6 +11,10 @@
 class Tag < ActiveRecord::Base
   has_many :votes
   has_many :voted_episodes, through: :votes, source: :episode
+  has_many :voter, through: :votes, source: :user
   #has_many :voted_user, through: :vote, source: :user
+
+
+  validates :title, :presence => true
 
 end
