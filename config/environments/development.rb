@@ -37,4 +37,7 @@ Rails.application.configure do
 
   # set for devise
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+
+  #add for adding view helper in rabl view
+  routes.default_url_options = { host: "127.0.0.1.xip.io", port: 3000 }
 end

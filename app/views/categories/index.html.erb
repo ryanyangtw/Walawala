@@ -1,0 +1,34 @@
+<div class="row">
+	<div class="col-md-12">
+
+		<%= link_to("新增節目分類", new_category_path, :class=> 'btn btn-info btn-lg')%>
+
+		<hr>
+
+		<h2>目前節目分類</h2>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th>分類名稱</th>
+						<th width="60%">分類敘述</th>
+						<th>編輯</th>
+						<th>刪除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @categories.each do |category|%>
+					<tr>
+	
+						<td><%=link_to category.title, category_path(category) %></td>
+				
+						<td><%= category.description %></td>
+						<td><%= link_to "編輯", edit_category_path(category) ,:class=>"btn btn-info"%></td>
+						<td><%= link_to "刪除", category_path(category) ,:method=>:delete, :class=>"btn btn-danger" %></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+
+	</div>
+</div>

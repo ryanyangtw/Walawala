@@ -1,0 +1,28 @@
+<div class="row">
+
+  <h2> 搜尋字串:  <%= params[:q]["subject_or_introduction_or_episodes_title_or_episodes_description_cont"] %></h2>
+
+  <hr>
+
+
+<div class="row">
+
+			 <% @programs.each do |program| %>
+			 <div class="col-sm-3 col-md-3">
+
+			    <div class="panel panel-default">
+			      <div class="img-box">
+			      	<%= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program) %>
+			    	</div>
+
+			      <div class="panel-body img-avatar">
+			      	<%= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded")%>
+			        <span><%= program.subject %></span>
+			    	</div>
+			    </div>
+			 </div>
+			 <% end %>
+
+</div>
+
+</div>

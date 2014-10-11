@@ -1,0 +1,112 @@
+<% content_for :program_show_customize_jquery do%>
+ <%= javascript_include_tag 'program_show' %>
+<% end %>
+
+<div class="row">
+	<div class="col-md-3 img-box">
+		<%= image_tag(@program.image.url(:medium))%>
+	</div>
+
+	<div class="col-md-9">
+		<% if(current_user == @program.owner)%>
+	  	<%= link_to("新增一集", new_program_episode_path(@program), :class=> 'btn btn-info btn-lg')%>
+
+	  	<%= link_to("修改節目", edit_program_path(@program), :class=> 'btn btn-info btn-lg')%>
+
+	  	<%= link_to("刪除節目", program_path(@program), :method=>:delete, :class=> 'btn btn-danger btn-lg')%>
+	
+	  <% end %>  
+
+
+	  <% if user_signed_in? %>
+	  	<% if  current_user.already_subscribed?(@program)%>
+				<%= link_to("取消訂閱", cancel_subscription_program_path(@program), :class=>'btn btn-default btn-lg',:method=>:post, :role=>"button") %>
+			<%else%>
+				<%= link_to("訂閱", subscribe_program_path(@program), :method=>:post, :class=>'btn btn-primary btn-lg') %>
+			<%end%>
+
+	  <%else %>
+			<%= link_to("請先登入才可訂閱", "#", :class=>'btn btn-default btn-lg disabled', :role=>"button") %>
+	  <%end%>
+	
+			<hr>
+
+
+		<% @program.categories.each do |category| %>
+			<%= content_tag(:span, category.title ,:class=>"label label-info") %>
+		<%end%>
+
+	  <h2><%= @program.subject %></h2>
+		<h4><%= simple_format(@program.introduction) %></h4>
+
+<!-- Remove evaluation on program. Add Tag to episode
+
+		<%# if user_signed_in? %>
+
+			<%# @evaluations.order("id ASC").each do |evaluation| %>
+
+				<%#= link_to evaluation.title, vote_program_path(@program,:evaluation_id=>evaluation),:type=>"button", :method=>:post, :class=>"btn btn-primary"%>
+
+				<%#= content_tag(:span, @program.program_evaluations.where(:evaluation_id => evaluation).size , :class=>"badge")%>
+
+				&nbsp;&nbsp;
+
+			<%#end%>
+		<%#end%>
+-->
+	</div>
+
+</div>
+
+<hr>
+
+<div class="row">
+	<div class="col-md-12 well">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>#</th>
+					<th>標題</th>
+					<th>描述</th>
+					<th>內容</th>
+					<% if(current_user == @program.owner)%>
+					<th>修改</th>
+					<th>刪除</th>
+					<th>標簽</th>
+					<%end%>
+				</tr>
+			</thead>
+			
+			<tbody>
+				<%if @program.episodes.present?%>
+					<%@program.episodes.order("id ASC").each_with_index do |episode, index|%>
+						<tr>
+							<td><%= index %></td>
+							<td><%= episode.title %></td>
+							<td><%= episode.description %></td>
+							<td><%= audio_tag(episode.audio.url, :controls => true, :preload => "auto")%></td>
+
+
+
+							<% if(current_user == @program.owner)%>
+								<td><%= link_to('編輯', edit_program_episode_path(@program, episode), :class=>'btn btn-info btn-lg')%></td>
+								<td><%= link_to('刪除', program_episode_path(@program, episode), :method => :delete,:class=>'btn btn-danger btn-lg')%></td>
+							<% end %>
+
+							<% Tag.order("id ASC").each do |tag|%>
+								<td><%= link_to("#{tag.title}(#{tag.voted_episodes.where(id: episode.id).size})", '#' , class: 'btn btn-primary') %> </td>
+							<%end%>
+						</tr>
+			 		
+			 		<%end%>	
+			 	<%end%>	
+			</tbody>
+
+
+		</table>
+	</div>
+</div>
+
+
+
+

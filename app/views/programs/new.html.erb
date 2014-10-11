@@ -1,0 +1,14 @@
+<div class="col-md-6 col-md-offset-3 well">
+	<h1>新增節目</h1>
+
+<%= form_for @program , :html => {multipart: true} ,:url => programs_path(@program) do |f|%>
+
+	<%= render(:partial=>'form', :locals => {:f => f})%>
+
+	<div class="form-group">
+		<%= f.submit("新增", :class=>"btn btn-primary")%>
+	</div>
+<%end%>
+
+
+</div>

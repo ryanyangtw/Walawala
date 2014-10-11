@@ -13,6 +13,12 @@
 
 class Program < ActiveRecord::Base
 
+  mount_uploader :image, ImageUploader
+
+
+  #one to many
+  belongs_to :owner, class_name: "User", foreign_key: :user_id
+
   #one to many
   has_many :episodes
 
@@ -24,6 +30,39 @@ class Program < ActiveRecord::Base
   has_many :program_category
   has_many :categories, through: :program_category
 
+  #many to many
+  has_many :votes
+  has_many :voter, through: :votes, source: :user
 
+
+  def add_subscriber!(subscriber)
+    self.subscribers << subscriber
+  end
+
+  #def add_evaluator!(evaluator)
+  #  self.evaluators << evaluator
+  #end
+
+  #def update_last_episode_uploaded_at(time)
+  #  #self.last_episode_uploaded_at = time
+  #  #self.save!
+  #  # self.errors.to_a
+  #   self.update_column(:last_episode_uploaded_at, time)
+  #end
+
+  def remove_subscriber!(user)
+    self.subscribers.destroy(user)
+  end
+
+  #def vote!(evaluation_id, user_id)
+  #  program_evaluations = self.program_evaluations.build(:evaluation_id=>evaluation_id, :user_id => user_id)
+  #  program_evaluations.save
+  #end
+
+
+  def image_url
+    return self.image.url(:small)
+    #return URI.join(request.url, self.image.url)
+  end
 
 end

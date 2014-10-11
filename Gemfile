@@ -32,6 +32,9 @@ gem 'spring',        group: :development
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass', '~> 3.2.0.0'
 gem 'devise', '~> 3.4.0'
+
+gem 'carrierwave'
+gem 'mini_magick', '~> 3.8.1'
 gem "settingslogic"
 
 gem 'omniauth-facebook'
@@ -62,9 +65,10 @@ gem 'open_graph_helper', :github => 'techbang/open_graph_helper'
 gem 'rack-cache', '~> 1.2'
 
 #Grape is a REST-like API micro-framework
-gem 'grape', '~> 0.8.0'
-gem 'grape-swagger', '~> 0.7.2'
-gem 'grape-rabl', '~> 0.3.0'
+gem 'grape'
+gem 'kramdown'
+gem 'grape-swagger'
+gem 'grape-rabl'
 #gem 'rack-cors', '~> 0.2.9'
 
 
