@@ -16,6 +16,12 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
+default size:120:90
+
+mqdefault:320*180
+
+hqdefault:480*360
+
 
 
   version :small do
@@ -27,18 +33,19 @@ class ImageUploader < CarrierWave::Uploader::Base
   end
 
 
-
-  version :small_square_for_mobile do
-    process :resize_to_fill => [180,180]
+  version :mobile_sq_default do
+    process :resize_to_fill => [120,90]
   end
 
-  version :big_square_for_mobile do
-    process :resize_to_fill => [480,480]
-  end
-
-  version :rectangle_for_mobile do
+  version :mobile_mq_default do
     process :resize_to_fill => [320,240]
   end
+
+  version :mobile_hq_default do
+    process :resize_to_fill => [480,360]
+  end
+
+
 
 
 
