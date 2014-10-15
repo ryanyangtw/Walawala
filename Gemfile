@@ -100,7 +100,7 @@ end
 #should be delete
 #add for heroku
 group :production do
-  gem 'pry'
+
   gem 'rails_12factor'
   #add for gzip on heroku
   gem 'heroku-deflater'

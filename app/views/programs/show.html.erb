@@ -81,7 +81,8 @@
 				<%if @program.episodes.present?%>
 					<%@program.episodes.order("id ASC").each_with_index do |episode, index|%>
 						<tr>
-							<%binding.pry%>
+							<% audio = FFMPEG::Movie.new(episode.audio.url) %>
+							=========<%= audio.duration %>=========
 							<td><%= index %></td>
 							<td><%= episode.title %></td>
 							<td><%= episode.description %></td>
