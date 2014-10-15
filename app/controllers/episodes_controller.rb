@@ -1,6 +1,7 @@
 class EpisodesController < ApplicationController
   before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
   before_action :find_episode, :only => [:edit, :update,:destroy]
+  before_action :authenticate_user!, only: [:vote]
 
   def index
   end
@@ -51,6 +52,27 @@ class EpisodesController < ApplicationController
     if(@episode.destroy)
       redirect_to program_path(@program)
     end
+  end
+
+
+  def vote
+
+
+    @episode = Episode.find(params[:id])
+    @tag = Tag.find(params[:tag_id])
+
+    @vote = Vote.new(episode: @episode, voter: current_user, tag: @tag)
+
+    binding.pry
+
+    if(@vote.save)
+      flash[:notice] = "你已成功評價此節目"
+      redirect_to :back
+    else
+      flash[:notice] = "你已經評分過囉！"
+      redirect_to :back
+    end
+
   end
 
 

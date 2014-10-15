@@ -8,10 +8,11 @@ Rails.application.routes.draw do
 
   resources :programs do 
     resources :episodes
+
+
     member do
       post :subscribe
       post :cancel_subscription
-      post :vote
     end
 
     collection do
@@ -23,7 +24,12 @@ Rails.application.routes.draw do
     #end
   end
   
-  resources :episodes ,:only=>[:show]
+  resources :episodes ,:only=>[:show] do
+    member do
+      post "tag/:tag_id/vote", to: "episodes#vote", as: :vote
+    end
+  end
+
   resources :categories
   resources :tags
   
