@@ -31,7 +31,7 @@ ActiveRecord::Schema.define(version: 20141015090807) do
     t.integer  "program_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.float    "length_of_audio", default: 0.0
+    t.integer  "length_of_audio", default: 0
   end
 
   create_table "program_categories", force: true do |t|
