@@ -10,6 +10,9 @@
 #
 
 class Category < ActiveRecord::Base
+
+  mount_uploader :image, ImageUploader
+  
   #many to mant
   has_many :program_categories
   has_many :programs, through: :program_categories

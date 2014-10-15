@@ -10,7 +10,8 @@
 				<thead>
 					<tr>
 						<th>分類名稱</th>
-						<th width="60%">分類敘述</th>
+						<th width="50%">分類敘述</th>
+						<th>分類圖片</th>
 						<th>編輯</th>
 						<th>刪除</th>
 					</tr>
@@ -23,6 +24,7 @@
 						<td><%=link_to category.title, category_path(category) %></td>
 				
 						<td><%= category.description %></td>
+						<td><%= image_tag(category.image.url(:small))%> </td>
 						<td><%= link_to "編輯", edit_category_path(category) ,:class=>"btn btn-info"%></td>
 						<td><%= link_to "刪除", category_path(category) ,:method=>:delete, :class=>"btn btn-danger" %></td>
 					</tr>

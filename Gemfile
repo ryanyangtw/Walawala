@@ -34,6 +34,7 @@ gem 'bootstrap-sass', '~> 3.2.0.0'
 gem 'devise', '~> 3.4.0'
 
 gem 'carrierwave'
+gem 'fog'
 gem 'mini_magick', '~> 3.8.1'
 gem "settingslogic"
 

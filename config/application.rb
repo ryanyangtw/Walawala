@@ -21,7 +21,7 @@ module Walawala
     # config.i18n.default_locale = :de
 
     #transfer english to chinese
-    config.i18n.default_locale = "zh-TW"
+    #config.i18n.default_locale = "zh-TW"
 
     #add for Grape
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')
