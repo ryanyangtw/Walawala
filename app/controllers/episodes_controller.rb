@@ -17,6 +17,7 @@ class EpisodesController < ApplicationController
   end
 
   def create  
+
     #@program = current_user.programs.find(params[:program_id])
     @episode = @program.episodes.build(episode_params)
     if(@episode.save)

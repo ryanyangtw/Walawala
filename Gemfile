@@ -74,6 +74,11 @@ gem 'grape-rabl'
 
 
 
+#for detect the length og audio
+gem 'streamio-ffmpeg'
+
+
+
 group :development, :test do
   #gem 'pry', '~> 0.10.0'
   #gem 'guard-livereload'
@@ -95,7 +100,7 @@ end
 #should be delete
 #add for heroku
 group :production do
-
+  gem 'pry'
   gem 'rails_12factor'
   #add for gzip on heroku
   gem 'heroku-deflater'
