@@ -16,12 +16,6 @@ class ImageUploader < CarrierWave::Uploader::Base
     "uploads/#{model.class.to_s.underscore}/#{mounted_as}/#{model.id}"
   end
 
-default size:120:90
-
-mqdefault:320*180
-
-hqdefault:480*360
-
 
 
   version :small do
