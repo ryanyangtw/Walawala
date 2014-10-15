@@ -75,7 +75,10 @@ gem 'grape-rabl'
 
 
 #for detect the length og audio
-gem 'streamio-ffmpeg'
+#gem 'streamio-ffmpeg'
+#gem 'taglib-ruby', '~> 0.7.0'
+#gem 'ruby-mp3info', '~> 0.8.5'
+gem 'ruby-audioinfo'
 
 
 

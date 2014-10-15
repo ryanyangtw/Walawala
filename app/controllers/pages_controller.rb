@@ -1,6 +1,7 @@
 class PagesController < ApplicationController
 
   def home
+
     @programs = Program.all.order("created_at DESC").paginate(:page => params[:page], :per_page => 20)
     @programs = [] if(@programs==nil)
 

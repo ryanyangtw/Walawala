@@ -81,7 +81,7 @@
 				<%if @program.episodes.present?%>
 					<%@program.episodes.order("id ASC").each_with_index do |episode, index|%>
 						<tr>
-
+	
 							<td><%= index %></td>
 							<td><%= episode.title %></td>
 							<td><%= episode.description %></td>
