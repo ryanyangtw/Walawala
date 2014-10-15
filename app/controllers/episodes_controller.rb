@@ -63,7 +63,6 @@ class EpisodesController < ApplicationController
 
     @vote = Vote.new(episode: @episode, voter: current_user, tag: @tag)
 
-
     if(@vote.save)
       flash[:notice] = "你已成功評價此節目"
       redirect_to :back
