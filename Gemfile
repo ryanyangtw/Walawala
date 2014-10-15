@@ -92,6 +92,18 @@ end
 
 
 
+#should be delete
+#add for heroku
+group :production do
+
+  gem 'rails_12factor'
+  #add for gzip on heroku
+  gem 'heroku-deflater'
+end
+
+
+
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
