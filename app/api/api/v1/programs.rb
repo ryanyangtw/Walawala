@@ -3,15 +3,32 @@ module API
 		class Programs < Grape::API
 			#helpers Rails.application.routes.url_helpers
 			
-			@@default_view_path = 'v1/program'
+			@@default_view_path = 'v1/programs'
+
+
+			helpers do
+        params :access_token do
+        	requires :user, type: Hash do
+          	requires :authentication_token, type: String
+          	requires :id, type: String
+          end
+        end
+      end
+
 
 	    resources :programs do
+	    	
 	    	desc "Return list of program"
-	    	get do
+				params do
+					use :access_token
+				end
+	    	get '/' do
 	    		#binding.pry
 	    		@programs = Program.all.includes(:episodes)
 	    		render rabl: "#{@@default_view_path}/index"
 	    	end
+
+
 
 	    	#post do
   			#	#Status.create!(text: params[:text])
@@ -19,6 +36,9 @@ module API
 				
 				desc "Return Specific Program"
 				route_param :id do
+					params do
+						use :access_token
+					end
 					get do
 						#id_array = params[:id].split(",")
 						#@program = Program.find(id_array)

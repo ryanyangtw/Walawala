@@ -19,8 +19,13 @@ module API
           return true if warden.authenticated?
           #user_id = params[:id].presence
    				#@user = user_id && User.find(user_id)
-   				@user = User.find(params[:id])
-          @user && params[:authentication_token] && Devise.secure_compare(@user.authentication_token, params[:authentication_token] )
+   				
+          ##@user = User.find(params[:id])
+          ##@user && params[:authentication_token] && Devise.secure_compare(@user.authentication_token, params[:authentication_token] )
+
+          @user = User.find(params[:user][:id])
+          @user && params[:user][:authentication_token] && Devise.secure_compare(@user.authentication_token, params[:user][:authentication_token] )
+
           #params[:authentication_token] && @user = User.find_by_authentication_token(params[:authentication_token])
         end
 
@@ -34,7 +39,8 @@ module API
       end		
 
 
-      #mount API::V1::Programs
+
+      mount API::V1::Programs
 			mount API::V1::Users
 
 	  end

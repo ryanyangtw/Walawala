@@ -1,9 +1,11 @@
 module API
 	module V1
 		class UnauthenticatedRequestsAPI < Grape::API
+
+			@@default_user_path = 'v1/users'
 			
 			mount API::V1::Categories
-			mount API::V1::Programs
+			#mount API::V1::Programs
 			mount API::V1::Episodes
 			resources :users do
 	    	
@@ -19,7 +21,9 @@ module API
 	    
 	    		@user = User.new(params[:user])
 	    		if(@user.save)
-	    			@user
+	    			@user.renew_data!
+
+	    			render rabl: "#{@@default_user_path}/show"
 	    		else
 	    			error!("該使用者已經存在", 500)
 	    		end
@@ -28,17 +32,20 @@ module API
 
     		desc "User Sign in"
     		params do
-    			optional :user, type: Hash do
+    			requires :user, type: Hash do
     				requires :email, type: String
     				requires :password, type: String
     			end
     		end
 	    	namespace :sign_in do
 	    		post do
-	    			@user = User.find_by_email(params[:email])
-        		if(user && user.valid_password?(params[:password]))
-        			@user.chenge_authentication_token
-       				@user
+
+	    			binding.pry
+	    			@user = User.find_by_email(params[:user][:email])
+        		if(@user && @user.valid_password?(params[:user][:password]))
+        			@user.change_authentication_token!
+        			@user.renew_data!
+       				render rabl: "#{@@default_user_path}/show"
         		else
         			error!("401 Unauthorized", 401)
         		end
@@ -48,25 +55,41 @@ module API
 				desc "Sign In With Facebook" 	 			  	
 	    	namespace :auth do
 	    		route_param :omniauth_provider do		
+		    		
 		    		params do
 		    			requires :omniauth_provider, type: String
-		    			optional :auth, type: Hash do
+		    			requires :user, type: Hash do
 		    				requires :provider, type: String
 		    				requires :uid, type: String
-	    				  optional :info, type: Hash do
-		    					requires :email, type: String
-		    					optional :name, type: String
-		    					optional :image, type: String
-	    				  end
+	    				  #optional :info, type: Hash do
+		    				requires :email, type: String
+		    				optional :name, type: String
+		    				optional :image, type: String
+	    				  #end
 	    				end
 	  				end
 
 						post do
 							if(params[:omniauth_provider] == 'facebook')
-								@user = User.from_omniauth(params[:auth])					
+
+								#auth = {"info"=>{}}
+								#auth["provider"] = params[:user][:provider]
+								#auth["uid"] = params[:user][:uid]
+								#auth["info"]["email"] = params[:user][:email]
+								#auth["info"]["name"] = params[:user][:name]
+								#auth["info"]["image"] = params[:user][:image]
+								params[:user][:info] = {}
+								params[:user][:info][:email]= params[:user][:email]
+								params[:user][:info][:name]= params[:user][:name]
+								params[:user][:info][:image]= params[:user][:image]
+
+
+								@user = User.from_omniauth(params[:user])					
 								if(@user.persisted?)
-									@user.chenge_authentication_token
-									@user
+									@user.change_authentication_token!
+									@user.renew_data!
+
+	    						render rabl: "#{@@default_user_path}/show"
 								else
 									error!("401 Unauthorized", 401)
 								end

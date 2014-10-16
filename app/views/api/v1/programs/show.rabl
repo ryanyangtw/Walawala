@@ -3,7 +3,12 @@ cache @program
 attributes :id, :subject, :introduction
 
 #node(:image_url){ |program| program.image_url }
-node(:image_url){ |program| program.image.url(:small) }
+node(:href){|program| program_path(program)}
+node(:image_sqdefault){ |program| program.image.url(:mobile_sq_default)}
+node(:image_mqdefault){ |program| program.image.url(:mobile_mq_default)}
+node(:image_hqdefault){ |program| program.image.url(:mobile_hq_default)}
+
+node(:subscribed){|program| program.subscribers.exists?(current_user) ? 'true' : 'false'}
 
 
 

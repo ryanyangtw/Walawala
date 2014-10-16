@@ -3,7 +3,7 @@ module API
     class Categories < Grape::API
       #helpers Rails.application.routes.url_helpers
       
-      @@default_view_path = 'v1/category'
+      @@default_view_path = 'v1/categories'
 
       resources :categories do
         desc "Return list of category"
