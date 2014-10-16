@@ -1,7 +1,3 @@
-
-
-binding.pry
-
 object @episode 
 cache @episode
 

@@ -40,7 +40,6 @@ module API
 	    	namespace :sign_in do
 	    		post do
 
-	    			binding.pry
 	    			@user = User.find_by_email(params[:user][:email])
         		if(@user && @user.valid_password?(params[:user][:password]))
         			@user.change_authentication_token!
