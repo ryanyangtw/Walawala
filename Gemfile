@@ -70,6 +70,8 @@ gem 'grape'
 gem 'kramdown'
 gem 'grape-swagger'
 gem 'grape-rabl'
+#disable the security feature of strong parameters for grape
+gem "hashie_rails"
 #gem 'rack-cors', '~> 0.2.9'
 
 

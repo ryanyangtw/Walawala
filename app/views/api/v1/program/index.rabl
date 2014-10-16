@@ -2,7 +2,7 @@ collection @programs ,:root => "programs"
 cache @programs
 attributes :id, :subject, :introduction
 
-node(:image_url){ |program| program.image_url }
+node(:image_url){ |program| program.image.url(:small) }
 node(:href){|program| program_path(program)}
 
 #node(:links) do |program|

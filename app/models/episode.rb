@@ -27,9 +27,9 @@ class Episode < ActiveRecord::Base
   # self.program.update_last_episode_uploaded_at(self.created_at)
   #end
 
-  def audio_url
-   self.audio.url if self.audio.present?
-  end
+  #def audio_url
+  # self.audio.url if self.audio.present?
+  #end
 
   private
   def calculate_length_of_audio

@@ -22,6 +22,22 @@ class RegistrationsController < Devise::RegistrationsController
       end
     end
 
+
+
+    protected
+    #def after_sign_up_path_for(resource)
+    #  #binding.pry
+    #  subscribe_categories_path
+    #  #signed_in_root_path(resource)
+    #end
+
+
+
+
+    #def after_update_path_for(resource)
+    #  signed_in_root_path(resource)
+    #end
+
     private
 
       # check if we need password to update user data

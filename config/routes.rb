@@ -32,6 +32,9 @@ Rails.application.routes.draw do
 
   resources :categories
   resources :tags
+
+  get "subscription/categories", to: "users#categories_of_subscription"
+  post "subscribe_categories", to: "users#subscribe_category"
   
   
 

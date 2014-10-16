@@ -25,5 +25,16 @@ class ApplicationController < ActionController::Base
   end
 
 
+# redirect the category describe page if the new user
+  def after_sign_in_path_for(resource)
+      
+      if resource.is_a?(User) && resource.sign_in_count == 1
+        subscription_categories_path
+      else
+        super
+      end
+  end
+
+
 
 end

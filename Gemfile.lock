@@ -175,6 +175,9 @@ GEM
       guard (~> 2.0)
       multi_json (~> 1.8)
     hashie (3.3.1)
+    hashie_rails (0.0.1)
+      hashie (>= 3.0)
+      rails (~> 4.0)
     heroku-deflater (0.5.3)
       rack (>= 1.4.5)
     hike (1.2.3)
@@ -376,6 +379,7 @@ DEPENDENCIES
   grape-rabl
   grape-swagger
   guard-livereload
+  hashie_rails
   heroku-deflater
   hirb
   hirb-unicode

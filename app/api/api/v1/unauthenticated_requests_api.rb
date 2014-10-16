@@ -9,30 +9,36 @@ module API
 	    	
 	    	desc "Create User"	    	
 	    	params do
-	    		requires :email, type: String
-	    		requires :password, type: String
+	    		optional :user, type: Hash do
+	    			requires :email, type: String
+	    			requires :password, type: String
+	    		end
 	    	end
 	    	post do
-	    		@user = User.new({email: params[:email], password: params[:password]})
+	    		#@user = User.new({email: params[:email], password: params[:password]})
+	    
+	    		@user = User.new(params[:user])
 	    		if(@user.save)
 	    			@user
 	    		else
-	    			error!("500 Internal Server Error", 500)
+	    			error!("該使用者已經存在", 500)
 	    		end
 	    	end
 
 
     		desc "User Sign in"
     		params do
-    			requires :email, type: String
-    			requires :password, type: String
+    			optional :user, type: Hash do
+    				requires :email, type: String
+    				requires :password, type: String
+    			end
     		end
 	    	namespace :sign_in do
 	    		post do
-	    			user = User.find_by_email(params[:email])
+	    			@user = User.find_by_email(params[:email])
         		if(user && user.valid_password?(params[:password]))
-        			user.chenge_authentication_token
-       				user
+        			@user.chenge_authentication_token
+       				@user
         		else
         			error!("401 Unauthorized", 401)
         		end
@@ -57,10 +63,10 @@ module API
 
 						post do
 							if(params[:omniauth_provider] == 'facebook')
-								user = User.from_omniauth(params[:auth])					
-								if(user.persisted?)
-									user.chenge_authentication_token
-									user
+								@user = User.from_omniauth(params[:auth])					
+								if(@user.persisted?)
+									@user.chenge_authentication_token
+									@user
 								else
 									error!("401 Unauthorized", 401)
 								end
