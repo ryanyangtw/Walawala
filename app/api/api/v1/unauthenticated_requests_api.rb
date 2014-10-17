@@ -18,9 +18,14 @@ module API
 	    		end
 	    	end
 	    	post do
-	    		puts params
+
 	    		#@user = User.new({email: params[:email], password: params[:password]})
-	    
+	    		puts "============================================================="
+	    		puts params
+	    		puts "============================================================="
+	    		puts params[:user]
+	    		puts "============================================================="
+	  
 	    		@user = User.new(params[:user])
 	    		if(@user.save)
 	    			@user.renew_data!

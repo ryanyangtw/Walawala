@@ -4,7 +4,6 @@ module API
 
 
         def error_message(message, staus_code)
-          puts params
           error!( message , staus_code)
         end
 
