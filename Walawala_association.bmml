@@ -165,13 +165,13 @@
         <text>%28subscribed_category%29</text>
       </controlProperties>
     </control>
-    <control controlID="50" controlTypeID="com.balsamiq.mockups::Label" x="1103" y="251" w="-1" h="-1" measuredW="138" measuredH="22" zOrder="22" locked="false" isInGroup="-1">
+    <control controlID="50" controlTypeID="com.balsamiq.mockups::Label" x="1200" y="228" w="-1" h="-1" measuredW="79" measuredH="22" zOrder="22" locked="false" isInGroup="-1">
       <controlProperties>
         <size>14</size>
         <text>%28subscriber%29</text>
       </controlProperties>
     </control>
-    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="799" y="539" w="-1" h="-1" measuredW="141" measuredH="22" zOrder="23" locked="false" isInGroup="-1">
+    <control controlID="52" controlTypeID="com.balsamiq.mockups::Label" x="790" y="566" w="-1" h="-1" measuredW="141" measuredH="22" zOrder="23" locked="false" isInGroup="-1">
       <controlProperties>
         <size>14</size>
         <text>%28subscribed_program%29</text>

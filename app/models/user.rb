@@ -36,17 +36,51 @@ class User < ActiveRecord::Base
   #many to many
   has_many :user_programs
   has_many :subscribed_programs, through: :user_programs, source: :program
+  has_many :subscribed_episodes, through: :subscribed_programs, source: :episodes
 
   #many to many
   has_many :user_categories
-  has_many :subscribed_categories, through: :user_categories, source: :category
+  has_many :subscribed_categories, through: :user_categories, source: :category, before_add: :subscribe_hot_program_in_categories
 
   #many_to_many voted episode. Didn't implement
   has_many :votes 
-  has_many :voted_episodes, through: :votes, source: :episodes
+  has_many :voted_episodes, through: :votes, source: :episode
 
 
   before_save :ensure_authentication_token
+
+  #before_save {|user| user.subscribe_hot_program_in_categories if user.subscribed_category_ids_changed?}
+
+
+  def customize_episodes
+
+    # TODO
+    self.subscribed_episodes.order('id desc').limit(20)
+  end
+
+  def renew_data!
+    new_count = self.sign_in_count + 1
+    self.update(sign_in_count: new_count)
+  end
+    
+  def subscribe_hot_program_in_categories(category)
+
+    category.programs.order('subscriberz_count desc').limit(3).each do |p|
+      self.subscribe_program!(p)
+    end 
+
+  end
+
+
+
+  def subscribe_program!(program)
+    self.subscribed_programs << program
+  end
+
+  def cancel_subscribed_program!(program)
+    self.subscribed_programs.destroy(program)
+  end
+
 
   def has_subscriptions?
     self.subscribed_programs.present?
@@ -78,6 +112,8 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     
     where(auth.slice(:provider, :uid)).first_or_create do |user|
+
+
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
@@ -131,6 +167,7 @@ class User < ActiveRecord::Base
         break token unless User.where(authentication_token: token).first
       end
     end
+
 
 
 end

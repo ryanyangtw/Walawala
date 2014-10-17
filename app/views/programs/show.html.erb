@@ -81,6 +81,7 @@
 				<%if @program.episodes.present?%>
 					<%@program.episodes.order("id ASC").each_with_index do |episode, index|%>
 						<tr>
+	
 							<td><%= index %></td>
 							<td><%= episode.title %></td>
 							<td><%= episode.description %></td>
@@ -94,7 +95,7 @@
 							<% end %>
 
 							<% Tag.order("id ASC").each do |tag|%>
-								<td><%= link_to("#{tag.title}(#{tag.voted_episodes.where(id: episode.id).size})", '#' , class: 'btn btn-primary') %> </td>
+								<td><%= link_to("#{tag.title}(#{tag.voted_episodes.where(id: episode.id).size})", vote_episode_path(episode, tag) , class: 'btn btn-primary', method: :post) %> </td>
 							<%end%>
 						</tr>
 			 		

@@ -35,6 +35,13 @@ class Program < ActiveRecord::Base
   has_many :voter, through: :votes, source: :user
 
 
+
+  def self.search(keyword)
+    if keyword.present?
+      where('subject LIKE ?', "%#{keyword}%")
+    end
+  end
+
   def add_subscriber!(subscriber)
     self.subscribers << subscriber
   end
@@ -60,9 +67,8 @@ class Program < ActiveRecord::Base
   #end
 
 
-  def image_url
-    return self.image.url(:small)
-    #return URI.join(request.url, self.image.url)
-  end
+  #def image_url
+  #  return self.image.url(:small)
+  #end
 
 end

@@ -11,7 +11,9 @@
 
 class Vote < ActiveRecord::Base
 
-  belongs_to :user
+  belongs_to :voter, class_name: "User", foreign_key: :user_id 
   belongs_to :episode
   belongs_to :tag
+
+  validates_uniqueness_of :voter, scope: [:episode_id, :tag_id]
 end

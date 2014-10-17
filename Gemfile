@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
-
+ruby "2.1.2"
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.1.0'
@@ -34,6 +34,7 @@ gem 'bootstrap-sass', '~> 3.2.0.0'
 gem 'devise', '~> 3.4.0'
 
 gem 'carrierwave'
+gem 'fog'
 gem 'mini_magick', '~> 3.8.1'
 gem "settingslogic"
 
@@ -69,7 +70,17 @@ gem 'grape'
 gem 'kramdown'
 gem 'grape-swagger'
 gem 'grape-rabl'
+#disable the security feature of strong parameters for grape
+gem "hashie_rails"
 #gem 'rack-cors', '~> 0.2.9'
+
+
+
+#for detect the length og audio
+#gem 'streamio-ffmpeg'
+#gem 'taglib-ruby', '~> 0.7.0'
+#gem 'ruby-mp3info', '~> 0.8.5'
+gem 'ruby-audioinfo'
 
 
 
@@ -86,6 +97,18 @@ group :development, :test do
   gem 'awesome_print', :require => false
   gem 'hirb', :require => false
   gem 'hirb-unicode', :require => false
+end
+
+
+
+
+#should be delete
+#add for heroku
+group :production do
+
+  gem 'rails_12factor'
+  #add for gzip on heroku
+  gem 'heroku-deflater'
 end
 
 

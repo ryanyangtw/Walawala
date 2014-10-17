@@ -40,4 +40,11 @@ Rails.application.configure do
 
   #add for adding view helper in rabl view
   routes.default_url_options = { host: "127.0.0.1.xip.io", port: 3000 }
+
+  #Shoule be delete
+  #Add for Heroku, It should be deleted after migrate to AWS
+  CarrierWave.configure do |config|
+    config.storage :file
+  end
+  ###########################################
 end

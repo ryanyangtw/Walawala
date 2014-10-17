@@ -11,5 +11,5 @@
 
 class UserProgram < ActiveRecord::Base
   belongs_to :user 
-  belongs_to :program 
+  belongs_to :program, counter_cache: :subscriberz_count
 end

@@ -1,6 +1,8 @@
 require File.expand_path('../boot', __FILE__)
 
 require 'rails/all'
+require 'mp3info'
+require 'audioinfo'
 
 # Require the gems listed in Gemfile, including any gems
 # you've limited to :test, :development, or :production.
@@ -21,7 +23,7 @@ module Walawala
     # config.i18n.default_locale = :de
 
     #transfer english to chinese
-    config.i18n.default_locale = "zh-TW"
+    #config.i18n.default_locale = "zh-TW"
 
     #add for Grape
     config.paths.add File.join('app', 'api'), glob: File.join('**', '*.rb')

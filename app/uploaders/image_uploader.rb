@@ -7,7 +7,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   include CarrierWave::MiniMagick
 
   # Choose what kind of storage to use for this uploader:
-  storage :file
+  #storage :file
   # storage :fog
 
   # Override the directory where uploaded files will be stored.
@@ -25,6 +25,22 @@ class ImageUploader < CarrierWave::Uploader::Base
   version :medium do
     process :resize_to_fill => [300,300]
   end
+
+
+  version :mobile_sq_default do
+    process :resize_to_fill => [120,90]
+  end
+
+  version :mobile_mq_default do
+    process :resize_to_fill => [320,240]
+  end
+
+  version :mobile_hq_default do
+    process :resize_to_fill => [480,360]
+  end
+
+
+
 
 
   # Provide a default URL as a default if there hasn't been a file uploaded:
