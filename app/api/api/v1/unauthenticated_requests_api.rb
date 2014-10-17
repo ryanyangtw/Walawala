@@ -72,17 +72,10 @@ module API
 						post do
 							if(params[:omniauth_provider] == 'facebook')
 
-								#auth = {"info"=>{}}
-								#auth["provider"] = params[:user][:provider]
-								#auth["uid"] = params[:user][:uid]
-								#auth["info"]["email"] = params[:user][:email]
-								#auth["info"]["name"] = params[:user][:name]
-								#auth["info"]["image"] = params[:user][:image]
 								params[:user][:info] = {}
 								params[:user][:info][:email]= params[:user][:email]
 								params[:user][:info][:name]= params[:user][:name]
 								params[:user][:info][:image]= params[:user][:avatar]
-
 
 								@user = User.from_omniauth(params[:user])					
 								if(@user.persisted?)
