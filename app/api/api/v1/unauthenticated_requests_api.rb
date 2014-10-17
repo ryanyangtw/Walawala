@@ -3,6 +3,7 @@ module API
 		class UnauthenticatedRequestsAPI < Grape::API
 
 			@@default_user_path = 'v1/users'
+			@@default_program_path = 'v1/programs'
 			
 			mount API::V1::Categories
 			#mount API::V1::Programs
@@ -63,7 +64,7 @@ module API
 	    				  #optional :info, type: Hash do
 		    				requires :email, type: String
 		    				optional :name, type: String
-		    				optional :image, type: String
+		    				optional :avatar, type: String
 	    				  #end
 	    				end
 	  				end
@@ -80,7 +81,7 @@ module API
 								params[:user][:info] = {}
 								params[:user][:info][:email]= params[:user][:email]
 								params[:user][:info][:name]= params[:user][:name]
-								params[:user][:info][:image]= params[:user][:image]
+								params[:user][:info][:image]= params[:user][:avatar]
 
 
 								@user = User.from_omniauth(params[:user])					
@@ -97,9 +98,20 @@ module API
 						end
 	    		end
 	    	end
-
 	  
-    	end	  
+    	end	  #resources user
+
+    	resources :programs do
+
+	    	desc "Search program" 
+		    params do
+		    	optional :keyword
+		    end
+		    get 'search' do
+		    	@programs = Program.search(params[:keyword])
+		    	render rabl: "#{@@default_program_path}/search"
+		    end
+		  end  #resources programs
 
 	  end
 	end

@@ -3,9 +3,15 @@ cache @programs
 attributes :id, :subject, :introduction
 
 node(:href){|program| program_path(program)}
-node(:image_sqdefault){ |program| program.image.url(:mobile_sq_default)}
-node(:image_mqdefault){ |program| program.image.url(:mobile_mq_default)}
-node(:image_hqdefault){ |program| program.image.url(:mobile_hq_default)}
+node :image do |program|
+{sqdefault: program.image.url(:mobile_sq_default), 
+ mqdefault: program.image.url(:mobile_mq_default),
+ hqdefault: program.image.url(:mobile_hq_default)}
+end
+
+#node(:image_sqdefault){ |program| program.image.url(:mobile_sq_default)}
+#node(:image_mqdefault){ |program| program.image.url(:mobile_mq_default)}
+#node(:image_hqdefault){ |program| program.image.url(:mobile_hq_default)}
 
 node(:subscribed){|program| program.subscribers.exists?(current_user) ? 'true' : 'false'}
 

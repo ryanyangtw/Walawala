@@ -35,6 +35,13 @@ class Program < ActiveRecord::Base
   has_many :voter, through: :votes, source: :user
 
 
+
+  def self.search(keyword)
+    if keyword.present?
+      where('subject LIKE ?', "%#{keyword}%")
+    end
+  end
+
   def add_subscriber!(subscriber)
     self.subscribers << subscriber
   end

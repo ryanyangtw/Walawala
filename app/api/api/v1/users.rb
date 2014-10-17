@@ -20,7 +20,7 @@ module API
 					params do
 	      		use :access_token
 	      	end
-	    		get do
+	    		get '/' do
 	    			@user = current_user
 	    			render rabl: "#{@@default_view_path}/show"
 	    		end
