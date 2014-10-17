@@ -17,14 +17,15 @@ module API
 
 
 	    resources :programs do
-	    	
+	    	paginate per_page: 15
 	    	desc "Return list of program"
+	    	paginate
 				params do
 					use :access_token
 				end
 	    	get '/' do
 	    		#binding.pry
-	    		@programs = Program.all.includes(:episodes)
+	    		@programs = paginate Program.all.includes(:episodes)
 	    		render rabl: "#{@@default_view_path}/index"
 	    	end
 

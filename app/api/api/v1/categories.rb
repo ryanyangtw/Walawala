@@ -7,9 +7,10 @@ module API
 
       resources :categories do
         desc "Return list of category"
+        paginate per_page: 15
         get do
           #binding.pry
-          @categories = Category.all.includes(:programs)
+         @categories =  paginate Category.all.includes(:programs)
           render rabl: "#{@@default_view_path}/index"
         end
 
