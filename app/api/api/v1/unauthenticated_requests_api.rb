@@ -18,6 +18,7 @@ module API
 	    		end
 	    	end
 	    	post do
+	    		puts params
 	    		#@user = User.new({email: params[:email], password: params[:password]})
 	    
 	    		@user = User.new(params[:user])
