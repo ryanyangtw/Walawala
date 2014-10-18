@@ -91,6 +91,8 @@ group :development, :test do
   #gem 'guard-livereload'
   #gem 'annotate', '~> 2.6.5'
   gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-nav'
   gem 'meta_request'
   gem 'better_errors'
   gem "binding_of_caller"

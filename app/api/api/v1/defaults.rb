@@ -18,13 +18,13 @@ module API
 
         # global exception handler, used for error notifications
         rescue_from :all do |e|
-          #if Rails.env.development?
-          #  raise e
-          #else
-            puts params
-            #Raven.capture_exception(e)
-            error_response(message: "Internal server error (rescue_from defaults)", status: 500)
-          #end
+          if Rails.env.development?
+            raise e
+          else
+           #puts params
+           #Raven.capture_exception(e)
+           error_response(message: "Internal server error (rescue_from defaults)", status: 500)
+          end
         end
 
         ## HTTP header based authentication
