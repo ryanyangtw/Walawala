@@ -32,7 +32,7 @@ module API
 
 	    			render rabl: "#{@@default_user_path}/show"
 	    		else
-	    			binding.pry
+
 	    			error!(@user.errors.full_messages)
 	    			#error!("該使用者已經存在", 500)
 	    		end
