@@ -19,7 +19,7 @@ module API
 	    resources :programs do
 	    	paginate per_page: 15
 	    	desc "Return list of program"
-	    	paginate
+	    	#paginate
 				params do
 					use :access_token
 				end

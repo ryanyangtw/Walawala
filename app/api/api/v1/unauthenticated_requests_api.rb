@@ -4,8 +4,9 @@ module API
 
 			@@default_user_path = 'v1/users'
 			@@default_program_path = 'v1/programs'
+			@@default_category_path = 'v1/categories'
 			
-			mount API::V1::Categories
+			#mount API::V1::Categories
 			#mount API::V1::Programs
 			mount API::V1::Episodes
 			resources :users do
@@ -114,6 +115,33 @@ module API
 		    	render rabl: "#{@@default_program_path}/search"
 		    end
 		  end  #resources programs
+
+		  
+		  resources :categories do
+		    desc "Return list of category"
+        paginate per_page: 15
+        get do
+          #binding.pry
+         @categories =  paginate Category.all.includes(:programs)
+          render rabl: "#{@@default_category_path}/index"
+        end
+
+
+
+        desc "Return Specific Category"
+        route_param :id do
+          get do
+            #id_array = params[:id].split(",")
+            #@program = Program.find(id_array)
+            @category = Category.find(params[:id])
+            render rabl: "#{@@default_category_path}/show"
+          end
+        end
+      end#resources categories
+
+
+
+
 
 	  end
 	end
