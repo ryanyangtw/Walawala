@@ -11,6 +11,7 @@
 
 class ProgramCategory < ActiveRecord::Base
 
-  belongs_to :program, counter_cache: :programz_count
+  #belongs_to :program, counter_cache: :programz_count
+  belongs_to :program
   belongs_to :category
 end
