@@ -60,12 +60,13 @@ module API
 
 
 				desc "Return List of customize episodes"
+				paginate per_page: 15
 				params do
 					use :access_token
 				end
 				get ":id/customize_episodes" do
 
-					@episodes = current_user.customize_episodes
+					@episodes = paginate current_user.customize_episodes
 					render rabl: "#{@@default_view_path}/customize_episodes"
 				end
 
@@ -84,12 +85,13 @@ module API
 
 
 				desc "Subscribe program"
+				paginate per_page: 15
 				params do
 					use :access_token
 					requires :program_id, type: String
 				end	
 				post ":id/programs/:program_id/subscribe" do
-					@program = Program.find(params[:program_id])
+					@program = paginate Program.find(params[:program_id])
 					current_user.subscribe_program!(@program)
 					success_message('success to subscribe this program')
 				end

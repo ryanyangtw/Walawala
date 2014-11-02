@@ -6,10 +6,11 @@ module API
       @@default_view_path = 'v1/episodes'
 
       resources :episodes do
+        paginate per_page: 15
         desc "Return list of episodes"
         get '/' do
           #binding.pry
-          @episodes = Episode.all
+          @episodes = paginate Episode.all
           render rabl: "#{@@default_view_path}/index"
         end
 

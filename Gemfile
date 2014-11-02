@@ -48,8 +48,7 @@ gem 'i18n', github: 'svenfuchs/i18n'
 
 gem 'simple_form', '~> 3.0.2'
 #gem 'jquery-turbolinks'
-gem 'will_paginate' , '~> 3.0'
-gem 'will_paginate-bootstrap' 
+
 
 
 gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
@@ -74,7 +73,10 @@ gem 'grape-rabl'
 gem "hashie_rails"
 #gem 'rack-cors', '~> 0.2.9'
 
-
+#add pagination for grape api
+gem 'will_paginate'
+gem 'will_paginate-bootstrap'
+gem 'api-pagination'
 
 #for detect the length og audio
 #gem 'streamio-ffmpeg'
@@ -89,6 +91,8 @@ group :development, :test do
   #gem 'guard-livereload'
   #gem 'annotate', '~> 2.6.5'
   gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-nav'
   gem 'meta_request'
   gem 'better_errors'
   gem "binding_of_caller"

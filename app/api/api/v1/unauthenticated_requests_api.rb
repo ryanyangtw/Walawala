@@ -4,15 +4,16 @@ module API
 
 			@@default_user_path = 'v1/users'
 			@@default_program_path = 'v1/programs'
+			@@default_category_path = 'v1/categories'
 			
-			mount API::V1::Categories
+			#mount API::V1::Categories
 			#mount API::V1::Programs
 			mount API::V1::Episodes
 			resources :users do
 	    	
 	    	desc "Create User"	    	
 	    	params do
-	    		optional :user, type: Hash do
+	    		requires :user, type: Hash do
 	    			requires :email, type: String
 	    			requires :password, type: String
 	    		end
@@ -32,7 +33,9 @@ module API
 
 	    			render rabl: "#{@@default_user_path}/show"
 	    		else
-	    			error!("該使用者已經存在", 500)
+
+	    			error!(@user.errors.full_messages)
+	    			#error!("該使用者已經存在", 500)
 	    		end
 	    	end
 
@@ -103,14 +106,42 @@ module API
     	resources :programs do
 
 	    	desc "Search program" 
+	    	paginate per_page: 15
 		    params do
 		    	optional :keyword
 		    end
 		    get 'search' do
-		    	@programs = Program.search(params[:keyword])
+		    	@programs = paginate Program.search(params[:keyword])
 		    	render rabl: "#{@@default_program_path}/search"
 		    end
 		  end  #resources programs
+
+		  
+		  resources :categories do
+		    desc "Return list of category"
+        paginate per_page: 15
+        get do
+          #binding.pry
+         @categories =  paginate Category.all.includes(:programs)
+          render rabl: "#{@@default_category_path}/index"
+        end
+
+
+
+        desc "Return Specific Category"
+        route_param :id do
+          get do
+            #id_array = params[:id].split(",")
+            #@program = Program.find(id_array)
+            @category = Category.find(params[:id])
+            render rabl: "#{@@default_category_path}/show"
+          end
+        end
+      end#resources categories
+
+
+
+
 
 	  end
 	end

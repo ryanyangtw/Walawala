@@ -34,12 +34,12 @@ class User < ActiveRecord::Base
   has_many :programs
 
   #many to many
-  has_many :user_programs
+  has_many :user_programs, dependent: :destroy
   has_many :subscribed_programs, through: :user_programs, source: :program
   has_many :subscribed_episodes, through: :subscribed_programs, source: :episodes
 
   #many to many
-  has_many :user_categories
+  has_many :user_categories, dependent: :destroy
   has_many :subscribed_categories, through: :user_categories, source: :category, before_add: :subscribe_hot_program_in_categories
 
   #many_to_many voted episode. Didn't implement

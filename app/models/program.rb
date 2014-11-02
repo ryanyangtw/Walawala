@@ -20,18 +20,18 @@ class Program < ActiveRecord::Base
   belongs_to :owner, class_name: "User", foreign_key: :user_id
 
   #one to many
-  has_many :episodes
+  has_many :episodes, dependent: :destroy
 
   #many to many 
-  has_many :user_programs
+  has_many :user_programs, dependent: :destroy
   has_many :subscribers, through: :user_programs, source: :user
 
   #many to many
-  has_many :program_category
+  has_many :program_category, dependent: :destroy
   has_many :categories, through: :program_category
 
   #many to many
-  has_many :votes
+  has_many :votes, dependent: :destroy
   has_many :voter, through: :votes, source: :user
 
 
