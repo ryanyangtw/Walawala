@@ -85,6 +85,9 @@ gem 'api-pagination'
 gem 'ruby-audioinfo'
 
 
+#add for unicorn
+gem 'unicorn', '~> 4.8.3'
+
 
 group :development, :test do
   #gem 'pry', '~> 0.10.0'
@@ -110,11 +113,17 @@ end
 #add for heroku
 group :production do
 
-  gem 'rails_12factor'
+  #gem 'rails_12factor'
   #add for gzip on heroku
-  gem 'heroku-deflater'
+  #gem 'heroku-deflater'
+  
+  # add for capistrano
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-rails', '~>1.1.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', "~> 2.0"
+  gem 'capistrano-cookbook', require: false
 end
-
 
 
 
