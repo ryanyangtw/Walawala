@@ -2,7 +2,7 @@
 lock '3.2.1'
 
 set :application, 'walawala'
-#set :branch, 'master'
+set :branch, 'master'
 
 set :scm, :git
 set :repo_url, 'git@github.com:ryanyangtw/Walawala.git'
