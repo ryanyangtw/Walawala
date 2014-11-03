@@ -84,7 +84,8 @@ gem 'api-pagination'
 #gem 'ruby-mp3info', '~> 0.8.5'
 gem 'ruby-audioinfo'
 
-
+#add for unicorn
+gem 'unicorn', '~> 4.8.3'
 
 
 
@@ -119,8 +120,7 @@ end
 #should be delete
 #add for heroku
 group :production do
-  #add for unicorn
-  gem 'unicorn', '~> 4.8.3'
+
 
   #gem 'rails_12factor'
   #add for gzip on heroku
