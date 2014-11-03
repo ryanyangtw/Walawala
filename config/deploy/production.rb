@@ -12,7 +12,10 @@ set :server_name, "www.walawala.com.tw walawala.com.tw"
 
 set :full_app_name, "#{fetch(:application)}_#{fetch(:stage)}"
 
-server '106.187.101.161', user: 'root', roles: %w{web app}, primary: true
+#change user from root to deploy because of security issue
+set :deploy_user, 'deploy'
+#server '106.187.101.161', user: 'root', roles: %w{web app}, primary: true
+server '106.187.101.161', user: 'deploy', roles: %w{web app}, primary: true
 
 set :deploy_to, "/home/#{fetch(:deploy_user)}/apps/#{fetch(:full_app_name)}"
 
