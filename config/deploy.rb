@@ -23,6 +23,17 @@ set :keep_releases, 5
 set :linked_files, %w{config/database.yml config/secrets.yml config/settings.yml}
 
 set :linked_dirs, %w{bin log tmp/pids tmp/cache tmp/sockets vendor/bundle public/system}
+
+set :rake,           "rake"
+#set :rails_env,      "production"
+set :migrate_env, "production"
+set :migrate_target, :latest
+
+#set :rails_env, 'production'                  # If the environment differs from the stage name
+#set :migration_role, 'db'            # Defaults to 'db'
+#set :conditionally_migrate, false           # Defaults to false. If true, it's skip migration if files in db/migrate not modified
+set :assets_roles, [:web, :app]            # Defaults to [:web]
+
 # Default branch is :master
 # ask :branch, proc { `git rev-parse --abbrev-ref HEAD`.chomp }.call
 
