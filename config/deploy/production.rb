@@ -6,7 +6,7 @@
 
 
 set :stage, :production
-#set :branch, "master"
+set :branch, "master"
 
 set :server_name, "www.walawala.com.tw walawala.com.tw"
 
