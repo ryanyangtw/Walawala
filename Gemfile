@@ -84,6 +84,11 @@ gem 'api-pagination'
 #gem 'ruby-mp3info', '~> 0.8.5'
 gem 'ruby-audioinfo'
 
+#add for unicorn
+gem 'unicorn', '~> 4.8.3'
+
+
+
 
 
 group :development, :test do
@@ -101,6 +106,15 @@ group :development, :test do
   gem 'awesome_print', :require => false
   gem 'hirb', :require => false
   gem 'hirb-unicode', :require => false
+
+  # add for capistrano
+  gem 'capistrano', '~> 3.2.1'
+  gem 'capistrano-rails', '~>1.1.0'
+  gem 'capistrano-bundler'
+  gem 'capistrano-rbenv', "~> 2.0"
+  gem 'capistrano-cookbook', require: false
+
+
 end
 
 
@@ -110,11 +124,12 @@ end
 #add for heroku
 group :production do
 
-  gem 'rails_12factor'
+  #gem 'rails_12factor'
   #add for gzip on heroku
-  gem 'heroku-deflater'
-end
+  #gem 'heroku-deflater'
+  
 
+end
 
 
 
