@@ -52,6 +52,5 @@ config/secrets.yml
 public/uploads
 public/assets
 
-config/deploy.rb
-config/deploy
+
 
