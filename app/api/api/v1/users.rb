@@ -25,6 +25,30 @@ module API
 	    			render rabl: "#{@@default_view_path}/show"
 	    		end
 				end
+
+				
+				desc "Edit User"
+				params do
+					use :access_token
+
+	      	requires :edit_user, type: Hash do
+        		requires :current_password, type: String
+        		optional :email, type: String
+        		optional :password, type: String
+        		optional :name, type: String
+        	end
+
+				end
+				put ':id/edit' do
+					if current_user.update_with_password(params[:edit_user])
+						success_message('scuuess edit user')
+					else
+						error_message('fail to edit user', 500)
+					end
+				end
+
+
+
 				
 				#desc "Return List of subscription"
 				#params do
@@ -120,6 +144,7 @@ module API
 				post ':id/feedbacks' do 
 					binding.pry
 				end
+
 
 
 
