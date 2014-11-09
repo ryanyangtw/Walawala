@@ -25,6 +25,8 @@
         
         <% if user_signed_in? %>
 
+        <li><%= link_to("設定回饋主題", feedback_subjects_path ) %></li>
+
         <li><%= link_to("設定標簽", tags_path) %></li>
         
         <li><%= link_to("節目分類", categories_path) %></li>

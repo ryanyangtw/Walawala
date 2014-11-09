@@ -1,0 +1,32 @@
+<div class="row">
+  <div class="col-md-12">
+
+    <%= link_to("新增回饋主題", new_feedback_subject_path, :class=> 'btn btn-info btn-lg')%>
+
+    <hr>
+
+    <h2>目前回饋主題</h2>
+      <table class="table table-bordered table-striped">
+        <thead>
+          <tr>
+            <th>回饋主題名稱</th>
+            <th>編輯</th>
+            <th>刪除</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @feedback_subjects.each do |feedback_subject|%>
+          <tr>
+  
+            <td><%=link_to feedback_subject.title, feedback_subject_path(feedback_subject) %></td>
+
+            <td><%= link_to "編輯", edit_feedback_subject_path(feedback_subject) ,:class=>"btn btn-info"%></td>
+            <td><%= link_to "刪除", feedback_subject_path(feedback_subject) ,:method=>:delete, :class=>"btn btn-danger" %></td>
+          </tr>
+          <%end%>
+        </tbody>
+      </table>
+
+  </div>
+</div>

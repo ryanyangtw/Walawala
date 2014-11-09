@@ -35,6 +35,8 @@ Rails.application.routes.draw do
 
   get "subscription/categories", to: "users#categories_of_subscription"
   post "subscribe_categories", to: "users#subscribe_category"
+
+  resources :feedback_subjects
   
   
 
