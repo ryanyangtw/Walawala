@@ -1,5 +1,5 @@
 collection @categories ,:root => "categories"
-cache @categories
+#cache @categories
 attributes :id, :title, :description
 
 

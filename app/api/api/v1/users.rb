@@ -26,19 +26,19 @@ module API
 	    		end
 				end
 				
-				desc "Return List of subscription"
-				params do
-					use :access_token
-				end
-				route_param :id do
-					namespace :subscription do
-						get do
-							@user = current_user
-							render rabl: "#{@@default_view_path}/subscription"
-							#current_user.subscriptions.order("last_episode_uploaded_at DESC")
-						end
-					end
-				end
+				#desc "Return List of subscription"
+				#params do
+				#	use :access_token
+				#end
+				#route_param :id do
+				#	namespace :subscription do
+				#		get do
+				#			@user = current_user
+				#			render rabl: "#{@@default_view_path}/subscription"
+				#			#current_user.subscriptions.order("last_episode_uploaded_at DESC")
+				#		end
+				#	end
+				#end
 
 
 				desc "User sign out"

@@ -1,5 +1,5 @@
 collection @programs ,:root => "programs"
-cache @programs
+#cache @programs
 attributes :id, :subject, :introduction
 
 node(:href){|program| program_path(program)}

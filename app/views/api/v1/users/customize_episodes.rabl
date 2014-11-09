@@ -1,6 +1,6 @@
 
 collection @episodes ,:root => "episodes"
-cache @episodes
+#cache @episodes
 
 
 #extends "api/v1/episodes/show"

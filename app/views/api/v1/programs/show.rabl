@@ -1,5 +1,5 @@
 object @program 
-cache @program
+#cache @program
 attributes :id, :subject, :introduction
 
 #node(:image_url){ |program| program.image_url }

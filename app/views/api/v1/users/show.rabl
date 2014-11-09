@@ -1,5 +1,5 @@
 object @user 
-cache @user
+#cache @user
 attributes :id, :name, :email, :authentication_token
 
 node :avatar do |user|
