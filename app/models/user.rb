@@ -46,6 +46,9 @@ class User < ActiveRecord::Base
   has_many :votes 
   has_many :voted_episodes, through: :votes, source: :episode
 
+  #one to many
+  has_many :feedbacks
+
 
   before_save :ensure_authentication_token
 

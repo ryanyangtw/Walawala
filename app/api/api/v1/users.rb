@@ -110,6 +110,20 @@ module API
 				end
 
 
+				desc "Create Feedback"
+				params do 
+					use :access_token
+					requires :feedback, type: Hash do
+          	requires :content, type: String
+          end
+				end
+				post ':id/feedbacks' do 
+					binding.pry
+				end
+
+
+
+
 
 
 
