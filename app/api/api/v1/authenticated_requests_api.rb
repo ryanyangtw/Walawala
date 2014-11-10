@@ -44,6 +44,7 @@ module API
       mount API::V1::Programs
 			mount API::V1::Users
       mount API::V1::FeedbackSubjects
+      mount API::V1::Episodes
 
 	  end
 	end

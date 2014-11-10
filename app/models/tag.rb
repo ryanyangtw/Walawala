@@ -17,4 +17,8 @@ class Tag < ActiveRecord::Base
 
   validates :title, :presence => true
 
+  def num_of_votes(episode)
+    self.voted_episodes.where(id: episode.id).size 
+  end
+
 end

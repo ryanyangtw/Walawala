@@ -21,3 +21,25 @@ child :program => "parent_program" do |program|
   #node(:image_hqdefault){ |program| program.image.url(:mobile_hq_default)}
   #node(:image_url){ |program| program.image_url }
 end
+
+
+node(:tags) do 
+  @tags_arr.each do |tag|
+    tag
+  end
+end
+
+
+#node(:tags) do 
+#  @tags.each do |tag|
+#    #node(:title){ tag.title}
+#    {title: tag.title,
+#     num: tag.num_of_votes(@episode)}
+#  end
+#end
+
+
+#collection @tags
+#attributes :id, :title
+  #node(:num){|tag| tag.num_of_votes(@episode)}
+

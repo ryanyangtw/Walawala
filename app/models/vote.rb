@@ -15,5 +15,7 @@ class Vote < ActiveRecord::Base
   belongs_to :episode
   belongs_to :tag
 
+  validates :user_id, :episode_id, :tag_id, presence: true
+
   validates_uniqueness_of :voter, scope: [:episode_id, :tag_id]
 end
