@@ -30,9 +30,9 @@ class Program < ActiveRecord::Base
   has_many :program_category, dependent: :destroy
   has_many :categories, through: :program_category
 
-  #many to many
-  has_many :votes, dependent: :destroy
-  has_many :voter, through: :votes, source: :user
+  ##many to many
+  #has_many :votes, dependent: :destroy
+  #has_many :voter, through: :votes, source: :user
 
 
 
@@ -70,5 +70,29 @@ class Program < ActiveRecord::Base
   #def image_url
   #  return self.image.url(:small)
   #end
+
+
+  ##include AASM
+##
+  ##aasm do
+  ##  state :checking, :initial => true
+  ##  event :recheck do
+  ##    transitions :from => [:on_shelf, :off_shelf], :to => :checking
+  ##  end
+##
+##
+  ##  stage :on_shelf
+  ##  event :put_on do
+  ##    transitions :from => :checking, :to => :on_shelf
+  ##  end
+##
+  ##  state :off_shelf
+  ##  event :take_down do 
+  ##    transations :from => :checking, :to => :off_shelf
+  ##  end
+  ##  
+  ##end
+
+
 
 end

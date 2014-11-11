@@ -50,6 +50,8 @@ class ProgramsController < ApplicationController
   end
 
   def destroy
+
+    binding.pry
     if(@program.destroy)
       redirect_to root_path
     end
