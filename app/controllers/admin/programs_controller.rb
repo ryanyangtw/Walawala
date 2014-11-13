@@ -1,18 +1,18 @@
-class ProgramsController < ApplicationController
+class Admin::ProgramsController < AdminController
+
   before_action :set_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription]
   before_action :find_all_categories, :only => [:new,:edit]
 
-  authorize_resource
 
   def index
   end
 
   def show
-
+    #@program = Program.includes(:episodes,:categories,:program_evaluations).find(params[:id])
     @program = Program.includes(:episodes, :categories).find(params[:id])
-
-
-
+    
+    #@evaluations = Evaluation.order("id ASC")
+    
     #@episodes = @program.episodes
     #@episodes = [] if(@episodes == nil)
 
@@ -36,7 +36,7 @@ class ProgramsController < ApplicationController
   end
 
   def edit
-    #@program = Program.find(params[:id])
+    #binding.pry
   end
 
   def update
@@ -112,6 +112,10 @@ class ProgramsController < ApplicationController
   def find_all_categories
     @categories = Category.all
   end
+
+
+
+
 
 
 end

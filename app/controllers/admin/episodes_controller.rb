@@ -1,10 +1,8 @@
-class EpisodesController < ApplicationController
-  before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
-  before_action :set_episode, :only => [:edit, :update,:destroy]
-  before_action :authenticate_user!, only: [:vote]
+class Admin::EpisodesController < ApplicationController
 
-  authorize_resource :episode
-  authorize_resource :program
+before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
+  before_action :find_episode, :only => [:edit, :update,:destroy]
+  before_action :authenticate_user!, only: [:vote]
 
   def index
   end
@@ -14,7 +12,6 @@ class EpisodesController < ApplicationController
     
 
   def new
-
     @episode = @program.episodes.build
     #@episode = current_user.
     #@program = current_user.build
@@ -98,7 +95,7 @@ class EpisodesController < ApplicationController
     @program = Program.find(params[:program_id])
   end
 
-  def set_episode
+  def find_episode
     @episode = Episode.find(params[:id])
   end
 

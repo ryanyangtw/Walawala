@@ -8,8 +8,6 @@ Rails.application.routes.draw do
 
   resources :programs do 
     resources :episodes
-
-
     member do
       post :subscribe
       post :cancel_subscription
@@ -18,10 +16,6 @@ Rails.application.routes.draw do
     collection do
       post :search
     end
-
-    #resources :evaluations do
-      #post :vote
-    #end
   end
   
   resources :episodes ,:only=>[:show] do
@@ -37,6 +31,16 @@ Rails.application.routes.draw do
   post "subscribe_categories", to: "users#subscribe_category"
 
   resources :feedback_subjects
+
+  
+
+  namespace :admin do
+    root to: 'programs#index'
+
+    resources :programs 
+    resources :episodes
+    resources :categories
+  end
   
   
 

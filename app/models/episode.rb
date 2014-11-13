@@ -16,6 +16,8 @@ class Episode < ActiveRecord::Base
   mount_uploader :audio, AudioUploader
 
   belongs_to :program, touch: true
+  #belongs_to :owner, through: :program,class_name: "User"
+
   has_many :votes, dependent: :destroy
 
   validates :audio, presence: true , on: [:create]
