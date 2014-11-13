@@ -95,16 +95,30 @@ module API
 				end
 
 
-				desc "Subscribe categories"
+				desc "Subscribe Categories"
 				params do
 					use :access_token
 	
 					requires :category_ids, type: String, default: ''
 				end	
 				post ":id/categories/subscribe" do
-					current_user.subscribed_category_ids = params[:category_ids]
+					category_ids_arr = params[:category_ids].split(",")
+					current_user.subscribed_category_ids = category_ids_arr
 					success_message('success to subscribe those categories')
 				end
+
+				
+				##desc "Edit Subscribed Categories"
+				##params do
+				##	use :access_token
+	##
+				##	requires :category_ids, type: String, default: ''
+				##end	
+				##put ":id/categories/subscribe" do
+				##	category_ids_arr = params[:category_ids].split(",")
+				##	current_user.subscribed_category_ids = category_ids_arr
+				##	success_message('success to subscribe those categories')
+				##end
 
 
 

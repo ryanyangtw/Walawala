@@ -26,13 +26,16 @@ module API
           render rabl: "v1/programs/index"
         end
 
-        #desc "Return list of category"
+        desc "Return list of category"
         #paginate per_page: 15
-        #get do
-        #  #binding.pry
-        # @categories =  paginate Category.all.includes(:programs)
-        #  render rabl: "#{@@default_view_path}/index"
-        #end
+        params do
+          use :access_token
+        end
+        get do
+         #@categories =  paginate Category.all.includes(:programs)
+          @categories = Category.order('id asc')
+          render rabl: "#{@@default_view_path}/index"
+        end
 
         
         #desc "Return Specific Category"
