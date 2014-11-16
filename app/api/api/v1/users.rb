@@ -123,13 +123,14 @@ module API
 
 
 				desc "Subscribe program"
-				paginate per_page: 15
+				#paginate per_page: 15
 				params do
 					use :access_token
 					requires :program_id, type: String
 				end	
 				post ":id/programs/:program_id/subscribe" do
-					@program = paginate Program.find(params[:program_id])
+					#@program = paginate Program.find(params[:program_id])
+					@program = Program.find(params[:program_id])
 					current_user.subscribe_program!(@program)
 					success_message('success to subscribe this program')
 				end

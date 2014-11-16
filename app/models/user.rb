@@ -68,9 +68,12 @@ class User < ActiveRecord::Base
     
   def subscribe_hot_program_in_categories(category)
 
+    program_ids_arr = []
     category.programs.order('subscriberz_count desc').limit(3).each do |p|
-      self.subscribe_program!(p)
+      #self.subscribe_program!(p)
+      program_ids_arr.push(p.id)
     end 
+    self.subscribed_program_ids = program_ids_arr
 
   end
 

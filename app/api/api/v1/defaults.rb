@@ -23,7 +23,10 @@ module API
           else
            #puts params
            #Raven.capture_exception(e)
-           error_response(message: "Internal server error (rescue_from defaults)", status: 500)
+           
+
+            raise e
+           #error_response(message: "Internal server error (rescue_from defaults)", status: 500)
           end
         end
 
