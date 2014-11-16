@@ -18,12 +18,10 @@ module API
         params do 
           use :access_token
           requires :feedback, type: Hash do
-            #requires :id, type: String
             requires :content, type: String
           end
         end
         post ':id/feedbacks' do 
-          binding.pry
           @feedback_subject = FeedbackSubject.find(params[:id])
           @feedback = @feedback_subject.feedbacks.build(params[:feedback])
           @feedback.user = current_user

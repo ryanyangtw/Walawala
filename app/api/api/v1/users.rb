@@ -137,7 +137,7 @@ module API
 
 
 
-				desc "Cancel subscribed program"
+				desc "Unsubscribe program"
 				params do
 					use :access_token
 					requires :program_id, type: String
