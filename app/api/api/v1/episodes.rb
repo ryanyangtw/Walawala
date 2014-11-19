@@ -2,6 +2,9 @@ module API
   module V1
     class Episodes < Grape::API
       #helpers Rails.application.routes.url_helpers
+
+      @@default_view_path = 'v1/episodes'
+      
       helpers do
         params :access_token do
           requires :user, type: Hash do
@@ -31,6 +34,28 @@ module API
           end
 
         end
+
+
+        desc "Return Specific Episode"
+        params do
+          use :access_token
+          requires :id, type: String
+        end
+        get ':id' do
+          @episode = Episode.find(params[:id])
+          @tags_arr = []
+          Tag.all.each do |tag|
+            h = {}
+            h[:id] = tag.id
+            h[:title] = tag.title
+            h[:num_of_votes] = tag.num_of_votes(@episode)
+            @tags_arr.push(h)
+          end
+          #binding.pry
+          render rabl: "#{@@default_view_path}/show"
+        end
+
+
       end # end of episodes resources
 
 

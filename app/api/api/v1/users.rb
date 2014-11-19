@@ -49,7 +49,6 @@ module API
 
 
 
-				
 				#desc "Return List of subscription"
 				#params do
 				#	use :access_token
@@ -98,7 +97,6 @@ module API
 				desc "Subscribe Categories"
 				params do
 					use :access_token
-	
 					requires :category_ids, type: String, default: ''
 				end	
 				post ":id/categories/subscribe" do
@@ -119,6 +117,17 @@ module API
 				##	current_user.subscribed_category_ids = category_ids_arr
 				##	success_message('success to subscribe those categories')
 				##end
+
+				desc "Return List of subscribed programs"
+				paginate per_page: 15
+				params do
+					use :access_token
+				end
+				get "/:id/subscribed_programs" do
+					#TODO: Should implement the indeed order of subscribed programs
+					@programs = paginate current_user.subscribed_programs.order("id asc")
+					render rabl: "v1/programs/index"
+				end
 
 
 
