@@ -40,7 +40,7 @@ class User < ActiveRecord::Base
 
   #many to many
   has_many :user_categories, dependent: :destroy
-  has_many :subscribed_categories, through: :user_categories, source: :category, before_add: :subscribe_hot_program_in_categories
+  has_many :subscribed_categories, through: :user_categories, source: :category, after_add: :subscribe_programs_in_category, after_remove: :unsubscribe_programs_in_category 
 
   #many_to_many voted episode. Didn't implement
   has_many :votes 
@@ -56,8 +56,7 @@ class User < ActiveRecord::Base
 
 
   def customize_episodes
-
-    # TODO
+    #TODO: should inplument indeed customize episodes
     self.subscribed_episodes.order('id desc').limit(20)
   end
 
@@ -65,16 +64,32 @@ class User < ActiveRecord::Base
     new_count = self.sign_in_count + 1
     self.update(sign_in_count: new_count)
   end
+
+  #TODO: Notice that calling unsubscribed method is before calling subscribe method
+  #TODO: Notice that if category have already subscribed by user, It will not trigger subscribe programs method
     
-  def subscribe_hot_program_in_categories(category)
-
-    program_ids_arr = []
+  def subscribe_programs_in_category(category)
     category.programs.order('subscriberz_count desc').limit(3).each do |p|
-      #self.subscribe_program!(p)
-      program_ids_arr.push(p.id)
+      begin
+        self.subscribed_programs << p
+      rescue ActiveRecord::RecordInvalid => e
+        next
+      end
     end 
-    self.subscribed_program_ids = program_ids_arr
+    #program_ids_arr = []
+    #category.programs.order('subscriberz_count desc').limit(3).each do |p|
+    #  #self.subscribe_program!(p)
+    #  program_ids_arr.push(p.id)
+    #end 
+    #self.subscribed_program_ids = program_ids_arr
+  end
 
+  def unsubscribe_programs_in_category(category)
+    self.subscribed_programs.each do |p|
+      if p.categories.exists?(category)
+        self.subscribed_programs.destroy(p)
+      end
+    end
   end
 
 
