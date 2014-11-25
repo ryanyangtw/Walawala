@@ -67,7 +67,7 @@ class User < ActiveRecord::Base
 
   #TODO: Notice that calling unsubscribed method is before calling subscribe method
   #TODO: Notice that if category have already subscribed by user, It will not trigger subscribe programs method
-    
+
   def subscribe_programs_in_category(category)
     category.programs.order('subscriberz_count desc').limit(3).each do |p|
       begin
