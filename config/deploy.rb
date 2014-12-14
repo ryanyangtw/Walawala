@@ -165,11 +165,24 @@ namespace :deploy do
 end
 
 
-# TODO: (Notice) Do the specific rake on remote server
+# TODO: (Note) Do the specific rake on remote server
 namespace :rake do  
-  desc "Run a task on a remote server."  
   # run like: cap staging rake:invoke task=a_certain_task  
+  desc "Run a task on a remote server."  
   task :invoke do  
     run("cd #{deploy_to}/current; /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
   end  
 end
+
+#namespace :rake do 
+#  task :runrake do 
+#    on roles(:all), in: :sequence, wait: 5 do      
+#      within release_path do
+#        execute :rake, ENV['task'], "RAILS_ENV=production"
+#        #run("cd #{deploy_to}/current; /usr/bin/env rake #{ENV['task']} RAILS_ENV=#{rails_env}")  
+#      end 
+#    end 
+#  end
+#end
+
+
