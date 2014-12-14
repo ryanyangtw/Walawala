@@ -3,7 +3,6 @@ namespace :dev do
   desc "Calculate programz_count for every category"
   task :calculate_programz_count => :environment do
     Category.all.each do |c|
-      binding.pry
       # Use update_attribute will present readonly error
       #c.update_attribute(:programz_count , c.programs.length)
       c.update_attributes(:programz_count => c.programs.length)
