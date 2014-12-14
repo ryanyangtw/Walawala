@@ -56,7 +56,7 @@ class User < ActiveRecord::Base
 
 
   def customize_episodes
-    #TODO: should inplument indeed customize episodes
+    # TODO: Should inplement indeed customize episodes
     self.subscribed_episodes.order('id desc').limit(20)
   end
 
@@ -65,13 +65,14 @@ class User < ActiveRecord::Base
     self.update(sign_in_count: new_count)
   end
 
-  #TODO: Notice that calling unsubscribed method is before calling subscribe method
-  #TODO: Notice that if category have already subscribed by user, It will not trigger subscribe programs method
-
+  # TODO: (Notice) notice that calling unsubscribed method is before calling subscribe method
+  # TODO: (Notice) notice that if category have already subscribed by user, It will not trigger subscribe programs method 
+  # The hook of association like after_add will send each instance(category) into below method
   def subscribe_programs_in_category(category)
     category.programs.order('subscriberz_count desc').limit(3).each do |p|
       begin
         self.subscribed_programs << p
+      # Rescue RecordInvalid if the user had already subscribed this program 
       rescue ActiveRecord::RecordInvalid => e
         next
       end
