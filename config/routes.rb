@@ -42,7 +42,15 @@ Rails.application.routes.draw do
     resources :categories
     resources :feedback_subjects
     resources :tags
-    resources :users, :only => [:index, :destroy]
+    resources :users, :only => [:index, :destroy] do
+      member do 
+        put :change_role
+      end
+    end
+
+
+
+
   end
   
   

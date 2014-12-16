@@ -16,4 +16,11 @@ class Admin::UsersController < AdminController
 
   end
 
+  def change_role
+    @user = User.find(params[:id])
+    @user.change_role(params[:new_role])
+    flash[:notice] = "Sucess to change role"
+    redirect_to admin_users_path
+  end
+
 end

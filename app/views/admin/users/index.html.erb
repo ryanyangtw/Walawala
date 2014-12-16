@@ -12,6 +12,7 @@
           <th>provider</th>
           <th>avatar</th>
           <th>role</th>
+          <th>修改權限</th>
           <th>刪除</th>
 
         </tr>
@@ -37,6 +38,14 @@
                   <span class="label label-success">管理者</span>
                 <% else %>
                   <span class="label label-default">一般使用者</span>
+                <% end %>
+              </td>
+
+              <td>
+                <%if user.role?(:admin)%>
+                  <%= link_to("設為一般使用者", change_role_admin_user_path(user, new_role: "regular"), class: "btn btn-info btn-sm", method: :put) %>
+                <% else %>
+                  <%= link_to("設為管理者", change_role_admin_user_path(user, new_role: "admin"), class: "btn btn-warning btn-sm", method: :put) %>
                 <% end %>
               </td>
      

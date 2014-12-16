@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     self.role == checking_role.to_s
   end
 
+  def change_role(new_role)
+    self.update_attribute(:role, new_role)
+  end
+
   def created_today?
     self.created_at.to_date == Date.today
   end
