@@ -135,6 +135,10 @@ class User < ActiveRecord::Base
     self.role == checking_role.to_s
   end
 
+  def created_today?
+    self.created_at.to_date == Date.today
+  end
+
 
 
   def self.from_omniauth(auth)

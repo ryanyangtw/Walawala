@@ -1,0 +1,9 @@
+<div class="col-md-6 col-md-offset-3 well">
+	<h2>新增節目分類</h2>
+	<%= simple_form_for @category, :url=>admin_categories_path(@category), :html=>{
+    multipart: true} do |f| %>
+
+		<%=render :partial=>"form", :locals=>{:f=>f} %>
+
+		<%= f.submit "新增節目分類", :class=>"btn btn-primary"%>
+	<%end%>

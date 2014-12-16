@@ -1,0 +1,70 @@
+<span style="font-size: 32px;">管理集</span> <span>(依照更新日期排序)</span> <span>(藍色表示今天有更新過)</span>
+<hr>
+
+<div class="row">
+  <div class="col-md-12 well">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>更新日期 </th>
+          <th>隸屬節目</th>
+          <th>標題</th>
+          <th>描述</th>
+          <th>內容</th>
+          <th>標籤</th>
+          <th>修改</th>
+          <th>刪除</th>
+
+
+
+        </tr>
+      </thead>
+  
+      <tbody>
+
+          <%@episodes.each do |episode|%>
+            <%if episode.updated_today?%>
+              <tr class="info">
+            <% else %>
+              <tr>
+            <% end %>
+  
+              <td><%= episode.id %></td>
+              <td><%= episode.updated_at.to_formatted_s(:short) %> </td>
+
+              <td><%= link_to( episode.program.subject, admin_program_path(episode.program) ) %></td>
+              <td><%= episode.title %></td>
+              <td><%= episode.description %></td>
+              <td><%= audio_tag(episode.audio.url, :controls => true, :preload => "auto")%></td>
+
+              <td>
+                <% Tag.order("id ASC").each do |tag|%>
+                
+
+                <%= content_tag(:span, content_tag(:span, "#{tag.title} ") +  content_tag(:span, tag.voted_episodes.where(id: episode.id).size, class: "badge").html_safe , class: "label label-primary" )%>
+                <br/>
+
+                <%#= link_to("#{tag.title}(#{tag.voted_episodes.where(id: episode.id).size})", vote_episode_path(episode, tag) , class: 'btn btn-primary', method: :post) %> 
+                <%end%>
+              </td>
+
+              <td><%= link_to('編輯', edit_admin_episode_path(episode), :class=>'btn btn-info btn-lg')%></td>
+              
+              <td><%= link_to('刪除', admin_episode_path(episode), :method => :delete,:class=>'btn btn-danger btn-lg')%></td>
+
+ 
+            </tr>
+          
+          <%end%> 
+
+      </tbody>
+
+
+    </table>
+  </div>
+</div>
+
+<div style="text-align: center;">
+<%= will_paginate @episodes, renderer: BootstrapPagination::Rails %>
+</div>

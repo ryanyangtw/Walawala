@@ -1,0 +1,26 @@
+<h1>您是新的使用者，請選擇您有興趣的分類</h1>
+
+<hr>
+
+<div class='col-md-10 col-md-offset-1 well' >
+  <%= form_for @user, :url => subscribe_categories_path, html: {method: :post} do |f|%>
+    <div class='control-group'>
+      
+      <%= f.label "Categories" %>
+      <%= f.collection_check_boxes :subscribed_category_ids, Category.order('id asc'), :id, :title do |cb|%>
+        
+        <%= cb.label(class: "checkbox inline") {cb.check_box(class: "checkbox") + cb.text} %>
+        <%= image_tag(cb.object.image.url(:small)) %>
+      <% end %>
+    </div>
+
+    <div class="form_group">
+      <%= f.submit('確定', :class=>'btn btn-lg btn-info')%>
+    </div>
+
+  <%end%>
+
+</div>
+
+
+

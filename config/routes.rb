@@ -38,8 +38,11 @@ Rails.application.routes.draw do
     root to: 'programs#index'
 
     resources :programs 
-    resources :episodes
+    resources :episodes #,:only=>[:index, :destroy]
     resources :categories
+    resources :feedback_subjects
+    resources :tags
+    resources :users, :only => [:index, :destroy]
   end
   
   

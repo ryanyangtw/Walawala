@@ -61,6 +61,11 @@ class Program < ActiveRecord::Base
     self.subscribers.destroy(user)
   end
 
+
+  def updated_today?
+    self.updated_at.to_date == Date.today
+  end
+
   #def vote!(evaluation_id, user_id)
   #  program_evaluations = self.program_evaluations.build(:evaluation_id=>evaluation_id, :user_id => user_id)
   #  program_evaluations.save

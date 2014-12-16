@@ -5,6 +5,7 @@ class Admin::ProgramsController < AdminController
 
 
   def index
+    @programs = Program.order("updated_at DESC").paginate(:page => params[:page], :per_page=>15)
   end
 
   def show
@@ -15,7 +16,6 @@ class Admin::ProgramsController < AdminController
     
     #@episodes = @program.episodes
     #@episodes = [] if(@episodes == nil)
-
   end
 
   def new
@@ -27,10 +27,12 @@ class Admin::ProgramsController < AdminController
     @program = current_user.programs.build(program_params)
 
     if(@program.save)
+      flash[:notice] = "Success to create new program"
       params[:program][:categories_ids] ||= []
       @program.category_ids = params[:program][:categories_ids]
-      redirect_to root_path
+      redirect_to admin_root_path
     else
+      flash[:alert] = "Something wrong"
       render :new
     end
   end
@@ -44,8 +46,11 @@ class Admin::ProgramsController < AdminController
     if(@program.update(program_params))
       params[:program][:categories_ids] ||= []
       @program.category_ids = params[:program][:categories_ids]
-      redirect_to program_path(@program)
+
+      flash[:notice] = "Success to update program"
+      redirect_to admin_program_path(@program)
     else
+      flash[:notice] = "Something wrong"
       render :edit
     end
 
@@ -53,9 +58,13 @@ class Admin::ProgramsController < AdminController
 
   def destroy
     if(@program.destroy)
-      redirect_to root_path
+      flash[:notice] = "Success to delete program"
+      redirect_to admin_root_path
     end
+
   end
+
+=begin
 
   def subscribe
     @program.add_subscriber!(current_user)
@@ -74,7 +83,7 @@ class Admin::ProgramsController < AdminController
     @programs = @q.result(distinct: true).includes(:episodes).paginate(:page => params[:page], :per_page => 20 )
   end
 
-
+=end
 
   #def vote  
 #

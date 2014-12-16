@@ -1,16 +1,17 @@
-class Admin::EpisodesController < ApplicationController
+class Admin::EpisodesController < AdminController
 
-before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
+  before_action :find_program, :only => [:new ,:create]
   before_action :find_episode, :only => [:edit, :update,:destroy]
   before_action :authenticate_user!, only: [:vote]
 
   def index
+    @episodes = Episode.order("updated_at DESC").paginate(:page => params[:page], :per_page=>20)
   end
 
   def show
   end
     
-
+=begin
   def new
     @episode = @program.episodes.build
     #@episode = current_user.
@@ -28,35 +29,35 @@ before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
       render :new
     end
 
-    #if(is_program_exist?(params[:subject]))
-#
-    #else
-    # 
-    # @program = current.user.build()
-    # @episode = 
-#
-    #end
+
   end
+
+=end
+
 
   def edit
   end
 
   def update
     if(@episode.update(episode_params))
-      redirect_to program_path(@program)
+      flash[:notice] = "success update episode"
+      redirect_to admin_episodes_path
     else
-      render :edit
+      #render :edit
     end
 
   end
 
   def destroy
     if(@episode.destroy)
-      redirect_to program_path(@program)
+      flash[:notice] = "success delete episode"
+      redirect_to admin_episodes_path
+      #redirect_to program_path(@program)
     end
   end
 
 
+=begin
   def vote
 
 
@@ -74,7 +75,7 @@ before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
     end
 
   end
-
+=end
 
   private
   #def is_program_exist?(subject)

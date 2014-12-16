@@ -33,6 +33,10 @@ class Episode < ActiveRecord::Base
   # self.audio.url if self.audio.present?
   #end
 
+  def updated_today?
+    self.updated_at.to_date == Date.today
+  end
+
   private
   def calculate_length_of_audio
     if self.audio.present?

@@ -1,0 +1,32 @@
+<div class="row">
+	<div class="col-md-12">
+
+		<%= link_to("新增標簽", new_admin_tag_path, :class=> 'btn btn-info btn-lg')%>
+
+		<hr>
+
+		<h2>目前標簽</h2>
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th width="50%">標簽名稱</th>
+						<th>編輯</th>
+						<th>刪除</th>
+					</tr>
+				</thead>
+
+				<tbody>
+					<% @tags.each do |tag|%>
+					<tr>
+	
+						<td><%=link_to tag.title, "#" %></td>
+			
+						<td><%= link_to "編輯", edit_admin_tag_path(tag) ,:class=>"btn btn-info"%></td>
+						<td><%= link_to "刪除", admin_tag_path(tag) ,:method=>:delete, :class=>"btn btn-danger" %></td>
+					</tr>
+					<%end%>
+				</tbody>
+			</table>
+
+	</div>
+</div>

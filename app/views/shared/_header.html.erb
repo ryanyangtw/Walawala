@@ -37,7 +37,7 @@
         </li>
 
         <% if current_user.role?(:admin)%>
-        <li><%= link_to("Admin Panel", admin_root_path)%></li>
+        <li><%= link_to("管理頁面", admin_root_path)%></li>
         <%end%>
 
         <li><%= image_tag(current_user.avatar.url(:small) ) if current_user.avatar.present?%>
