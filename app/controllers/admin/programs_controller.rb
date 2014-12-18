@@ -10,7 +10,12 @@ class Admin::ProgramsController < AdminController
 
   def show
     #@program = Program.includes(:episodes,:categories,:program_evaluations).find(params[:id])
+    #@program = Program.includes(:episodes, :categories).find(params[:id])
+
     @program = Program.includes(:episodes, :categories).find(params[:id])
+    @episodes = @program.episodes.order("id DESC").paginate(:page => params[:page], :per_page=>15)
+
+
     
     #@evaluations = Evaluation.order("id ASC")
     

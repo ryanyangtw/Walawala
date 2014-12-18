@@ -81,8 +81,10 @@
 			</thead>
 			
 			<tbody>
-				<%if @program.episodes.present?%>
-					<%@program.episodes.order("id ASC").each_with_index do |episode, index|%>
+				<%#if @program.episodes.present?%>
+					<%#@program.episodes.order("id DESC").each_with_index do |episode, index|%>
+				<%if @episodes.present?%>
+					<% @episodes.order("id DESC").each_with_index do |episode, index|%>
 						<tr>
 	
 							<td><%= index %></td>
@@ -108,6 +110,11 @@
 
 
 		</table>
+
+
+		<div style="text-align: center;">
+			<%= will_paginate @episodes, renderer: BootstrapPagination::Rails %>
+		</div>
 	</div>
 </div>
 

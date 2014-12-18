@@ -170,8 +170,12 @@ namespace :runrake do
   # run like: cap staging rake:invoke task=a_certain_task  
   desc "Run a task on a remote server."  
   task :invoke do 
-    on roles(:all), in: :sequence, wait: 5 do    
-      execute "cd #{deploy_to}/current; rake #{ENV['task']} RAILS_ENV=#{fetch(:rails_env)}"
+    on roles(:all), in: :sequence, wait: 5 do 
+    with rails_env: :production do   
+      #execute "cd #{deploy_to}/current; bundle exec rake #{ENV['task']} RAILS_ENV=#{fetch(:rails_env)}"
+      #execute "cd #{deploy_to}/current; ruby -v"
+    end
+      #cape
       #execute :rake, ENV['task'], "RAILS_ENV=#{fetch(:rails_env)}"
       #execute "bundle exec rake #{ENV['task']} RAILS_ENV=#{fetch(:rails_env)}"  
     end
