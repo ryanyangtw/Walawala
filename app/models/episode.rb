@@ -35,6 +35,7 @@ class Episode < ActiveRecord::Base
 
   def updated_today?
     self.updated_at.to_date == Date.today
+    #self.updated_at.to_date == DateTime.current.to_date
   end
 
   private

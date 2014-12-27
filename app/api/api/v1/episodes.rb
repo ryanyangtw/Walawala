@@ -43,14 +43,15 @@ module API
         end
         get ':id' do
           @episode = Episode.find(params[:id])
-          @tags_arr = []
-          Tag.all.each do |tag|
-            h = {}
-            h[:id] = tag.id
-            h[:title] = tag.title
-            h[:num_of_votes] = tag.num_of_votes(@episode)
-            @tags_arr.push(h)
-          end
+          @tags = Tag.all
+          #@tags_arr = []
+          #Tag.all.each do |tag|
+          #  h = {}
+          #  h[:id] = tag.id
+          #  h[:title] = tag.title
+          #  h[:num_of_votes] = tag.num_of_votes(@episode)
+          #  @tags_arr.push(h)
+          #end
           #binding.pry
           render rabl: "#{@@default_view_path}/show"
         end

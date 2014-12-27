@@ -24,20 +24,27 @@ child :program => "parent_program" do |program|
 end
 
 
-node(:tags) do 
-  @tags_arr.each do |tag|
-    tag
-  end
+#node(:tags) do 
+#  @tags_arr.each do |tag|
+#    tag
+#  end
+#end
+
+
+# node(:tags) do 
+#   @tags.each do |tag|
+#     node(:title){ tag.title }
+#     #{title: tag.title,
+#     # num: tag.num_of_votes(@episode)}
+#   end
+# end
+
+child(@tags) do
+  attributes :id, :title
+  node(:num_of_votes){|tag| tag.num_of_votes(@episode)}
 end
 
 
-#node(:tags) do 
-#  @tags.each do |tag|
-#    #node(:title){ tag.title}
-#    {title: tag.title,
-#     num: tag.num_of_votes(@episode)}
-#  end
-#end
 
 
 #collection @tags

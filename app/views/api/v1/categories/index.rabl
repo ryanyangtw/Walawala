@@ -1,5 +1,7 @@
 collection @categories ,:root => "categories"
 #cache @categories
+
+#extends "v1/categories/show"
 attributes :id, :title, :description
 
 
