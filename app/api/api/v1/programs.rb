@@ -39,6 +39,7 @@ module API
 				desc "Search program" 
         paginate per_page: 15
         params do
+        	use :access_token
           optional :keyword
         end
         get 'search' do
