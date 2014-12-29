@@ -35,6 +35,16 @@ module API
 	    	#post do
   			#	#Status.create!(text: params[:text])
 				#end
+
+				desc "Search program" 
+        paginate per_page: 15
+        params do
+          optional :keyword
+        end
+        get 'search' do
+          @programs = paginate Program.search(params[:keyword])
+          render rabl: "#{@@default_program_path}/search"
+        end
 				
 				desc "Return Specific Program"
 				route_param :id do
@@ -62,10 +72,9 @@ module API
 					render rabl: "#{@@default_episode_path}/index"
 
 				end
-		
 
 
-	    end
+	    end # end of resources :programs
 	  end
 	end
 end
