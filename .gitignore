@@ -49,6 +49,7 @@ config/secrets.yml
 config/settings.yml
 public/uploads
 public/assets
+config/deploy
 
 
 
