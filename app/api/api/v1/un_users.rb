@@ -11,25 +11,26 @@ module API
           requires :user, type: Hash do
             requires :email, type: String
             requires :password, type: String
+            optional :name, type: String
           end
         end
         post do
 
           #@user = User.new({email: params[:email], password: params[:password]})
-          puts "============================================================="
-          puts params
-          puts "============================================================="
-          puts params[:user]
-          puts "============================================================="
-    
+          #puts "============================================================="
+          #puts params
+          #puts "============================================================="
+          #puts params[:user]
+          #puts "============================================================="
           @user = User.new(params[:user])
           if(@user.save)
             @user.renew_data!
 
             render rabl: "#{@@default_user_path}/show"
           else
-
+            #raise
             error!(@user.errors.full_messages)
+            #error_response({ message: "rescued from" })
             #error!("該使用者已經存在", 500)
           end
         end
@@ -51,7 +52,8 @@ module API
               @user.renew_data!
               render rabl: "#{@@default_user_path}/show"
             else
-              error!("401 Unauthorized", 401)
+              error!(@user.errors.full_messages)
+              #error!("401 Unauthorized", 401)
             end
           end
         end
@@ -88,7 +90,8 @@ module API
 
                   render rabl: "#{@@default_user_path}/show"
                 else
-                  error!("401 Unauthorized", 401)
+                  error!(@user.errors.full_messages)
+                  #error!("401 Unauthorized", 401)
                 end
               end
 

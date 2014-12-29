@@ -32,7 +32,7 @@ module API
 					use :access_token
 
 	      	requires :edit_user, type: Hash do
-        		requires :current_password, type: String
+        		optional :current_password, type: String
         		optional :email, type: String
         		optional :password, type: String
         		optional :name, type: String
@@ -40,11 +40,22 @@ module API
 
 				end
 				put ':id/edit' do
-					if current_user.update_with_password(params[:edit_user])
-						success_message('scuuess edit user')
+	
+					if(params[:edit_user][:password].present?)
+						if current_user.update_with_password(params[:edit_user])
+							success_message('scuuess edit user')
+						else
+							error!('fail to edit user')
+							#error_message('fail to edit user', 500)
+						end
 					else
-						error_message('fail to edit user', 500)
+						if current_user.update(params[:edit_user])
+							success_message('scuuess edit user')
+						else
+							error!('fail to edit user')
+						end
 					end
+
 				end
 
 
@@ -90,6 +101,7 @@ module API
 				get ":id/customize_episodes" do
 
 					@episodes = paginate current_user.customize_episodes
+					@tags = Tag.all
 					render rabl: "#{@@default_view_path}/customize_episodes"
 				end
 
@@ -157,17 +169,17 @@ module API
 					success_message('success to cancel thos program')
 				end
 
-
-				desc "Create Feedback"
-				params do 
-					use :access_token
-					requires :feedback, type: Hash do
-          	requires :content, type: String
-          end
-				end
-				post ':id/feedbacks' do 
-					binding.pry
-				end
+				# Move this api to feedback_subjects
+				#desc "Create Feedback"
+				#params do 
+				#	use :access_token
+				#	requires :feedback, type: Hash do
+        #  	requires :content, type: String
+        #  end
+				#end
+				#post ':id/feedbacks' do 
+				#	binding.pry
+				#end
 
 
 

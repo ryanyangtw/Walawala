@@ -26,7 +26,7 @@ module API
           @episode = Episode.find(params[:episode_id])
           @tag = Tag.find(params[:id])
           @vote = Vote.new(episode: @episode, voter: current_user, tag: @tag)
-          binding.pry
+          #binding.pry
           if @vote.save
             success_message('投票成功')
           else

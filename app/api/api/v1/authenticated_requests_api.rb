@@ -5,7 +5,8 @@ module API
 
 			#before fillter should be put before method 
       before do
-        error!("401 Unauthorized", 401) unless authenticated
+        #error!("401 Unauthorized", 401) unless authenticated
+        error!(["抱歉，您目前的權限不足"], 401) unless authenticated
       end
 
       helpers do

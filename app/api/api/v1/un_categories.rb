@@ -14,15 +14,17 @@ module API
 
 
 
-        desc "Return Specific Category"
-        route_param :id do
-          get do
-            #id_array = params[:id].split(",")
-            #@program = Program.find(id_array)
-            @category = Category.find(params[:id])
-            render rabl: "#{@@default_category_path}/show"
-          end
-        end
+        #desc "Return Specific Category"
+        #route_param :id do
+        #  get do
+        #    #id_array = params[:id].split(",")
+        #    #@program = Program.find(id_array)
+        #    @category = Category.find(params[:id])
+        #    render rabl: "#{@@default_category_path}/show"
+        #  end
+        #end
+
+
       end#resources categories
 
 

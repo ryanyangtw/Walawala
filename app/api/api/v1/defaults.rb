@@ -21,12 +21,10 @@ module API
           if Rails.env.development?
             raise e
           else
-           #puts params
-           #Raven.capture_exception(e)
-           
-
-            raise e
-           #error_response(message: "Internal server error (rescue_from defaults)", status: 500)
+          #puts params
+          #Raven.capture_exception(e)
+          
+          error_response(message: ["系統發生錯誤..XD"] , status: 500)
           end
         end
 
