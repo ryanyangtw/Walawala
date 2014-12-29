@@ -18,7 +18,6 @@ module API
         params do 
           use :access_token
           requires :feedback, type: Hash do
-            requires :id, type: String
             requires :content, type: String
           end
         end

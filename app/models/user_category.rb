@@ -12,4 +12,6 @@
 class UserCategory < ActiveRecord::Base
   belongs_to :user 
   belongs_to :category 
+
+  validates_uniqueness_of :category, scope: :user_id
 end

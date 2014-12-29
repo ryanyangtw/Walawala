@@ -18,7 +18,7 @@ class Category < ActiveRecord::Base
   has_many :programs, through: :program_categories
 
   has_many :user_categories, dependent: :destroy
-  has_many :subscriber , through: :user_categories, source: :user
+  has_many :subscribers , through: :user_categories, source: :user
 
   validates :title, :presence => true
 end

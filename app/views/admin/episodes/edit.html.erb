@@ -1,0 +1,17 @@
+<div class="col-md-6 col-md-offset-3 well">
+	<h1>修改此集</h1>
+
+
+<%= form_for(@episode , :html=> {:multipart => true}, :url => admin_episode_path(@episode)) do |f|%>
+
+	<%= render(:partial=>'form' , :locals=>{:f => f})%>	
+
+	
+<hr class="style-six">
+	<div class="form-group">
+		<%= f.submit("修改", :class=>"btn btn-primary")%>
+	</div>
+<%end%>
+
+
+</div>

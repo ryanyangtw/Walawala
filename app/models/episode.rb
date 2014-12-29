@@ -16,6 +16,8 @@ class Episode < ActiveRecord::Base
   mount_uploader :audio, AudioUploader
 
   belongs_to :program, touch: true
+  #belongs_to :owner, through: :program,class_name: "User"
+
   has_many :votes, dependent: :destroy
 
   validates :audio, presence: true , on: [:create]
@@ -30,6 +32,11 @@ class Episode < ActiveRecord::Base
   #def audio_url
   # self.audio.url if self.audio.present?
   #end
+
+  def updated_today?
+    self.updated_at.to_date == Date.today
+    #self.updated_at.to_date == DateTime.current.to_date
+  end
 
   private
   def calculate_length_of_audio

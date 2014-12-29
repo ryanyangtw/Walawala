@@ -49,7 +49,6 @@ module API
 
 
 
-				
 				#desc "Return List of subscription"
 				#params do
 				#	use :access_token
@@ -95,34 +94,59 @@ module API
 				end
 
 
-				desc "Subscribe categories"
+				desc "Subscribe Categories"
 				params do
 					use :access_token
-	
 					requires :category_ids, type: String, default: ''
 				end	
 				post ":id/categories/subscribe" do
-					current_user.subscribed_category_ids = params[:category_ids]
+					category_ids_arr = params[:category_ids].split(",")
+					current_user.subscribed_category_ids = category_ids_arr
 					success_message('success to subscribe those categories')
+				end
+
+				
+				##desc "Edit Subscribed Categories"
+				##params do
+				##	use :access_token
+	##
+				##	requires :category_ids, type: String, default: ''
+				##end	
+				##put ":id/categories/subscribe" do
+				##	category_ids_arr = params[:category_ids].split(",")
+				##	current_user.subscribed_category_ids = category_ids_arr
+				##	success_message('success to subscribe those categories')
+				##end
+
+				desc "Return List of subscribed programs"
+				paginate per_page: 15
+				params do
+					use :access_token
+				end
+				get "/:id/subscribed_programs" do
+					#TODO: Should implement the indeed order of subscribed programs
+					@programs = paginate current_user.subscribed_programs.order("id asc")
+					render rabl: "v1/programs/index"
 				end
 
 
 
 				desc "Subscribe program"
-				paginate per_page: 15
+				#paginate per_page: 15
 				params do
 					use :access_token
 					requires :program_id, type: String
 				end	
 				post ":id/programs/:program_id/subscribe" do
-					@program = paginate Program.find(params[:program_id])
+					#@program = paginate Program.find(params[:program_id])
+					@program = Program.find(params[:program_id])
 					current_user.subscribe_program!(@program)
 					success_message('success to subscribe this program')
 				end
 
 
 
-				desc "Cancel subscribed program"
+				desc "Unsubscribe program"
 				params do
 					use :access_token
 					requires :program_id, type: String

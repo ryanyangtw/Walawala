@@ -16,6 +16,7 @@ child :program => "parent_program" do |program|
      mqdefault: program.image.url(:mobile_mq_default),
      hqdefault: program.image.url(:mobile_hq_default)}
   end
+  node(:subscribed){|program| program.subscribers.exists?(current_user) ? 'true' : 'false'}
   #node(:image_sqdefault){ |program| program.image.url(:mobile_sq_default)}
   #node(:image_mqdefault){ |program| program.image.url(:mobile_mq_default)}
   #node(:image_hqdefault){ |program| program.image.url(:mobile_hq_default)}
@@ -23,20 +24,27 @@ child :program => "parent_program" do |program|
 end
 
 
-node(:tags) do 
-  @tags_arr.each do |tag|
-    tag
-  end
+#node(:tags) do 
+#  @tags_arr.each do |tag|
+#    tag
+#  end
+#end
+
+
+# node(:tags) do 
+#   @tags.each do |tag|
+#     node(:title){ tag.title }
+#     #{title: tag.title,
+#     # num: tag.num_of_votes(@episode)}
+#   end
+# end
+
+child(@tags) do
+  attributes :id, :title
+  node(:num_of_votes){|tag| tag.num_of_votes(@episode)}
 end
 
 
-#node(:tags) do 
-#  @tags.each do |tag|
-#    #node(:title){ tag.title}
-#    {title: tag.title,
-#     num: tag.num_of_votes(@episode)}
-#  end
-#end
 
 
 #collection @tags

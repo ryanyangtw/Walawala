@@ -5,13 +5,12 @@ module API
       @@default_category_path = 'v1/categories'
 
       resources :categories do
-        desc "Return list of category"
-        paginate per_page: 15
-        get do
-          #binding.pry
-         @categories =  paginate Category.all.includes(:programs)
-          render rabl: "#{@@default_category_path}/index"
-        end
+        #desc "Return list of category"
+        #paginate per_page: 15
+        #get do
+        # @categories =  paginate Category.all.includes(:programs)
+        #  render rabl: "#{@@default_category_path}/index"
+        #end
 
 
 

@@ -8,14 +8,17 @@
 	</div>
 
 	<div class="col-md-9">
-		<% if(current_user == @program.owner)%>
-	  	<%= link_to("新增一集", new_program_episode_path(@program), :class=> 'btn btn-info btn-lg')%>
 
-	  	<%= link_to("修改節目", edit_program_path(@program), :class=> 'btn btn-info btn-lg')%>
 
-	  	<%= link_to("刪除節目", program_path(@program), :method=>:delete, :class=> 'btn btn-danger btn-lg')%>
+
+		<%# if(current_user == @program.owner)%>
+	  	<%= link_to("新增一集", new_program_episode_path(@program), :class=> 'btn btn-info btn-lg') if can? :create, @program%>
+
+	  	<%= link_to("修改節目", edit_program_path(@program), :class=> 'btn btn-info btn-lg') if can? :update, @program%>
+
+	  	<%= link_to("刪除節目", program_path(@program), :method=>:delete, :class=> 'btn btn-danger btn-lg') if can? :destroy, @program %>
 	
-	  <% end %>  
+	  <%# end %>  
 
 
 	  <% if user_signed_in? %>
@@ -78,8 +81,10 @@
 			</thead>
 			
 			<tbody>
-				<%if @program.episodes.present?%>
-					<%@program.episodes.order("id ASC").each_with_index do |episode, index|%>
+				<%#if @program.episodes.present?%>
+					<%#@program.episodes.order("id DESC").each_with_index do |episode, index|%>
+				<%if @episodes.present?%>
+					<% @episodes.order("id DESC").each_with_index do |episode, index|%>
 						<tr>
 	
 							<td><%= index %></td>
@@ -105,6 +110,11 @@
 
 
 		</table>
+
+
+		<div style="text-align: center;">
+			<%= will_paginate @episodes, renderer: BootstrapPagination::Rails %>
+		</div>
 	</div>
 </div>
 

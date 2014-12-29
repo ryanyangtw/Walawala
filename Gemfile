@@ -90,7 +90,8 @@ gem 'unicorn', '~> 4.8.3'
 #state machine
 #gem 'aasm', '~> 3.4.0'
 
-
+#role engine
+gem 'cancancan', '~> 1.9'
 
 
 

@@ -1,0 +1,9 @@
+<div class="col-md-6 col-md-offset-3 well">
+  <h2>新增回饋主題類</h2>
+  <%= simple_form_for @feedback_subject, :url=>admin_feedback_subjects_path(@feedback_subject), :html=>{
+    multipart: true} do |f| %>
+
+    <%=render :partial=>"form", :locals=>{:f=>f} %>
+
+    <%= f.submit "新增回饋主題", :class=>"btn btn-primary"%>
+  <%end%>

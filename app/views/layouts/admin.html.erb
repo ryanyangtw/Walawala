@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <%= stylesheet_link_tag "application" %>
+
+  <%= csrf_meta_tags %>
+  
+  <meta name="author" content="Ryan Yang">
+
+</head>
+<body>
+  
+  <%= render "shared/header" %>
+
+  <div class="container">
+
+    <%= notice_message %>
+
+
+
+
+    <div class="row">
+      <div class="col-md-2">
+        <ul class="nav nav-pills nav-stacked" style="max-width: 200px;">
+          <li><%= link_to("管理節目", admin_programs_path)%></li>
+
+          <li><%= link_to("管理集", admin_episodes_path)%></li>
+
+          <li><%= link_to("管理使用者", admin_users_path)%></li>
+
+          <li><%= link_to("管理節目分類", admin_categories_path) %></li>
+
+          <li><%= link_to("設定回饋主題", admin_feedback_subjects_path ) %></li>
+  
+          <li><%= link_to("設定標簽", admin_tags_path) %></li>
+
+        </ul>
+      </div>
+      <div class="col-md-10">
+
+        <%= yield %>
+      </div>
+      
+    </div>
+
+
+
+
+
+  </div>
+   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+</body>
+
+</html>

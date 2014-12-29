@@ -15,7 +15,7 @@ end
 #node(:image_hqdefault){ |program| program.image.url(:mobile_hq_default)}
 
 node(:subscribed){|program| program.subscribers.exists?(current_user) ? 'true' : 'false'}
-
+node(:num_of_subscribers){|program| program.subscribers.size}
 
 
 child :owner => "owner" do |owner|

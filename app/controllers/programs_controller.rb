@@ -1,16 +1,20 @@
 class ProgramsController < ApplicationController
-  before_action :find_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription]
+  before_action :set_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription]
   before_action :find_all_categories, :only => [:new,:edit]
+
+  authorize_resource
 
   def index
   end
 
   def show
-    #@program = Program.includes(:episodes,:categories,:program_evaluations).find(params[:id])
+
+    #@program = Program.includes(:episodes, :categories).find(params[:id])
     @program = Program.includes(:episodes, :categories).find(params[:id])
-    
-    #@evaluations = Evaluation.order("id ASC")
-    
+    @episodes = @program.episodes.order("id DESC").paginate(:page => params[:page], :per_page=>15)
+
+
+
     #@episodes = @program.episodes
     #@episodes = [] if(@episodes == nil)
 
@@ -34,7 +38,7 @@ class ProgramsController < ApplicationController
   end
 
   def edit
-    #binding.pry
+    #@program = Program.find(params[:id])
   end
 
   def update
@@ -103,7 +107,7 @@ class ProgramsController < ApplicationController
     params.require(:program).permit(:subject, :introduction, :image)
   end
 
-  def find_program
+  def set_program
     @program = Program.find(params[:id])
   end
 

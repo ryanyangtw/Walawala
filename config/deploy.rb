@@ -161,5 +161,33 @@ namespace :deploy do
       # end
     end
   end
-
+ 
 end
+
+
+
+# TODO: (Note) Do the specific rake on remote server
+namespace :runrake do  
+  # run like: cap staging runrake:invoke task=a_certain_task  
+  desc "Run a task on a remote server."  
+  task :invoke do 
+    on roles(:all), in: :sequence, wait: 5 do 
+
+      execute "export PATH=$PATH:/usr/local/rbenv/shims:/usr/local/rbenv/bin; cd #{deploy_to}/current; echo $PATH; cd #{deploy_to}/current; bundle exec rake #{ENV['task']} RAILS_ENV=#{fetch(:rails_env)}"
+
+      # check if it load correct environment variables
+      # execute "cd #{deploy_to}/current; echo $PATH; ruby -v"
+
+      
+      #execute "cd #{deploy_to}/current; echo $PATH"
+      #execute "cd #{deploy_to}/current; ls; ruby -v"
+      #cape
+      #execute :rake, ENV['task'], "RAILS_ENV=#{fetch(:rails_env)}"
+      #execute "bundle exec rake #{ENV['task']} RAILS_ENV=#{fetch(:rails_env)}"  
+
+    end
+  end  
+end
+
+
+

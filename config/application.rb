@@ -33,6 +33,9 @@ module Walawala
     config.middleware.use(Rack::Config) do |env|
         env['api.tilt.root'] = Rails.root.join "app", "views", "api"
     end
+
+    # add fot display localize timezone
+    config.time_zone = "Taipei"
     
   end
 end

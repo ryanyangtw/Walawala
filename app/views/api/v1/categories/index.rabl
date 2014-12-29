@@ -1,5 +1,7 @@
 collection @categories ,:root => "categories"
 #cache @categories
+
+#extends "v1/categories/show"
 attributes :id, :title, :description
 
 
@@ -11,6 +13,7 @@ node :image do |category|
    hqdefault: category.image.url(:mobile_hq_default)}
 end
 
+node(:subscribed){|category| category.subscribers.exists?(current_user) ? 'true' : 'false'}
 
 #child :programs do
 #  attributes :id, :subject, :introduction

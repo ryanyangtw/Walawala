@@ -1,0 +1,66 @@
+<span style="font-size: 32px;">管理使用者</span> <span>(依照註冊)</span> <span>(藍色表示今天註冊的使用者)</span>
+<hr>
+
+<div class="row">
+  <div class="col-md-12 well">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>email</th>
+          <th>name</th>
+          <th>provider</th>
+          <th>avatar</th>
+          <th>role</th>
+          <th>修改權限</th>
+          <th>刪除</th>
+
+        </tr>
+      </thead>
+  
+      <tbody>
+
+          <%@users.each do |user|%>
+            <%if user.created_today?%>
+              <tr class="info">
+            <% else %>
+              <tr>
+            <% end %>
+  
+              <td><%= user.id %></td>
+              <td><%= user.email %> </td>
+              <td><%= user.name %></td>
+              <td><%= user.provider %></td>
+              <td><%= image_tag(user.avatar.url(:small), style: "width: 50px;")%></td>
+
+              <td>
+                <%if user.role?(:admin)%>
+                  <span class="label label-success">管理者</span>
+                <% else %>
+                  <span class="label label-default">一般使用者</span>
+                <% end %>
+              </td>
+
+              <td>
+                <%if user.role?(:admin)%>
+                  <%= link_to("設為一般使用者", change_role_admin_user_path(user, new_role: "regular"), class: "btn btn-info btn-sm", method: :put) %>
+                <% else %>
+                  <%= link_to("設為管理者", change_role_admin_user_path(user, new_role: "admin"), class: "btn btn-warning btn-sm", method: :put) %>
+                <% end %>
+              </td>
+     
+              <td><%= link_to('刪除', admin_user_path(user), :method => :delete,:class=>'btn btn-danger btn-sm')%></td>
+            </tr>
+          
+          <%end%> 
+
+      </tbody>
+
+
+    </table>
+  </div>
+</div>
+
+<div style="text-align: center;">
+<%= will_paginate @users, renderer: BootstrapPagination::Rails %>
+</div>
