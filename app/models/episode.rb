@@ -25,6 +25,11 @@ class Episode < ActiveRecord::Base
   before_create :calculate_length_of_audio
 
 
+  scope :sort_by_update_time, -> { order("updated_at desc") }
+  #scope :sort_by_num_of_subscribers, -> { order("subscriberz_count desc") }
+
+
+
   #def update_program
   # self.program.update_last_episode_uploaded_at(self.created_at)
   #end
@@ -42,8 +47,6 @@ class Episode < ActiveRecord::Base
   def calculate_length_of_audio
     if self.audio.present?
       self.length_of_audio = AudioInfo.open(self.audio.path).length
-    else
-      0
     end
 
   end

@@ -35,10 +35,12 @@ class Program < ActiveRecord::Base
   #has_many :voter, through: :votes, source: :user
 
 
+  scope :sort_by_update_time, -> { order("updated_at desc") }
+  scope :sort_by_num_of_subscribers, -> { order("subscriberz_count desc") }
 
   def self.search(keyword)
     if keyword.present?
-      where('subject LIKE ?', "%#{keyword}%")
+      where('subject LIKE ?', "%#{keyword}%").sort_by_num_of_subscribers
     end
   end
 

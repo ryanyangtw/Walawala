@@ -15,7 +15,7 @@ class Category < ActiveRecord::Base
   
   #many to mant
   has_many :program_categories, dependent: :destroy
-  has_many :programs, through: :program_categories
+  has_many :programs, -> {order("subscriberz_count desc")}, through: :program_categories
 
   has_many :user_categories, dependent: :destroy
   has_many :subscribers , through: :user_categories, source: :user

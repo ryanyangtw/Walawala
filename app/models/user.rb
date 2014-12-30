@@ -57,7 +57,40 @@ class User < ActiveRecord::Base
 
   def customize_episodes
     # TODO: Should inplement indeed customize episodes
-    self.subscribed_episodes.order('id desc').limit(20)
+    #self.subscribed_episodes.order('id desc').limit(20)
+    
+    recommended_episodes = self.subscribed_episodes.order('updated_at desc')
+
+    #self.subscribed_episodes.order('updated_at desc').each do |e|
+    #  recommended_array << e
+    #end
+
+
+    # Recommend newest episode from hot 3 program in subscribed category
+    recommended_array = []
+    self.subscribed_categories.each do |c|
+      c.programs.order('subscriberz_count desc').limit(3).each do |p|
+        if !self.subscribed_programs.exists?(p)
+          recommended_array << p.episodes.last
+        end
+      end
+    end
+
+    length = recommended_episodes.size
+    recommended_episodes.each_with_index do |item,index| 
+      if(recommended_array.empty? || index+1 == length)
+        recommended_episodes << recommended_array
+        break
+      else
+        recommended_episodes << recommended_array[0]
+        recommdnded_array.shift
+      end
+    end
+
+    # TODO: Cache Recommendation Result
+    recommended_episodes
+    
+
   end
 
   def renew_data!
