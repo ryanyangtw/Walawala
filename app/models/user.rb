@@ -55,42 +55,53 @@ class User < ActiveRecord::Base
   #before_save {|user| user.subscribe_hot_program_in_categories if user.subscribed_category_ids_changed?}
 
 
-  def customize_episodes
+  def customize_episodes(page=5 , per_page=15)
     # TODO: Should inplement indeed customize episodes
     #self.subscribed_episodes.order('id desc').limit(20)
     
-    recommended_episodes = self.subscribed_episodes.order('updated_at desc')
-
-    #self.subscribed_episodes.order('updated_at desc').each do |e|
-    #  recommended_array << e
-    #end
-
-
     # Recommend newest episode from hot 3 program in subscribed category
     recommended_array = []
-    self.subscribed_categories.each do |c|
-      c.programs.order('subscriberz_count desc').limit(3).each do |p|
-        if !self.subscribed_programs.exists?(p)
+    3.times do |index|
+      self.subscribed_categories.each do |c|
+        p = c.programs.order('subscriberz_count desc').offset(index).first
+        if p.present? && !self.subscribed_programs.exists?(p)
           recommended_array << p.episodes.last
         end
       end
     end
 
-    length = recommended_episodes.size
-    recommended_episodes.each_with_index do |item,index| 
-      if(recommended_array.empty? || index+1 == length)
-        recommended_episodes << recommended_array
-        break
+    #We will recommend 3 special episode in every 15 episodes
+    num_of_recomended_episodes_per_page = 3
+    selected_recommended_episodes = recommended_array.slice( (page-1)*num_of_recomended_episodes_per_page, num_of_recomended_episodes_per_page)
+
+
+    # Caculate episodes offset point 
+    if((page-2)*num_of_recomended_episodes_per_page < recommended_array.size)
+      offset_point = (page-1) * (per_page - num_of_recomended_episodes_per_page)
+    else
+      offset_point = ((page-1) * per_page) - recommended_array.size
+    end
+
+    original_subscribed_episodes = self.subscribed_episodes.order('updated_at desc').limit(per_page-selected_recommended_episodes.size).offset(offset_point)
+    original_subscribed_episodes = original_subscribed_episodes.to_a
+
+    customization = []
+    length = original_subscribed_episodes.size
+
+    # Combined the recommended_array and original_subscribed_episodes to customized_episodes
+    (1..15).each do |index|
+      if( index%4 == 0 && !recommended_array.empty?)
+        customization << recommended_array.shift
+      elsif( !original_subscribed_episodes.empty?  )
+        customization << original_subscribed_episodes.shift
       else
-        recommended_episodes << recommended_array[0]
-        recommdnded_array.shift
+        break
       end
     end
 
     # TODO: Cache Recommendation Result
-    recommended_episodes
+    customization
     
-
   end
 
   def renew_data!

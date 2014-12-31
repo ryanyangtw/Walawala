@@ -99,8 +99,11 @@ module API
 					use :access_token
 				end
 				get ":id/customize_episodes" do
-
-					@episodes = paginate current_user.customize_episodes
+					#@episodes = paginate current_user.customize_episodes
+					if params[:per_page].blank?
+						params[:per_page] = 15
+					end
+					@episodes = current_user.customize_episodes(params[:page], params[:per_page])
 					@tags = Tag.all
 					render rabl: "#{@@default_view_path}/customize_episodes"
 				end
