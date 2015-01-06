@@ -55,9 +55,12 @@ class User < ActiveRecord::Base
   #before_save {|user| user.subscribe_hot_program_in_categories if user.subscribed_category_ids_changed?}
 
 
-  def customize_episodes(page=5 , per_page=15)
+  def customize_episodes(page=1 , per_page=15)
     # TODO: Should inplement indeed customize episodes
     #self.subscribed_episodes.order('id desc').limit(20)
+
+    per_page = 15 if per_page.blank?
+    page = 1 if page.blank?
     
     # Recommend newest episode from hot 3 program in subscribed category
     recommended_array = []
@@ -72,7 +75,7 @@ class User < ActiveRecord::Base
 
     #We will recommend 3 special episode in every 15 episodes
     num_of_recomended_episodes_per_page = 3
-    selected_recommended_episodes = recommended_array.slice( (page-1)*num_of_recomended_episodes_per_page, num_of_recomended_episodes_per_page)
+    selected_recommended_episodes = recommended_array.slice( (page-1)*num_of_recomended_episodes_per_page, num_of_recomended_episodes_per_page) || []
 
 
     # Caculate episodes offset point 
