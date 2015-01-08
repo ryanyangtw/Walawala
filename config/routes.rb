@@ -37,7 +37,12 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'programs#index'
 
-    resources :programs 
+    resources :programs do
+      member do 
+        post :recommend
+        post :cancel_recommendation
+      end
+    end
     resources :episodes #,:only=>[:index, :destroy]
     resources :categories
     resources :feedback_subjects

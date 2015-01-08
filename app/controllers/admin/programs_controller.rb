@@ -1,6 +1,6 @@
 class Admin::ProgramsController < AdminController
 
-  before_action :set_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription]
+  before_action :set_program, :only => [ :edit, :update, :destroy, :recommend, :cancel_recommendation]
   before_action :find_all_categories, :only => [:new,:edit]
 
 
@@ -68,6 +68,19 @@ class Admin::ProgramsController < AdminController
     end
 
   end
+
+  def recommend 
+    @program.set_to_recommendation
+    flash[:notice] = "Success to add this program to 精選輯"
+    redirect_to :back
+  end 
+
+  def cancel_recommendation
+    @program.cancel_from_recommendation
+    flash[:notice] = "Success to remove this program from 精選輯"
+    redirect_to :back
+  end
+
 
 =begin
 

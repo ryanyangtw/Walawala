@@ -35,6 +35,15 @@ module API
 
         end
 
+        desc "Return official collection"
+        paginate per_page: 15
+        params do
+          use :access_token
+        end
+        get 'official_collection' do
+          @episodes = Program.official_collection(params[:page], params[:per_page])
+          render rabl: "#{@@default_view_path}/index"
+        end
 
         desc "Return Specific Episode"
         params do

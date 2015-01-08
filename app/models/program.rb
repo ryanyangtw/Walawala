@@ -37,6 +37,18 @@ class Program < ActiveRecord::Base
 
   scope :sort_by_update_time, -> { order("updated_at desc") }
   scope :sort_by_num_of_subscribers, -> { order("subscriberz_count desc") }
+  scope :recomendable, -> { where(recommendable: true) }
+
+
+  #TODO: [Notice] This is official collection (from best radio)
+  def self.official_collection(page=1, per_page=15)
+    page = 1 if page.blank?
+    per_page = 15 if per_page.blank?
+    
+    programs_list = Program.recomendable.sort_by_update_time.limit(per_page).offset((page-1)*per_page)
+    episodes_list = programs_list.map{|p| p.newest_episode }
+    episodes_list
+  end
 
   def self.search(keyword)
     if keyword.present?
@@ -66,6 +78,18 @@ class Program < ActiveRecord::Base
 
   def updated_today?
     self.updated_at.to_date == Date.today
+  end
+
+  def set_to_recommendation
+    self.update_column(:recommendable, true)
+  end
+
+  def cancel_from_recommendation
+    self.update_column(:recommendable ,false)
+  end
+
+  def newest_episode
+    self.episodes.last
   end
 
   #def vote!(evaluation_id, user_id)

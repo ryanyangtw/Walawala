@@ -3,10 +3,12 @@ attributes :id, :title, :description
 
 node(:href){|category| category_path(category)}
 node :image do |category|
-  {sqdefault: category.image.url(:mobile_sq_default), 
-   mqdefault: category.image.url(:mobile_mq_default),
-   hqdefault: category.image.url(:mobile_hq_default)}
+  {sqdefault: category.image_url, 
+   mqdefault: category.image_url,
+   hqdefault: category.image_url}
 end
+
+#node (:image){|category| category.image_url}
 
 node(:subscribed){|category| category.subscribers.exists?(current_user) ? 'true' : 'false'}
 
