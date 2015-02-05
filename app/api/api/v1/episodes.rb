@@ -36,6 +36,25 @@ module API
 
             #error_message('您已經投過票囉', 500) #@vote.errors.full_messages
           end
+        end
+
+        
+        desc "Cancel vote On Specific Episode and tag"
+        params do
+          use :access_token
+          requires :episode_id, type: String
+          requires :id, type: String
+        end
+        delete ':episode_id/tags/:id/votes' do 
+          @episode = Episode.find(params[:episode_id])
+          @tag = Tag.find(params[:id])
+          #@vote = Vote.where(episode: @episode, voter: current_user, tag: @tag).first
+          #binding.pry
+          if current_user.cancel_vote(@tag, @episode)
+            success_message('成功取消投票')
+          else
+            #TODO: 若刪除失敗......      
+          end
 
         end
 
