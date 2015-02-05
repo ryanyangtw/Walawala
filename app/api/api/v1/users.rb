@@ -102,7 +102,7 @@ module API
 					#@episodes = paginate current_user.customize_episodes
 
 					@episodes = current_user.customize_episodes(params[:page], params[:per_page])
-					@tags = Tag.all
+					#@tags = Tag.all
 					render rabl: "#{@@default_view_path}/customize_episodes"
 				end
 
