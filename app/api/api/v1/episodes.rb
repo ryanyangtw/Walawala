@@ -30,7 +30,11 @@ module API
           if @vote.save
             success_message('投票成功')
           else
-            error_message('您已經投過票囉', 500) #@vote.errors.full_messages
+            #TODO: exception handler for 確認錯誤為重複投票        
+            current_user.cancel_vote(@tag, @episode)
+            success_message('成功取消投票')
+
+            #error_message('您已經投過票囉', 500) #@vote.errors.full_messages
           end
 
         end

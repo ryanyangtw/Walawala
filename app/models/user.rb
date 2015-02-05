@@ -190,6 +190,15 @@ class User < ActiveRecord::Base
     self.created_at.to_date == Date.today
   end
 
+  def has_voted?(tag, episode)
+    self.votes.where(tag: tag, episode:episode).first ? true : false
+  end
+
+  def cancel_vote(tag, episode)
+    vote = self.votes.where(tag:tag,episode:episode)
+    self.votes.destroy(vote)
+  end
+
 
 
   def self.from_omniauth(auth)

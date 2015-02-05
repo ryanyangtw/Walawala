@@ -25,10 +25,13 @@ if(locals[:show_parent_program])
   end
 end
 
+
+
 @tags = Tag.all
 child(@tags) do
   attributes :id, :title
   node(:num_of_votes){|tag| tag.num_of_votes(locals[:object])}
+  node(:voted){|tag| current_user.has_voted?(tag, locals[:object]) }
 end
 
 
