@@ -43,31 +43,30 @@ class Episode < ActiveRecord::Base
     #self.updated_at.to_date == DateTime.current.to_date
   end
 
-  def self.to_csv(options = {})
-    
-    
-    
-    CSV.generate(options) do |csv|
-      column_names_arr = ["ID", "UploadDate", "Title", "ParentProgram", "Uploader"]
-      Category.all.each_with_index do |category, index|
-        column_names_arr << "Category_#{index}_#{category.title}"
-      end
-      csv << column_names_arr 
-      self.all.each do |episode|
-        attributes_arr = []
-        attributes_arr << episode.id 
-        attributes_arr << episode.created_at
-        attributes_arr << episode.title
-        attributes_arr << episode.program.subject
-        attributes_arr << episode.program.try(:owner).try(:name)
-        Category.all.each do |category|
-          attributes_arr <<  episode.program.categories.exists?(category) ? 1 : 0
-        end
+  ## There are some ernoding problems whrn outputing CSV
+  # def self.to_csv(options = {})
+  #   CSV.generate(options) do |csv|
+  #     column_names_arr = ["ID", "UploadDate", "Title", "ParentProgram", "Uploader"]
+  #     Category.all.each_with_index do |category, index|
+  #       column_names_arr << "Category_#{index}_#{category.title}"
+  #     end
+  #     csv << column_names_arr 
+  #     self.all.each do |episode|
+  #       attributes_arr = []
+  #       attributes_arr << episode.id 
+  #       attributes_arr << episode.created_at
+  #       attributes_arr << episode.title
+  #       attributes_arr << episode.program.subject
+  #       attributes_arr << episode.program.try(:owner).try(:name)
+  #       Category.all.each do |category|
+  #         attributes_arr <<  episode.program.categories.exists?(category) ? 1 : 0
+  #       end
 
-        csv << attributes_arr
-      end
-    end
-  end
+  #       csv << attributes_arr
+  #     end
+  #   end
+  # end
+
 
 
   private

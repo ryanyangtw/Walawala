@@ -7,13 +7,14 @@
   <Worksheet ss:Name="Sheet1">
     <Table>
       <Row>
-        <Cell><Data ss:Type="Number">ID</Data></Cell>
+        <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">CreatedDate</Data></Cell>
         <Cell><Data ss:Type="String">Title</Data></Cell>
         <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
         <Cell><Data ss:Type="String">Uploader</Data></Cell>
+        <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
         <% Category.all.each_with_index do |category, index|%>
-        <Cell><Data ss:Type="String"><%= "Category_#{index}_#{category.title}" %></Data></Cell>-->
+        <Cell><Data ss:Type="String"><%= "Category_#{index}_#{category.title}" %></Data></Cell>
         <% end %>
       </Row>
     <% @episodes.each do |episode| %>
@@ -23,11 +24,14 @@
         <Cell><Data ss:Type="String"><%= episode.title %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.program.subject %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.program.try(:owner).try(:name) %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.program.subject %></Data></Cell>
         <% Category.all.each do |category|%>
-        <Cell><Data ss:Type="Number"><%= episode.program.categories.exists?(category) ? 1 : 0 %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.program.categories.exists?(category) ? 1 : 0 %></Data></Cell>
         <% end %>
+
       </Row>
     <% end %>
     </Table>
   </Worksheet>
 </Workbook>
+

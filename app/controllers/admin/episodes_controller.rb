@@ -9,7 +9,8 @@ class Admin::EpisodesController < AdminController
       format.html do
         @episodes = Episode.order("updated_at DESC").paginate(:page => params[:page], :per_page=>20)
       end
-
+      
+      # There are some ernoding problems whrn outputing CSV
       format.csv do
         @episodes = Episode.order("updated_at ASC")
         send_data @episodes.to_csv
