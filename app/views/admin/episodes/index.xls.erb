@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Workbook xmlns="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:o="urn:schemas-microsoft-com:office:office"
+  xmlns:x="urn:schemas-microsoft-com:office:excel"
+  xmlns:ss="urn:schemas-microsoft-com:office:spreadsheet"
+  xmlns:html="http://www.w3.org/TR/REC-html40">
+  <Worksheet ss:Name="Sheet1">
+    <Table>
+      <Row>
+        <Cell><Data ss:Type="Number">ID</Data></Cell>
+        <Cell><Data ss:Type="String">CreatedDate</Data></Cell>
+        <Cell><Data ss:Type="String">Title</Data></Cell>
+        <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
+        <Cell><Data ss:Type="String">Uploader</Data></Cell>
+        <% Category.all.each_with_index do |category, index|%>
+        <Cell><Data ss:Type="String"><%= "Category_#{index}_#{category.title}" %></Data></Cell>-->
+        <% end %>
+      </Row>
+    <% @episodes.each do |episode| %>
+      <Row>
+        <Cell><Data ss:Type="Number"><%= episode.id %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.title %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.program.subject %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.program.try(:owner).try(:name) %></Data></Cell>
+        <% Category.all.each do |category|%>
+        <Cell><Data ss:Type="Number"><%= episode.program.categories.exists?(category) ? 1 : 0 %></Data></Cell>
+        <% end %>
+      </Row>
+    <% end %>
+    </Table>
+  </Worksheet>
+</Workbook>

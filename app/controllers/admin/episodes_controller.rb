@@ -5,7 +5,21 @@ class Admin::EpisodesController < AdminController
   before_action :authenticate_user!, only: [:vote]
 
   def index
-    @episodes = Episode.order("updated_at DESC").paginate(:page => params[:page], :per_page=>20)
+    respond_to do |format|
+      format.html do
+        @episodes = Episode.order("updated_at DESC").paginate(:page => params[:page], :per_page=>20)
+      end
+
+      format.csv do
+        @episodes = Episode.order("updated_at ASC")
+        send_data @episodes.to_csv
+      end
+
+      format.xls do
+        @episodes = Episode.order("updated_at ASC")
+      end
+
+    end
   end
 
   def show
