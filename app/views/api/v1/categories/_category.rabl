@@ -4,8 +4,8 @@ attributes :id, :title, :description
 node(:href){|category| category_path(category)}
 node :image do |category|
   {sqdefault: category.image_url, 
-   mqdefault: category.image_url,
-   hqdefault: category.image_url}
+   mqdefault: category.image2x_url,
+   hqdefault: category.image3x_url}
 end
 
 #node (:image){|category| category.image_url}
