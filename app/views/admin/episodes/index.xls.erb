@@ -9,6 +9,7 @@
       <Row>
         <Cell><Data ss:Type="String">ID</Data></Cell>
         <Cell><Data ss:Type="String">CreatedDate</Data></Cell>
+        <Cell><Data ss:Type="String">UpdatedDate</Data></Cell>
         <Cell><Data ss:Type="String">Title</Data></Cell>
         <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
         <Cell><Data ss:Type="String">Uploader</Data></Cell>
@@ -21,6 +22,7 @@
       <Row>
         <Cell><Data ss:Type="Number"><%= episode.id %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.created_at %></Data></Cell>
+        <Cell><Data ss:Type="String"><%= episode.updated_at %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.title %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.program.subject %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.program.try(:owner).try(:name) %></Data></Cell>
