@@ -1,6 +1,6 @@
 #cache @episode
 
-attributes :id, :title, :description, :length_of_audio
+attributes :id, :title, :description, :length_of_audio, :created_at
 
 node(:audio_url){|episode| episode.audio.url}
 node(:href){|episode| episode_path(episode)}
