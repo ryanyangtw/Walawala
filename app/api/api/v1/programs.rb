@@ -69,7 +69,7 @@ module API
 				end
 				get '/:program_id/episodes' do
 					@program = Program.find(params[:program_id])
-					@episodes = paginate @program.episodes
+					@episodes = paginate @program.episodes.order("created_at DESC")
           #@tags = Tag.all
 					render rabl: "#{@@default_episode_path}/index"
 
