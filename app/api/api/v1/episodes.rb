@@ -89,6 +89,23 @@ module API
         end
 
 
+        desc "Increase number of views in episode"
+        params do
+          use :access_token
+          requires :id, type: String
+        end
+        post ':id/increase_number_of_views' do 
+
+          @episode = Episode.find(params[:id])
+
+          if @episode.increase_number_of_views(current_user)
+            success_message('success to increase number of views')
+          end
+          #@episode.add_listener(current_user)
+    
+        end
+
+
       end # end of episodes resources
 
 

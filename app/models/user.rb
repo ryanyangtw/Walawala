@@ -49,6 +49,11 @@ class User < ActiveRecord::Base
   #one to many
   has_many :feedbacks
 
+  # many to many
+  has_many :views
+  has_many :listened_episodes, through: :views, source: :episode
+
+
 
   before_save :ensure_authentication_token
 
