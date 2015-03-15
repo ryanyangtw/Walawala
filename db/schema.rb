@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150224091917) do
+ActiveRecord::Schema.define(version: 20150314135327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -34,7 +34,9 @@ ActiveRecord::Schema.define(version: 20150224091917) do
     t.integer  "program_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "length_of_audio", default: 0
+    t.integer  "length_of_audio",            default: 0
+    t.integer  "number_of_unique_listeners", default: 0
+    t.integer  "number_of_total_listeners",  default: 0
   end
 
   create_table "feedback_subjects", force: true do |t|
@@ -112,6 +114,14 @@ ActiveRecord::Schema.define(version: 20150224091917) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+
+  create_table "views", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "episode_id"
+    t.integer  "numbers",    default: 0
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "votes", force: true do |t|
     t.integer  "tag_id"

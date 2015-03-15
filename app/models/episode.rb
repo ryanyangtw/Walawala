@@ -20,6 +20,11 @@ class Episode < ActiveRecord::Base
 
   has_many :votes, dependent: :destroy
 
+  # many to many
+  has_many :views, dependent: :destroy
+  has_many :listeners, through: :views, source: :listener
+
+
   validates :audio, presence: true , on: [:create]
 
   before_create :calculate_length_of_audio
@@ -41,6 +46,23 @@ class Episode < ActiveRecord::Base
   def updated_today?
     self.updated_at.to_date == Date.today
     #self.updated_at.to_date == DateTime.current.to_date
+  end
+
+  def increase_number_of_total_listeners
+    self.update_column(:number_of_total_listeners, self.number_of_total_listeners + 1)
+
+    # Notice: increment will fired the hook (before_save :increase_numbers) in model/view.rb twice
+    #self.increment!(:number_of_total_listeners)
+  end
+
+  def increase_number_of_views(user)
+    if self.listeners.exists?(user)
+      view = self.views.where(listener: user).first
+      view.increase_numbers
+    else
+      self.listeners << user
+    end
+
   end
 
   ## There are some ernoding problems whrn outputing CSV
@@ -76,4 +98,7 @@ class Episode < ActiveRecord::Base
     end
 
   end
+
+
+
 end
