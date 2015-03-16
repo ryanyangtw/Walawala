@@ -14,6 +14,9 @@
         <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
         <Cell><Data ss:Type="String">Uploader</Data></Cell>
         <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
+        <Cell><Data ss:Type="String">NumberOfUniqueListeners</Data></Cell>
+        <Cell><Data ss:Type="String">NumberOfTotalListeners</Data></Cell>
+        <Cell><Data ss:Type="String">ParentProgram</Data></Cell>
         <% Category.all.each_with_index do |category, index|%>
         <Cell><Data ss:Type="String"><%= "Category_#{index}_#{category.title}" %></Data></Cell>
         <% end %>
@@ -27,6 +30,8 @@
         <Cell><Data ss:Type="String"><%= episode.program.subject %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.program.try(:owner).try(:name) %></Data></Cell>
         <Cell><Data ss:Type="String"><%= episode.program.subject %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= episode.number_of_unique_listeners %></Data></Cell>
+        <Cell><Data ss:Type="Number"><%= episode.number_of_total_listeners %></Data></Cell>
         <% Category.all.each do |category|%>
         <Cell><Data ss:Type="String"><%= episode.program.categories.exists?(category) ? 1 : 0 %></Data></Cell>
         <% end %>

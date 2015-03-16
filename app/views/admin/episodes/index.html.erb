@@ -12,6 +12,8 @@
           <th>標題</th>
           <th>描述</th>
           <th>內容</th>
+          <th>不重複聽眾</th>
+          <th>總共瀏覽量</th> 
           <th>標籤</th>
           <th>修改</th>
           <th>刪除</th>
@@ -37,7 +39,8 @@
               <td><%= episode.title %></td>
               <td><%= episode.description %></td>
               <td><%= audio_tag(episode.audio.url, :controls => true, :preload => "auto")%></td>
-
+              <td><%= episode.number_of_unique_listeners %></td>
+              <td><%= episode.number_of_total_listeners %></td>
               <td>
                 <% Tag.order("id ASC").each do |tag|%>
                 

@@ -16,6 +16,7 @@
           <th>節目名稱</th>
           <th>節目圖片</th>
           <th>節目敘述</th>
+          <th>訂閱人數</th> 
           <th>編輯</th>
           <th>刪除</th>
           <th>推薦</th>
@@ -47,6 +48,9 @@
           <%= program.introduction %>
           </td>
           
+          <td>
+            <%= program.subscribers.size %>
+          </td>
           <td><%= link_to('編輯', edit_admin_program_path(program), :class=>'btn btn-info btn-sm')%></td>
           <td><%= link_to('刪除', admin_program_path(program), :class=>'btn btn-danger btn-sm', method: :delete)%></td>
 
