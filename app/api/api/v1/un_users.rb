@@ -71,6 +71,7 @@ module API
                 requires :email, type: String
                 optional :name, type: String
                 optional :avatar, type: String
+                optional :fb_access_token, type: String
                 #end
               end
             end
@@ -82,6 +83,9 @@ module API
                 params[:user][:info][:email]= params[:user][:email]
                 params[:user][:info][:name]= params[:user][:name]
                 params[:user][:info][:image]= params[:user][:avatar]
+  
+                params[:user][:credentials] = {}
+                params[:user][:credentials][:token] = params[:user][:fb_access_token]
 
                 @user = User.from_omniauth(params[:user])         
                 if(@user.persisted?)

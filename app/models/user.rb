@@ -207,35 +207,62 @@ class User < ActiveRecord::Base
 
 
   def self.from_omniauth(auth)
-    
-    where(auth.slice(:provider, :uid)).first_or_create do |user|
 
 
+    user = User.find_by(provider: auth.provider, uid: auth.uid)
+
+    if user 
+      user.update_columns(fb_access_token: auth.credentials.token)
+    else
+      user = User.new
+      user.provider = auth.provider
+      user.uid = auth.uid
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.name   # assuming the user model has a name
+      user.fb_access_token = auth.credentials.token
       
       if auth.info.image.present?
 
         avatar_url = process_uri(auth.info.image)
         #user.remote_avatar_url = URI.parse(avatar_url)
         user.remote_avatar_url = avatar_url
-
       end
-      # user.avatar = URI.parse(avatar_url) 
 
-      #if auth.info.image.present?
-      # require 'open-uri'
-      # require 'open_uri_redirections'
-      # avatar_url = open(auth.info.image, :allow_redirections => :safe) do |r|
-      #   r.base_uri.to_s
-      # end
-      # #avatar_url = process_uri(auth.info.image)
-      # user.avatar = URI.parse(avatar_url) 
-      #end
-      #user.avatar = auth.info.image # assuming the user model has an image
-      #user.avatar =  URI.parse(auth.info.image) if auth.info.image?
-    end
+      user.save
+    end   
+
+    return user
+    
+    # where(auth.slice(:provider, :uid)).first_or_create do |user|
+
+
+    #   user.email = auth.info.email
+    #   user.password = Devise.friendly_token[0,20]
+    #   user.name = auth.info.name   # assuming the user model has a name
+    #   user.fb_access_token = auth.info.token
+      
+    #   if auth.info.image.present?
+
+    #     avatar_url = process_uri(auth.info.image)
+    #     #user.remote_avatar_url = URI.parse(avatar_url)
+    #     user.remote_avatar_url = avatar_url
+
+    #   end
+    #   # user.avatar = URI.parse(avatar_url) 
+
+    #   #if auth.info.image.present?
+    #   # require 'open-uri'
+    #   # require 'open_uri_redirections'
+    #   # avatar_url = open(auth.info.image, :allow_redirections => :safe) do |r|
+    #   #   r.base_uri.to_s
+    #   # end
+    #   # #avatar_url = process_uri(auth.info.image)
+    #   # user.avatar = URI.parse(avatar_url) 
+    #   #end
+    #   #user.avatar = auth.info.image # assuming the user model has an image
+    #   #user.avatar =  URI.parse(auth.info.image) if auth.info.image?
+    # end
   end
 
 
