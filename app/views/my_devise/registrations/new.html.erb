@@ -1,0 +1,121 @@
+ <div class="relative sign_up">
+        <div class="s_u_alert_frame error_messages">
+        </div>
+        <div class="s_u_frame poz_center">
+            <div class="absolute s_u_title">註冊&nbsp;walawala</div>
+            <div class="absolute s_u_sub_title"></div>
+            <div class="absolute s_u_fb hover_opacity">facebook&nbsp;帳號註冊</div>
+            <!-- <img class="absolute s_u_or" src="images/sign_up/s_u_or.png"/> -->
+            <%= image_tag('sign_up/s_u_or.png', class: "absolute s_u_or") %>
+
+
+
+            <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), remote: true, :html => { :multipart => true }) do |f| %>
+              <%#= devise_error_messages! %>
+
+ 
+              <%= f.text_field :email, autofocus: true , class: "absolute s_u_mail",placeholder: "Email" %>
+             
+            
+
+
+              <%= f.password_field :password , class: "absolute s_u_build_password",  placeholder: "建立密碼" %>
+             
+
+         
+              <%= f.password_field :password_confirmation, class: "absolute s_u_build_password_again", placeholder: "再次確認密碼"%>
+              
+
+              <!-- <input class="absolute s_u_mail" type="text" onfocus="if(this.value=='Email') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='Email';this.style.color='#999b9d';};" value="Email">
+              <input class="absolute s_u_build_password" type="text" onfocus="if(this.value=='建立密碼') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='建立密碼';this.style.color='#999b9d';};" value="建立密碼"> -->
+              <%= f.submit "註  冊" ,class: "absolute s_u_submit hover_opacity", style: "border: none;"%>
+            <% end %>
+            <!-- <div class="absolute s_u_submit hover_opacity">註&nbsp;&nbsp;&nbsp;&nbsp;冊</div> -->
+            <div class="absolute s_u_line"></div>
+            
+            <%= image_tag('sign_up/s_u_al_word.png', class: 'absolute s_u_al_word') %>
+            <!-- <img class="absolute s_u_al_word" src="images/sign_up/s_u_al_word.png"/> -->
+            <%= link_to(path_with_hash_tag(new_user_session_path)) do%>
+            <!-- <a href="#login"> -->
+              <div class="absolute s_u_login_btn hover_opacity">Login now</div>
+            <!-- </a> -->
+            <% end %>
+        </div>
+
+        <%= render(partial: 'shared/footer', locals: {footer_class: "footer"})%>
+        <!-- <div class="footer">
+            <span>
+                <a href="">法律條款</a>
+            </span>
+            <span>
+                <a href="">聯絡我們</a>
+            </span>
+            <span>
+                <a href="">加入我們</a>
+            </span>
+            <span>
+                <a href="">廣告合作</a>
+            </span>
+        </div> -->
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container col-sm-offset-3 col-sm-6">
+<div class="panel panel-default ">
+  
+  <div class="panel-heading">
+    <h2>註冊</h2>
+  </div>
+
+  <div class="panel-body">
+    <%#= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :multipart => true }) do |f| %>
+      <%#= devise_error_messages! %>
+
+      <div class="form-group">
+        <%#= f.label :avatar %>
+        <%#= f.file_field :avatar, class: "form-control", :autofocus => true %>
+      </div>
+
+      <div class="form-group">
+        <%#= label_tag(:name, "暱稱") %>
+    
+        <%#= f.text_field :name, autofocus: true ,class: "form-control"%>
+      </div>
+
+
+      <div class="form-group">
+        <%#= f.label :email %>
+        <%#= f.email_field :email, autofocus: true ,class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%#= f.label :password %>
+        <%#= f.password_field :password , class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%#= f.label :password_confirmation %><br />
+        <%#= f.password_field :password_confirmation , class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%#= f.submit "Sign up" ,class: "btn btn-primary"%>
+      </div>
+    <% #end %>
+  </div>
+  
+  <div class="panel-footer">
+    <%#= render "devise/shared/links" %>
+  </div>
+</div>
+</div>
+ -->

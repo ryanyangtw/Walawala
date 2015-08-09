@@ -1,0 +1,11 @@
+<% if @user.valid? %>
+  window.location.replace('<%= root_path %>');
+<% else %>
+  
+  $('.error_messages').html("");
+  <% @error_messages.each do |msg| %>   
+    <% element = raw("<div class='s_u_alert'> #{msg} </div>") %>
+    $('.error_messages').append("<%= element %>");
+  <% end %>
+
+<% end %>

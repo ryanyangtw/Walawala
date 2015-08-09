@@ -36,10 +36,15 @@ Rails.application.configure do
   # config.action_view.raise_on_missing_translations = true
 
   # set for devise
-  config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
+  # config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   #add for adding view helper in rabl view
   routes.default_url_options = { host: "127.0.0.1.xip.io", port: 3000 }
+
+  config.action_mailer.delivery_method = :letter_opener
+  config.action_mailer.default_url_options = { host: '127.0.0.1.xip.io', port: 3000 }
+  config.action_mailer.asset_host = '127.0.0.1.xip.io:3000'
+  config.action_controller.asset_host = '127.0.0.1.xip.io:3000'
 
   #Shoule be delete
   #Add for Heroku, It should be deleted after migrate to AWS

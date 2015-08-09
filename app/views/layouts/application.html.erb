@@ -9,16 +9,16 @@
 <body>
 
 
-<%= render 'shared/header' %>
-<div class="container">
-  <%flash.each do |name , msg|%>
-    <%= content_tag(:div , msg,class: "alert alert-info") %>
-  <%end%>
+<%#= render 'shared/header' %>
+<!-- <div class="container"> -->
+  <%#flash.each do |name , msg|%>
+    <%#= content_tag(:div , msg,class: "alert alert-info") %>
+  <%#end%>
   <%= yield %>
-</div>
+<!-- </div> -->
 
 
-<%= javascript_include_tag 'application'%>
+<%#= javascript_include_tag 'application'%>
 <%= yield :program_show_customize_jquery%>
 
 </body>

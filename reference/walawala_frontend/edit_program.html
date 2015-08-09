@@ -1,0 +1,77 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="relative edit_program">
+        <div class="e_p_frame poz_center">
+            <p class="e_p_title">修改節目</p>
+            <div class="e_p_box">
+                <div class="e_p_delete btn_hover">
+                    <img class="off" src="images/edit_program/e_p_delete_off.png">
+                    <img class="on" src="images/edit_program/e_p_delete_on.png">
+                    <div class="absolute full">
+                        刪除此節目
+                    </div>
+                </div>
+                <div class="e_p_pic hover_opacity">
+                    <div class="absolute full"></div>
+                    <div class="e_p_pic_over">
+                        <div class="e_p_pic_over_word">上傳圖片</div>
+                    </div>
+                    <input class="e_p_pic_input_btn" name="" type="file">
+                </div>
+                <input class="e_p_program_name" name="" type="text" onfocus="if(this.value=='輸入節目名稱（10字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入節目名稱（10字內）';this.style.color='#999999';};" value="輸入節目名稱（10字內）">
+                <select class="e_p_program_select_0">
+                    <option>主分類</option>
+                </select>
+                <select class="e_p_program_select_1">
+                    <option>次分類</option>
+                </select>
+                <select class="e_p_program_select_2">
+                    <option>次分類</option>
+                </select>
+                <textarea class="e_p_program_text" onfocus="if(this.value=='輸入節目描述（100字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入節目描述（100字內）';this.style.color='#999999';};">節目原描述節目原描述節目原描述節目原描述節目原描述節目原描述</textarea>
+                <div class="e_p_cancle btn_hover">
+                    <img class="off" src="images/upload_program/u_p_cancle_off.png">
+                    <img class="on" src="images/upload_program/u_p_cancle_on.png">
+                    <a href="#upload">
+                        <div class="absolute full">
+                            取消
+                        </div>
+                    </a>
+                </div>
+                <div class="e_p_complete btn_hover">
+                    <img class="off" src="images/upload_program/u_p_complete_off.png">
+                    <img class="on" src="images/upload_program/u_p_complete_on.png">
+                    <div class="absolute full">
+                        完成
+                    </div>
+                </div>
+                <div class="e_p_complete_go btn_hover">
+                    <img class="off" src="images/upload_program/u_p_complete_go_off.png">
+                    <img class="on" src="images/upload_program/u_p_complete_go_on.png">
+                    <div class="absolute full">
+                        完成，前往上傳集
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <span>
+                <a href="">法律條款</a>
+            </span>
+            <span>
+                <a href="">聯絡我們</a>
+            </span>
+            <span>
+                <a href="">加入我們</a>
+            </span>
+            <span>
+                <a href="">廣告合作</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Walawala</title>
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%#= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <div style= "width:100%;margin:0px auto 0px auto">
+      <div class="relative main_frame">
+          <%= yield %>
+      </div>
+  </div>
+  
+  <%= render partial: 'shared/loading' %>
+
+  <%= render partial: 'shared/header' %>
+
+  <%= render partial: 'shared/components' %>
+
+  <%= javascript_include_tag 'application'%>
+
+</body>
+</html>

@@ -1,0 +1,24 @@
+
+
+<% if @user %>
+  <% if @user.valid?%>
+    // alert("Your password has been changed. Please sign in.");
+    <%# binding.pry %>
+    window.location.hash = '<%= path_without_backslash(new_user_session_path) %>';
+    // window.location.replace('<%#= path_with_hash_tag(new_user_session_path) %>');
+  <% else %>
+    // alert( "<%= list_error_messages(@user.errors.full_messages) %>" );
+
+    $('.error_messages').html("");
+
+    <% @user.errors.full_messages.each do |msg| %>   
+      <% element = raw("<div class='l_alert'> #{msg} </div>") %>
+      $('.error_messages').append("<%= element %>");
+    <% end %>
+    
+  <% end %>
+<% else %>
+  window.location.hash = '<%= path_without_backslash(expired_token_path) %>';
+  // window.location.replace('<%= path_with_hash_tag(expired_token_path) %>');
+<% end %>    
+

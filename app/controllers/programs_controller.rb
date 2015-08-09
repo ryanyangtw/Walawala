@@ -1,10 +1,11 @@
 class ProgramsController < ApplicationController
-  before_action :set_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription]
+  before_action :set_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription, :more_episodes]
   before_action :find_all_categories, :only => [:new,:edit]
 
   authorize_resource
 
   def index
+    @programs = Program.order(id: :desc)
   end
 
   def show
@@ -12,8 +13,6 @@ class ProgramsController < ApplicationController
     #@program = Program.includes(:episodes, :categories).find(params[:id])
     @program = Program.includes(:episodes, :categories).find(params[:id])
     @episodes = @program.episodes.order("id DESC").paginate(:page => params[:page], :per_page=>15)
-
-
 
     #@episodes = @program.episodes
     #@episodes = [] if(@episodes == nil)
@@ -61,19 +60,35 @@ class ProgramsController < ApplicationController
 
   def subscribe
     @program.add_subscriber!(current_user)
-    flash[:notice] = "你已成功訂閱此節目"
-    redirect_to :back
+    # flash[:notice] = "你已成功訂閱此節目"
+    # redirect_to :back
+    # render js: "alert('你已成功訂閱此節目');"
+    respond_to do |format|
+      format.js
+    end
   end
 
   def cancel_subscription
     @program.remove_subscriber!(current_user)
-    flash[:notice] = "你已取消訂閱此節目"
-    redirect_to :back
+    # flash[:notice] = "你已取消訂閱此節目"
+    # render js: "alert('你已取消訂閱此節目');"
+    # redirect_to :back
+    respond_to do |format|
+      format.js
+    end
   end
 
   def search
     @q = Program.includes(:episodes).ransack(params[:q]) 
     @programs = @q.result(distinct: true).includes(:episodes).paginate(:page => params[:page], :per_page => 20 )
+  end
+
+  def more_episodes
+    @episodes = @program.episodes.order(id: :desc).limit(20).offset(30)
+    
+    respond_to do |format|
+      format.js
+    end
   end
 
 

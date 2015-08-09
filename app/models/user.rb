@@ -30,6 +30,8 @@ class User < ActiveRecord::Base
 
   mount_uploader :avatar, ImageUploader
 
+  include Tokenable
+
   # one to many
   has_many :programs
 
@@ -274,6 +276,9 @@ class User < ActiveRecord::Base
     end
   end
 
+  def register_from_fb?
+    self.provider == "facebook"
+  end
   
 
   private

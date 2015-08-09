@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
-  root to: "pages#home"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , :registrations => "registrations" }
+  root to: "pages#index"
+  get 'home', to: "pages#home"
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , registrations: 'my_devise/registrations', sessions: 'my_devise/sessions'} #:registrations => "registrations" }
 
   #devise_for :users
   #devise_for :users, :controllers=>{ :registrations=>"registrations"}
@@ -15,6 +17,7 @@ Rails.application.routes.draw do
 
     collection do
       post :search
+      get :more_episodes
     end
   end
   
@@ -31,6 +34,14 @@ Rails.application.routes.draw do
   post "subscribe_categories", to: "users#subscribe_category"
 
   resources :feedback_subjects
+
+
+  get 'forgot_password', to: 'forgot_passwords#new'
+  resources :forgot_passwords, only: [:create]
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
+
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token', to: 'pages#expired_token'
 
   
 
@@ -52,14 +63,13 @@ Rails.application.routes.draw do
         put :change_role
       end
     end
-
-
-
-
   end
-  
-  
 
+  #add for sidekiq dashboard
+  require 'sidekiq/web'
+  mount Sidekiq::Web, at: "/sidekiq"
+  
+  
   #add for grape api
   #mount Walawala::API => '/api'
   mount API::Root => '/'

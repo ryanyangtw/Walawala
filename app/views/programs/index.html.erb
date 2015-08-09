@@ -1,0 +1,73 @@
+<div class="bg-purple">   
+    <div class="relative upload">
+        <p class="u_header">已建立的節目</p>
+        <%= link_to(path_with_hash_tag(new_program_path)) do %>
+        <!-- <a href="#upload_program"> -->
+            <div class="u_create_new_program">
+                <div class="u_create_new_program_pic">
+                  <%= image_tag('upload/u_create_new_program.png') %>
+                    <!-- <img src="images/upload/u_create_new_program.png"/> -->
+                  <%= image_tag('upload/u_create_new_program_hover.png', class: "u_create_new_program_hover") %>
+                    <!-- <img class="u_create_new_program_hover" src="images/upload/u_create_new_program_hover.png"/> -->
+                </div>
+                
+                  <div class="u_create_new_program_word">建立新節目</div>
+                
+            </div>
+        <% end %>
+        <!-- </a> -->
+
+
+
+        <% @programs.each do |program| %>
+          <div class="u_unit">
+              <%= link_to(edit_program_path(program)) do %>
+              <!-- <a href="#edit_program"> -->
+                  <div class="u_pic">
+                      <div class="u_pic_in">
+                        <%= image_tag(program.image.url) %>
+                          <!-- <img src="images/upload/demo.jpg"> -->
+                      </div>
+                      <div class="u_pic_over">
+                          <p class="u_pic_over_word">修改節目</p>
+                      </div>
+                  </div>
+              <% end %>
+              <!-- </a> -->
+              <div class="u_programe_name"><%= truncate(program.subject, length: 13) %></div>
+              
+              <div class="u_edit_box">
+                  <!-- <a href="#upload_episode"> -->
+                  <%= link_to(path_with_hash_tag(new_program_episode_path(program))) do %>
+                      <div class="u_new_btn hover_opacity">上傳新一集</div>
+                  <% end %>
+                  <!-- </a> -->
+                  <% program.episodes.order(id: :desc).limit(4).each_with_index do |episode, index|%>
+                  <!-- <a href="#edit_episode"> -->
+                      <div class="u_episode_unit">
+                          <div class="u_episode_unit_">
+                              <%= image_tag('u_episode_unit.png') %> <%= render_episode_title_with_index(index, episode) %>
+                              <!-- <img src="images/upload/u_episode_unit.png"/> 1.集名稱 episode title -->
+                              <div class="u_episode_unit_time"><%= render_format_time(program.created_at) %></div>
+                              <div class="u_episode_word">修改此集</div>
+                          </div>
+                      </div>
+                  <!-- </a> -->
+                  <% end %>
+              </div>
+
+              <div class="u_episode_unit_more hover_opacity">
+                <%= image_tag('upload/u_episode_unit_more.png', class: "poz_center") %>
+                  <!-- <img class="poz_center" src="images/upload/u_episode_unit_more.png"> -->
+                <%= image_tag('upload/u_episode_unit_more_hover.png', class: "u_episode_unit_more_hover") %>
+                  <!-- <img class="u_episode_unit_more_hover" src="images/upload/u_episode_unit_more_hover.png"> -->
+              </div>
+          </div>
+        <% end %>
+
+
+  
+
+        <%= render(partial: 'shared/footer') %>
+    </div>
+ </div>   

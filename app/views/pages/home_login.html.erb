@@ -1,0 +1,69 @@
+
+
+<div class="bg-purple">
+    <div class="relative home_logged">
+        <div class="relative h_l_header">
+            <div class="absolute selected_btn hover_opacity">精選節目</div>
+        </div>
+
+ 
+  
+        <div class="relative h_l_content">
+            <% @customize_episodes.each do |episode|%>
+            <div class="h_l_item state_0 to_f">
+                <div class="h_l_item_pic">
+                    <%= image_tag(episode.program.image_url) %>
+                    <!-- <img src="images/home_logged/demo.jpg"> -->
+                </div>
+                <div class="filter"></div>
+                <div class='h_l_follow'></div>
+                <div class="h_l_share"></div>
+                <div class="h_l_item_btn" onclick="playPause('song_1')"></div>
+                <p><%= episode.title %></p>
+                <div class="h_l_item_name"><%= truncate(episode.program.subject, length: 9) %></div>
+            </div> 
+            <% end %>   
+        </div>
+            
+       
+
+        <div class="relative h_l_content">
+            <div class="h_l_item state_0 to_f">
+                <div class="h_l_item_pic">
+                    <%= image_tag('home_logged/demo.jpg') %>
+                    <!-- <img src="images/home_logged/demo.jpg"> -->
+                </div>
+                <div class="filter"></div>
+                <div class='h_l_follow'></div>
+                <div class="h_l_share"></div>
+                <div class="h_l_item_btn" onclick="playPause('song_1')"></div>
+                <p>集名稱 episode title</p>
+                <div class="h_l_item_name">節目名稱</div>
+            </div>
+        </div>
+
+        <audio id="song_1">
+            <source src="<%= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
+        </audio>
+        <audio id="song_2">
+            <source src="<%= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
+        </audio>
+
+
+        <%= render(partial: "shared/footer", locals: { footer_class: "relative footer" })%>
+        <!-- <div class="footer">
+            <span>
+                <a href="">法律條款</a>
+            </span>
+            <span>
+                <a href="">聯絡我們</a>
+            </span>
+            <span>
+                <a href="">加入我們</a>
+            </span>
+            <span>
+                <a href="">廣告合作</a>
+            </span>
+        </div> -->
+    </div>
+</div>

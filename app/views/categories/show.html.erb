@@ -1,28 +1,113 @@
-<div class="row">
+<div class="relative sub_cate">
+        <div class="absolute sub_cate_list">
 
-  <h2> 分類名稱:  <%= @category.title%></h2>
+        	<% @categories.each do |category| %>
+        		<%= link_to(path_with_hash_tag(category_path(category))) do%>
+	            <div class="sub_cate_list_item">
+	                <div class="s_bg"></div>
+	                <div class="s_word">
+	                    <%= image_tag('sub_cate/sub_cate_icon.png') %><%= category.title %>
+	                </div>
+	            </div>
+	          <% end %>
+           <% end %>
+        </div>
+
+
+        <div class="relative sub_cate_content">
+            <div class="relative s_c_i_box">
+
+            	<% @programs.each do |program| %>
+            		<% if user_signed_in? %>
+	            		<% if current_user.already_subscribed?(program) %>
+
+	            			<div class="s_c_i s_c_i_followed">
+	            		<% else %>
+	            			<div class="s_c_i">
+	            		<% end %>
+	            	<% end %>
+
+                    <div class="s_c_i_pic">
+                    	<%= image_tag(program.image.url) %>
+                        <!-- <img src="images/sub_cate/program_user.png" > -->
+                        <!-- <div class="s_c_i_episode">	
+                        </div> -->
+                    </div>
+                    <div class="s_c_i_text">
+                        <div class="s_c_i_head">
+                            <a href="#program">
+                                <span class="s_c_i_title"><%= truncate(program.subject, length: 14)%></span>
+                            </a>
+                        </div>
+                        
+                        <p class="s_c_i_intro"><%= truncate(program.introduction, length: 90) %></p>
+                    </div>
+
+										
+									  <% if user_signed_in? %>
+									  	<% if current_user.already_subscribed?(program) %>
+									  		<%= link_to(cancel_subscription_program_path(program), method: :post, remote: true, id: "subscribe_program_#{program.id}") do%>
+											
+									  			<%= div_for(program, class: "s_c_i_follow hover_opacity") do %>
+									  			<% end %>
+									  			<!-- <div class="s_c_i_follow hover_opacity"></div> -->
+									  		<% end %>
+									  	<% else %>
+									  		<%= link_to(subscribe_program_path(program), method: :post, remote: true, id: "subscribe_program_#{program.id}") do%>
+									  			<!-- <div class="s_c_i_follow hover_opacity"></div> -->
+									  			<%= div_for(program, class: "s_c_i_follow hover_opacity") do %>
+									  			<% end %>
+									  		<% end %>
+									  	<% end %>
+                    <% end %>
+
+                    <div class="s_c_i_share hover_opacity" data-href="<%=  program_path(program) %>"></div>
+               	</div>
+            	<% end %>
+                
+            </div>
+        </div>
+
+        <%= will_paginate(@programs, class: "absolute") %>
+
+        <%= render(partial: "shared/footer") %>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row">
+
+  <h2> 分類名稱:  <%#= @category.title%></h2>
 
   <hr>
 
 
 <div class="row">
 
-			 <% @category.programs.each do |program| %>
+			 <%# @category.programs.each do |program| %>
 			 <div class="col-sm-3 col-md-3">
 
 			    <div class="panel panel-default">
 			      <div class="img-box">
-			      	<%= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program) %>
+			      	<%#= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program) %>
 			    	</div>
 
 			      <div class="panel-body img-avatar">
-			      	<%= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded")%>
-			        <span><%= program.subject %></span>
+			      	<%#= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded")%>
+			        <span><%#= program.subject %></span>
 			    	</div>
 			    </div>
 			 </div>
-			 <% end %>
+			 <%# end %>
 
 </div>
 
-</div>
+</div> -->

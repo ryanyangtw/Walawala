@@ -93,6 +93,14 @@ gem 'unicorn', '~> 4.8.3'
 #role engine
 gem 'cancancan', '~> 1.9'
 
+gem "figaro"
+
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
+# gem 'will_paginate', '~> 3.0.6'
+
 
 
 group :development, :test do
@@ -118,7 +126,7 @@ group :development, :test do
   gem 'capistrano-rbenv', "~> 2.0"
   gem 'capistrano-cookbook', require: false
 
-
+  gem 'letter_opener'
 end
 
 

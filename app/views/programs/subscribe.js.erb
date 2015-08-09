@@ -1,0 +1,9 @@
+
+if($('#program_<%= @program.id %>').parentsUntil($.Body,'.s_c_i').hasClass('s_c_i_followed')){
+    $('#program_<%= @program.id %>').parentsUntil($.Body,'.s_c_i').removeClass('s_c_i_followed');
+} else {
+    $('#program_<%= @program.id %>').parentsUntil($.Body,'.s_c_i').addClass('s_c_i_followed');
+}
+
+
+$('#subscribe_program_<%= @program.id %>').attr("href", "<%= cancel_subscription_program_path(@program) %>");

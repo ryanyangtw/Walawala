@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="relative login">
+      <div class="l_alert_frame error_messages">
+      </div>
+        <div class="l_frame poz_center">
+            <div class="absolute l_title">SIGN IN YOUR ACCOUNT</div>
+            <div class="absolute l_sub_title"></div>
+            <div class="absolute l_fb hover_opacity">
+              <%= link_to "facebook 登入", user_omniauth_authorize_path(:facebook) %>
+            </div>
+
+            <%= image_tag('sign_up/s_u_or.png', class: "absolute l_or") %>
+            <!-- <img class="absolute l_or" src="images/sign_up/s_u_or.png"/> -->
+            
+            <%= form_for(resource, :as => resource_name, :url => session_path(resource_name), remote: true) do |f| %>
+       
+     
+              <%= f.email_field(:email, class: "absolute l_username", placeholder: "joinus@bab.bo")%>
+
+
+              <%= f.password_field(:password ,class: "absolute l_build_password", placeholder: "password") %>
+
+
+              <!-- <%# if devise_mapping.rememberable? -%>
+                <div class="checkbox">
+                  <%#= f.check_box :remember_me %> 
+                  <%#= f.label :remember_me %>
+                </div>
+              <%# end -%> -->
+
+              <!-- <div class="form-group">
+                <%#= f.submit "Sign in", class: "btn btn-primary"%>
+              </div> -->
+
+              <!-- <div class="absolute l_submit hover_opacity"> -->
+              <%= f.submit "登入", class: "absolute l_submit hover_opacity"%>
+                <!-- 登&nbsp;&nbsp;&nbsp;&nbsp;入 -->
+              <!-- </div> -->
+            <% end %>
+
+            <div class="absolute l_line"></div>
+            <a href="#reset_password"><div class="absolute l_login_sub hover_opacity"><p>Forget password</p></div></a>
+
+            <%= link_to(path_with_hash_tag(new_user_registration_path)) do%>
+            <!-- <a href="#sign_up"> -->
+                <div class="absolute l_login_btn hover_opacity">Sign up now</div>
+            <!-- </a> -->
+            <% end %>
+            
+        </div>
+        
+        <%= render(partial: 'shared/footer', locals: { footer_class: "footer" })%>
+    </div>
+</body>
+</html>
+
+
+
+
+
+<!-- <div class="panel panel-default  col-sm-offset-3 col-sm-6">
+  <div class="panel-heading"
+    <h2>登入</h2>
+  </div>
+
+  <div class="panel-body">
+    
+    <%#= form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%#= f.label :email %><br />
+        <%#= f.email_field :email, autofocus: true , class: "form-control"%>
+      </div>
+
+      <div class="form-group">
+        <%#= f.label :password %><br />
+        <%#= f.password_field :password ,class: "form-control"%>
+      </div>
+
+      <%# if devise_mapping.rememberable? -%>
+        <div class="checkbox">
+          <%#= f.check_box :remember_me %> 
+          <%#= f.label :remember_me %>
+        </div>
+      <%# end %>
+
+      <div class="form-group">
+        <%#= f.submit "Sign in", class: "btn btn-primary"%>
+      </div>
+    <%# end %>
+  </div>
+
+  <div class="panel-footer">
+    <%#= render "devise/shared/links" %>
+  </div>
+</div>
+ -->

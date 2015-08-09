@@ -1,0 +1,157 @@
+<div class="relative setting">
+  <%#= image_tag('upload/demo.jpg') %>
+  <div class="r_alert_frame error_messages">
+    <% if flash[:error].present? %>
+      <div class='s_u_alert'> <%= flash[:error] %> </div>
+    <% end %>
+  </div>
+
+  <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :multipart => true}) do |f| %>
+    <div class="setting_frame poz_center">
+
+      <div class="absolute setting_photo_frame_up">
+      </div>
+
+      <div class="absolute setting_photo_frame upload-preview">
+        <% user_avatar_url = @user.avatar.url || image_path('upload/demo.jpg') %>
+        <%= image_tag(@user.avatar.url) %>
+        <!-- <img src="images/upload/demo.jpg"> -->
+      </div>
+
+      <%= f.file_field :avatar, id: "myFileInput", :autofocus => true, style: "display: none; visibility: hidden;", class: "file" %>
+      <div id="myFileButton" class= "absolute setting_photo_frame_dn hover_opacity">變更大頭貼</div>
+  
+
+      <!-- <input type="submit" class="absolute setting_photo_frame_dn hover_opacity" value="變更大頭貼"> -->
+      </input>
+
+      <div class="absolute setting_line"></div>
+     
+      <div class="absolute setting_data_frame">
+          <div class="absolute setting_data_title">個人資料修改</div>
+          <div class="absolute setting_name">
+            <%= f.text_field :name, class: "absolute s_username", :autofocus => true, placeholder: "username" %>
+               <!-- <input class="absolute s_username" type="text"  placeholder="username"> -->
+          </div>
+          <div class="absolute setting_mail">
+            <%= f.text_field :email, class: "absolute s_mail", :autofocus => true, placeholder: "email" %>
+               <!-- <input class="absolute s_mail" type="text"  , placeholder="email"placeholder="email"> -->
+          </div>
+          <div class="absolute setting_again">
+            <%= f.password_field :current_password, class: "absolute s_build_password", :autofocus => true, placeholder: "old password(修改資料必填)" %>
+            <!-- <input class="absolute l_build_password" type="password"  placeholder="修改資料必填"> -->
+          </div>
+
+            <%= f.submit("確認修改", class: "absolute setting_data_btn hover_opacity", value: "確認修改") %>
+              <!-- <input class="absolute setting_data_btn hover_opacity" type="submit"  value="確認修改"> -->
+
+          <% if !current_user.register_from_fb? %>
+            <div class="absolute setting_passord">
+
+                <div class="absolute setting_right">
+                  <%= image_tag('setting/setting_password.png', class: "absolute") %>
+                    <!-- <img class="absolute" src="images/setting/setting_password.png"> -->
+                </div>
+                
+                <div class="absolute setting_passord_btn hover_opacity ">
+                    <a href="#new_pssword">變更密碼</a>
+                </div>
+                
+            </div>
+          <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <%= render(partial: 'shared/footer', locals: {footer_class: "footer"})%>
+</div>
+
+
+
+
+
+<!-- Change Default Label Of Input Type="File" Button Element -->
+<script>
+
+  $(document).ready(function(){
+
+    $("#myFileButton").on("click", function() {
+      $('#myFileInput').trigger('click');
+    });
+
+
+    var preview = $(".upload-preview img");
+
+    $(".file").change(function(event){
+       var input = $(event.currentTarget);
+       var file = input[0].files[0];
+       var reader = new FileReader();
+       reader.onload = function(e){
+           image_base64 = e.target.result;
+           preview.attr("src", image_base64);
+       };
+       reader.readAsDataURL(file);
+    });
+  });
+</script>
+
+
+
+  
+
+<!-- <div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <h1>Edit <%#= resource_name.to_s.humanize %></h1>
+    </div>
+  </div>
+  <div class="panel-body">
+    <%#= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :multipart => true}) do |f| %>
+     
+      <%#= devise_error_messages! %>
+
+      <h4>修改基本資料</h4>
+      <div class="form-group">
+        <%#= f.label :avatar %>
+        <%#= f.file_field :avatar, class: "form-control", :autofocus => true %>
+      </div>
+
+      <div class="form-group">
+        <%#= f.label :name %>
+        <%#= f.text_field :name, class: "form-control", :autofocus => true %>
+      </div>
+
+      <div class="form-group">
+        <%#= f.label :email %>
+        <%#= f.email_field :email, class: "form-control", :autofocus => true %>
+      </div>
+
+      <hr>
+      <h4>修改密碼</h4>
+
+      <div class="form-group">
+        <%#= f.label :password %> <i>(leave blank if you don't want to change it)</i>
+        <%#= f.password_field :password, class: "form-control", :autocomplete => "off" %>
+      </div>
+
+
+      <div class="form-group">
+        <%#= f.label :current_password %> <i>(we need your current password to confirm your changes)</i>
+        <%#= f.password_field :current_password, class: "form-control" %>
+      </div>
+
+      <hr>
+
+      <div class="form-group">
+        <%#= f.submit "Update", class: "btn btn-primary" %>
+      </div>
+    <%# end %>
+  </div>
+  <div class="panel-footer">
+    <h3>Cancel my account</h3>
+
+    <p>Unhappy? <%#= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete, class: "btn btn-warning" %></p>
+
+    <%#= link_to "Back", :back %>
+  </div>
+</div> -->
