@@ -13,19 +13,25 @@ Rails.application.routes.draw do
     member do
       post :subscribe
       post :cancel_subscription
+      get :more_episodes
     end
 
     collection do
-      post :search
-      get :more_episodes
+      get :search
     end
   end
   
   resources :episodes ,:only=>[:show] do
-    member do
-      post "tag/:tag_id/vote", to: "episodes#vote", as: :vote
-    end
+    # member do
+    #   post "tag/:tag_id/vote", to: "episodes#vote", as: :vote
+    #   post "tag/:tag_id/cancel_vote", to: "episodes#cancel_vote", as: :cancel_vote
+    # end
+
+    resources :comments
   end
+
+  post "episode/:episode_id/tag/:tag_id/vote", to: "votes#create", as: :votes
+  delete "episode/:episode_id/tag/:tag_id/cancel_vote", to: "votes#destroy", as: :cancel_vote
 
   resources :categories
   resources :tags

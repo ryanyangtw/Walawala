@@ -55,6 +55,9 @@ class User < ActiveRecord::Base
   has_many :views
   has_many :listened_episodes, through: :views, source: :episode
 
+  # many to one
+  has_many :comments
+
 
 
   before_save :ensure_authentication_token
@@ -81,7 +84,8 @@ class User < ActiveRecord::Base
     end
 
     #We will recommend 3 special episode in every 15 episodes
-    num_of_recomended_episodes_per_page = 3
+    # num_of_recomended_episodes_per_page = 3
+    num_of_recomended_episodes_per_page = per_page/4
     selected_recommended_episodes = recommended_array.slice( (page-1)*num_of_recomended_episodes_per_page, num_of_recomended_episodes_per_page) || []
 
 
@@ -99,15 +103,32 @@ class User < ActiveRecord::Base
     length = original_subscribed_episodes.size
 
     # Combined the recommended_array and original_subscribed_episodes to customized_episodes
-    (1..15).each do |index|
-      if( index%4 == 0 && !recommended_array.empty?)
+    (1..per_page).each do |index|
+      if(index%4 == 0 && !recommended_array.empty?)
         customization << recommended_array.shift
-      elsif( !original_subscribed_episodes.empty?  )
+      elsif(!original_subscribed_episodes.empty?)
         customization << original_subscribed_episodes.shift
       else
         break
       end
     end
+
+    # if the length customization array is not enough. We will recommended the newest episodes to user
+    if customization.length < per_page
+      # newest_episodes = Episode.order(id: :desc).limit(per_page - customization.length).to_a
+      # customization = customization + newest_episodes
+      newest_episodes = Episode.order(id: :desc).limit(50).to_a
+      newest_episodes.each do |episode| 
+        if !customization.include?(episode)
+          customization << episode
+        end
+
+        if customization.length >= per_page
+          break
+        end
+      end
+    end
+
 
     # TODO: Cache Recommendation Result
     customization

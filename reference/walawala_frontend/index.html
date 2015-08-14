@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+﻿xxx<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -23,7 +23,85 @@
                 	<img alt="walawala logo" src="images/logo.png"/>
                 </h1>
             </a>
-            <div class="main_player absolute">
+
+            <!-- 新的播放器 modify0809 -->
+            <div class="mainContainer" style="">
+
+        <!--<div class="containerPlayer"> -->
+        <div id="listContainer" class="playlistContainer" style="display: none;">
+        <ul id="playListContainer">
+
+              <li id="song" data-src="https://s3.amazonaws.com/9lessonslabs/songs/Everything+But+Mine.mp3">
+                <a>
+                    1
+                </a>
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/Linkin+Park+-+Numb.mp3">
+
+                  <a>
+2
+                </a>
+
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/love-the-way-you-lie-rihanna-feat-eminem.mp3">
+
+                    <a>
+3
+                </a> 
+
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/rolling-in-the-deep-adele.mp3">
+
+                    <a>
+4
+                </a>
+
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/when-i-was-your-man-bruno-mars.mp3">
+
+                    <a>
+5
+                </a>
+
+            </li>
+
+            
+        </ul>
+    </div>
+        <div id="playerContainer" class="absolute">
+        <div id="controlContainer">  
+            <!--<li>
+                <a href="#" class="shuffle shuffleActive" data-attr="shuffled"></a>
+            </li> -->
+              
+                <li>
+                    <div class="play" data-attr="playPauseAudio"></div>
+                </li>
+               <!-- <li>
+                    <div class="play" data-attr="playPauseAudio"></div>
+                </li>  -->
+               
+
+            <div class="audioDetails">
+                <span class="songPlay"></span>
+                <span data-attr="timer" class="audioTime"></span>
+            </div>
+            <div class="progress">
+                <div data-attr="seekableTrack" class="seekableTrack"></div>
+                <div class="updateProgress"></div>
+            </div>
+            
+        </div>
+            <div class="right" data-attr="nextAudio"></div>
+            
+            <div class="volume volume1"></div>
+        <div class="volumeControl">
+            <input class="bar" data-attr="rangeVolume" type="range" min="0" max="1" step="0.1" value="0.7" />
+        </div>
+    </div>
+    <!--</div> -->
+</div>
+            <!--  原本播放器 modify0809 <div class="main_player absolute">
             	<div class="playing_btn absolute cursor_pointer">
                     <div class="start_btn absolute full"><img class="poz_center" src="images/start_icon.png"></div>
                     <div class="pause_btn absolute full"><img class="poz_center" src="images/pause_icon.png"></div>
@@ -48,7 +126,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> -->
             <ul class="inline_block float_right">
                 <li class="inline_block cursor_pointer main_search">
                     <span class="main_search_btn">

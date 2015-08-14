@@ -35,9 +35,11 @@
                     </div>
                     <div class="s_c_i_text">
                         <div class="s_c_i_head">
-                            <a href="#program">
+                            <!-- <a href="#program"> -->
+                            <%= link_to(path_with_hash_tag(program_path(program))) do %>
                                 <span class="s_c_i_title"><%= truncate(program.subject, length: 14)%></span>
-                            </a>
+                            <% end %>
+                            <!-- </a> -->
                         </div>
                         
                         <p class="s_c_i_intro"><%= truncate(program.introduction, length: 90) %></p>
@@ -68,13 +70,14 @@
             </div>
         </div>
 
-        <%= will_paginate(@programs, class: "absolute") %>
+        <%= will_paginate(@programs, class: "absolute pagination") %>
 
         <%= render(partial: "shared/footer") %>
     </div>
 
 
 
+    <%= javascript_include_tag 'pagination' %>
 
 
 

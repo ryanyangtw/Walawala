@@ -10,6 +10,9 @@ class ApplicationController < ActionController::Base
     redirect_to root_path if !current_user.role?(:admin)
   end
 
+  def path_with_hash_tag(path)
+    "##{path}"
+  end
 
 
   protected

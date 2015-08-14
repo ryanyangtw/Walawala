@@ -7,7 +7,7 @@ class PagesController < ApplicationController
       #@subscriptions = current_user.subscriptions.order("last_episode_uploaded_at DESC")
       #@subscriptions = current_user.subscribed_programs.order("updated_at DESC")
 
-      @customize_episodes = current_user.customize_episodes
+      @customize_episodes = current_user.customize_episodes(1, 10)
       render 'pages/home_login'
     else
       render 'pages/home_unlogin'

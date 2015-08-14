@@ -1,14 +1,33 @@
+<div class="relative upload_program">
+    <div class="u_p_frame poz_center">
+        <p class="u_p_title">修改節目</p>
+
+
+        <%= form_for @program, :html=> {multipart: true} do |f| %>
+
+          <%=render(:partial=>"form", :locals=>{:f=>f}) %>
+        <%end%>
+
+    </div>
+    
+    <%= render(partial: 'shared/footer') %>
+</div>
+
+
+
+
+<!-- 
 <div class="col-md-6 col-md-offset-3 well">
 	<h1>new Program</h1>
 
-<%= form_for @program , :html => {multipart: true} ,:url => program_path(@program) do |f|%>
+<%#= form_for @program , :html => {multipart: true} ,:url => program_path(@program) do |f|%>
 
-	<%= render(:partial=>'form', :locals => {:f => f})%>
+	<%#= render(:partial=>'form', :locals => {:f => f})%>
 
 	<div class="form-group">
-		<%= f.submit("修改", :class=>"btn btn-primary")%>
+		<%#= f.submit("修改", :class=>"btn btn-primary")%>
 	</div>
-<%end%>
+<%#end%>
 
 
-</div>
+</div> -->

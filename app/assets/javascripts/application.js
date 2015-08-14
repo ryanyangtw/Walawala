@@ -23,3 +23,4 @@
 //= require js/player.js
 //= require scripts/html5shiv.js
 //= require js/index.js
+//= require js/jquery.audioControls.min.js

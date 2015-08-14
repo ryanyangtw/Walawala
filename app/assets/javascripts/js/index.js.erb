@@ -149,14 +149,14 @@
                             $.loading.fadeOut(fadeTime);
                         });
                     break;
-                    case "#search":
-                        $.loading.show();
-                        $.Body.find('.main_frame ').css("top","53px").removeClass().addClass('relative red_frame main_frame');
-                        $.Body.find('.main').removeClass().addClass('red main absolute');
-                        $.main_frame.load('search.html',function(){
-                            $.loading.fadeOut(fadeTime);
-                        });
-                    break;
+                    // case "#search":
+                    //     $.loading.show();
+                    //     $.Body.find('.main_frame ').css("top","53px").removeClass().addClass('relative red_frame main_frame');
+                    //     $.Body.find('.main').removeClass().addClass('red main absolute');
+                    //     $.main_frame.load('search.html',function(){
+                    //         $.loading.fadeOut(fadeTime);
+                    //     });
+                    // break;
                     case "#setting":
                         $.loading.show();
                         $.Body.find('.main_frame ').css("top","53px").removeClass().addClass('relative green_frame main_frame');
@@ -228,7 +228,8 @@
                         $.loading.show();
                         //$.Body.find('.main').removeClass().addClass('unlogged main absolute');
                         $.Body.find('.main_frame').css("top","53px");
-
+                        $('.main_frame').find('.h_l_item_btn>a').css('display','none');
+                        
                         var hashString = window.location.hash; 
                         var url = hashString;                       
                         if(hashString.charAt(0,1) === "#"){
@@ -259,16 +260,16 @@
     }
     $.fn.EventInIt = function () {
         $.Body.PlayerInIt();
-        $.Body.find('li.main_search').click(
-            function(){
-                $(this).addClass('active_search');
-            }
-        );
-        $.Body.find('.main_search_btn').click(
-            function(){
-                window.location.hash = "#search";
-            }
-        );
+        // $.Body.find('li.main_search').click(
+        //     function(){
+        //         $(this).addClass('active_search');
+        //     }
+        // );
+        // $.Body.find('.main_search_btn').click(
+        //     function(){
+        //         window.location.hash = "#search";
+        //     }
+        // );
         $.Body.find('.user_account').click(
             function(){
                 if($(this).hasClass('user_account_in')){
@@ -343,16 +344,16 @@
         //     window.location.hash = 'cate1';
         // });
         
-        $.main_frame.on('click','div.p_g_subscribe',function(){
-            switch(true){
-                case ($(this).hasClass('p_g_candisorder')):
-                    $(this).removeClass('p_g_candisorder').addClass('p_g_canorder');
-                    break;
-                case ($(this).hasClass('p_g_canorder')):
-                    $(this).removeClass('p_g_canorder').addClass('p_g_candisorder');
-                    break;
-            }
-        });
+        // $.main_frame.on('click','div.p_g_subscribe',function(){
+        //     switch(true){
+        //         case ($(this).hasClass('p_g_candisorder')):
+        //             $(this).removeClass('p_g_candisorder').addClass('p_g_canorder');
+        //             break;
+        //         case ($(this).hasClass('p_g_canorder')):
+        //             $(this).removeClass('p_g_canorder').addClass('p_g_candisorder');
+        //             break;
+        //     }
+        // });
 
 
         $.main_frame.on('click','div.p_g_more',function(){
@@ -398,9 +399,9 @@
                 $(this).css({'color':'#999999'});
             }
         });
-        $.main_frame.on('click','.p_g_reply_submit',function(e){
-            alert('留言');
-        });
+        // $.main_frame.on('click','.p_g_reply_submit',function(e){
+        //     alert('留言');
+        // });
 
        $.main_frame.on('click',".h_l_share, .p_g_share, .s_c_i_share, .s_share",function(){
             //alert(fbhtml_url);
@@ -437,24 +438,24 @@
         $.main_frame.on('click','div.h_l_share',function(){
             alert('分享??');
         });
-        $.main_frame.on('click','div.e_p_delete',function(){
-            alert('刪除??');
-        });
+        // $.main_frame.on('click','div.e_p_delete',function(){
+        //     alert('確定要刪除??');
+        // });
         $.main_frame.on('click','div.e_p_complete',function(){
             alert('完成??');
         });
         $.main_frame.on('click','div.e_p_complete_go',function(){
             alert('完成，前往上傳集??');
         });
-        $.main_frame.on('click','div.e_e_complete',function(){
-            alert('上傳新ㄧ集，完成');
-        });
-        $.main_frame.on('click','div.u_p_complete',function(){
-            alert('建立新節目，完成');
-        });
-        $.main_frame.on('click','div.u_p_complete_go',function(){
-            alert('建立新節目，完成，前往上傳集');
-        });
+        // $.main_frame.on('click','div.e_e_complete',function(){
+        //     alert('上傳新ㄧ集，完成');
+        // });
+        // $.main_frame.on('click','div.u_p_complete',function(){
+        //     alert('建立新節目，完成');
+        // });
+        // $.main_frame.on('click','div.u_p_complete_go',function(){
+        //     alert('建立新節目，完成，前往上傳集');
+        // });
         $.main_frame.on('click','div.l_fb',function(){
             // alert('facebook 登入');
         });
@@ -480,12 +481,12 @@
                  }
             });*/
         });
-        $.main_frame.on('click','div.u_episode_unit_more',function(){
-            alert('展開20集!!');
-            for(var i = 0; i < 20; i ++) {
-                $(this).parentsUntil($.Body,'.u_unit').find('.u_edit_box').append('<a href="#edit_episode"><div class="u_episode_unit"><div class="u_episode_unit_"><img src="images/upload/u_episode_unit.png"/> 1.集名稱 episode title<div class="u_episode_unit_time">2014/02/03</div><div class="u_episode_word">修改此集</div></div></div></a>');
-            }
-        });
+        // $.main_frame.on('click','div.u_episode_unit_more',function(){
+        //     alert('展開20集!!');
+        //     for(var i = 0; i < 20; i ++) {
+        //         $(this).parentsUntil($.Body,'.u_unit').find('.u_edit_box').append('<a href="#edit_episode"><div class="u_episode_unit"><div class="u_episode_unit_"><img src="images/upload/u_episode_unit.png"/> 1.集名稱 episode title<div class="u_episode_unit_time">2014/02/03</div><div class="u_episode_word">修改此集</div></div></div></a>');
+        //     }
+        // });
     }
     $.fn.PlayerInIt = function () {
         $.playing_btn = $.Body.find('div.playing_btn');

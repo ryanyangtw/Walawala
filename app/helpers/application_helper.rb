@@ -53,4 +53,35 @@ module ApplicationHelper
   end
 
 
+
+  # change the default link renderer for will_paginate
+  # def will_paginate(collection_or_options = nil, options = {})
+  #   if collection_or_options.is_a? Hash
+  #     options, collection_or_options = collection_or_options, nil
+  #   end
+  #   unless options[:renderer]
+  #     options = options.merge :renderer => MyCustomLinkRenderer
+  #   end
+  #   super *[collection_or_options, options].compact
+  # end
+
 end
+
+
+
+# class MyCustomLinkRenderer < WillPaginate::ViewHelpers::LinkRenderer
+#   def link(text, target, attributes = {})
+#     if target.is_a? Fixnum
+#       attributes[:rel] = rel_value(target)
+#       target = url(target)
+#     end
+#     attributes[:href] = target
+#     tag(:a, text, attributes)
+#   end
+
+#   def url(path)
+#     "##{path}"
+#   end
+# end
+
+

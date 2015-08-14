@@ -1,5 +1,7 @@
 class ProgramsController < ApplicationController
-  before_action :set_program, :only => [ :edit, :update, :destroy, :subscribe, :cancel_subscription, :more_episodes]
+  before_action :authenticate_user!, only: [:edit, :update, :destroy]
+  before_action :set_program_in_from_current_user, only: [:edit, :update, :destroy, :more_episodes]
+  before_action :set_program, :only => [:subscribe, :cancel_subscription]
   before_action :find_all_categories, :only => [:new,:edit]
 
   authorize_resource
@@ -11,9 +13,9 @@ class ProgramsController < ApplicationController
   def show
 
     #@program = Program.includes(:episodes, :categories).find(params[:id])
-    @program = Program.includes(:episodes, :categories).find(params[:id])
-    @episodes = @program.episodes.order("id DESC").paginate(:page => params[:page], :per_page=>15)
-
+    @program = Program.includes(:episodes, :categories, :owner).find(params[:id])
+    @episodes = @program.episodes.order(id: :desc).paginate(page: params[:page], per_page: 20)
+    @comment = Comment.new
     #@episodes = @program.episodes
     #@episodes = [] if(@episodes == nil)
 
@@ -24,15 +26,17 @@ class ProgramsController < ApplicationController
   end
 
   def create  
-
+  
     @program = current_user.programs.build(program_params)
 
     if(@program.save)
-      params[:program][:categories_ids] ||= []
-      @program.category_ids = params[:program][:categories_ids]
-      redirect_to root_path
+      # params[:program][:categories_ids] ||= []
+      # @program.category_ids = params[:program][:categories_ids]
+      redirect_to path_with_hash_tag(new_program_episode_path(@program))
     else
-      render :new
+      # Todo: error messages
+      redirect_to path_with_hash_tag(new_program_path)
+      # render :back
     end
   end
 
@@ -43,18 +47,21 @@ class ProgramsController < ApplicationController
   def update
 
     if(@program.update(program_params))
-      params[:program][:categories_ids] ||= []
-      @program.category_ids = params[:program][:categories_ids]
-      redirect_to program_path(@program)
+      redirect_to path_with_hash_tag(new_program_episode_path(@program))
+      # params[:program][:categories_ids] ||= []
+      # @program.category_ids = params[:program][:categories_ids]
+      # redirect_to program_path(@program)
     else
-      render :edit
+      redirect_to path_with_hash_tag(edit_program_path(@ptrgram))
+      # render :edit
     end
 
   end
 
   def destroy
     if(@program.destroy)
-      redirect_to root_path
+      redirect_to path_with_hash_tag(programs_path)
+      # redirect_to root_path
     end
   end
 
@@ -79,12 +86,22 @@ class ProgramsController < ApplicationController
   end
 
   def search
+  
     @q = Program.includes(:episodes).ransack(params[:q]) 
-    @programs = @q.result(distinct: true).includes(:episodes).paginate(:page => params[:page], :per_page => 20 )
+    @programs = @q.result(distinct: true).includes(:episodes).paginate(:page => params[:page], :per_page => 3 )
+    
   end
 
+  # def search_result
+  #   @q = Program.includes(:episodes).ransack(params[:q]) 
+  #   @programs = @q.result(distinct: true).includes(:episodes).paginate(:page => params[:page], :per_page => 3 )
+  #   binding.pry
+  # end
+
   def more_episodes
-    @episodes = @program.episodes.order(id: :desc).limit(20).offset(30)
+
+    # @episodes = @program.episodes.order(id: :desc).limit(20).offset(30)
+    @episodes = @program.episodes.order(id: :asc)
     
     respond_to do |format|
       format.js
@@ -119,7 +136,12 @@ class ProgramsController < ApplicationController
 
   private
   def program_params
-    params.require(:program).permit(:subject, :introduction, :image)
+    params.require(:program).permit(:subject, :introduction, :image, :first_category, :second_category, :third_category)
+  end
+
+
+  def set_program_in_from_current_user
+    @program = current_user.programs.find(params[:id])
   end
 
   def set_program

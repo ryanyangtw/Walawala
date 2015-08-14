@@ -6,48 +6,59 @@
             <div class="absolute selected_btn hover_opacity">精選節目</div>
         </div>
 
- 
-  
-        <div class="relative h_l_content">
+       
+
+
+        <ul class="relative h_l_content">
+            
             <% @customize_episodes.each do |episode|%>
-            <div class="h_l_item state_0 to_f">
-                <div class="h_l_item_pic">
-                    <%= image_tag(episode.program.image_url) %>
-                    <!-- <img src="images/home_logged/demo.jpg"> -->
-                </div>
-                <div class="filter"></div>
-                <div class='h_l_follow'></div>
-                <div class="h_l_share"></div>
-                <div class="h_l_item_btn" onclick="playPause('song_1')"></div>
-                <p><%= episode.title %></p>
-                <div class="h_l_item_name"><%= truncate(episode.program.subject, length: 9) %></div>
-            </div> 
-            <% end %>   
-        </div>
+              <div class="h_l_item state_0 to_f div_episode">
+                  <div class="h_l_item_pic">
+                      <%= image_tag(episode.program.image_url) %>
+                      <!-- <img src="images/home_logged/demo.jpg"> -->
+                  </div>
+                  <div class="filter"></div>
+                  <div class='h_l_follow'></div>
+                  <div class="h_l_share"></div>
+                  <!-- <div class="add_play_list"> -->
+                  <li class="h_l_item_btn li_episode" data-src="<%= episode.audio_url %>">
+                    <a> <%= episode.title %> </a>
+                  </li>
+                  <!-- </div> -->
+                  <p><%= episode.title %></p>
+                  <div class="h_l_item_name"><%= truncate(episode.program.subject, length: 9) %></div>
+              </div> 
+            <% end %> 
+          
+
+        </ul>
             
        
 
-        <div class="relative h_l_content">
+        <!-- <ul class="relative h_l_content">
             <div class="h_l_item state_0 to_f">
                 <div class="h_l_item_pic">
-                    <%= image_tag('home_logged/demo.jpg') %>
-                    <!-- <img src="images/home_logged/demo.jpg"> -->
+                    <%#= image_tag('home_logged/demo.jpg') %>
+                   
                 </div>
                 <div class="filter"></div>
                 <div class='h_l_follow'></div>
                 <div class="h_l_share"></div>
-                <div class="h_l_item_btn" onclick="playPause('song_1')"></div>
+                <div class="add_play_list">
+                
+                <li class="h_l_item_btn"  data-src="https://s3.amazonaws.com/9lessonslabs/songs/Linkin+Park+-+Numb.mp3"><a>2</a></li>
+                </div>
                 <p>集名稱 episode title</p>
                 <div class="h_l_item_name">節目名稱</div>
             </div>
-        </div>
+        </ul> -->
 
-        <audio id="song_1">
+       <!--  <audio id="song_1">
             <source src="<%= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
         </audio>
         <audio id="song_2">
             <source src="<%= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
-        </audio>
+        </audio> -->
 
 
         <%= render(partial: "shared/footer", locals: { footer_class: "relative footer" })%>

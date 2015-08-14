@@ -1,186 +1,100 @@
-
- 
-    var activeSong;
-
-    //Plays the song. Just pass the id of the audio element.
-    /**    function play_1() {
-           
-            $('.songPlay').on('click',function(){
-                $(this).parent().addClass('state_in_playing');
-                 //Sets the active song to the song being played.  All other functions depend on this.
-            
-            activeSong = document.getElementById('song_1');
-            activeSong.play();
-            var percentageOfVolume = activeSong.volume / 1;
-
-            });
-        }
-
-        function pause_1() {
-
-        $('.songPause').on('click',function(){
-                $('.playing_cube').removeClass('state_in_playing');
-                 //Sets the active song to the song being played.  All other functions depend on this.
-            activeSong.pause();
-
+$(document).ready(function(){
+            $("div.volume").on('click',function(){
+                $('.volumeControl').fadeToggle(100);
             });
 
-    }
-        function play_2() {
-           
-            $('.songPlay').on('click',function(){
-                $(this).parent().addClass('state_in_playing');
-                 //Sets the active song to the song being played.  All other functions depend on this.
-            activeSong = document.getElementById('song_2');
-            //Plays the song defined in the audio tag.
-            activeSong.play();
-            //Calculates the starting percentage of the song.
-            var percentageOfVolume = activeSong.volume / 1;
 
-            //Fills out the volume status bar.
-            });
+           $(".main_frame").on('click','.songPlay_btn',function(){
+                if ($(this).parents('.p_g_player_box').find('.updateProgress').hasClass('hide')){
+                $(this).parents('.main_frame').find('.updateProgress').addClass('hide')    
+                $(this).parents('.p_g_player_box').find('.updateProgress').removeClass('hide');
+               } else {
+
+                //$(this).parents('.p_g_player_box').find('.updateProgress').addClass('hide');
+               }      
+           });
+
+             $(".main_frame").on('click','li',function(){
+
+                // 取得這個頁面li 裡面的data-src  包成array
+                //var dataSrc = $(this).parents.find('li').attr('data-src'); 
+                // 取得這個頁面li 的數量
+                // 根據數量幾個塞幾個li 進 index.html裡面
+                // 塞li 各自的data-src 進 index.html裡面的 li
+                // http://stackoverflow.com/questions/7055053/jquery-select-attributes-into-an-array
             
-            
+                // var dataSrc =  $(this).parent('.add_play_list');
+                // var addPlayList = dataSrc.html();
 
-        }
-        //Pauses the active song.
-        function pause_2() {
-
-        $('.songPause').on('click',function(){
+                var parent_div = $(this).parent('.div_episode');
+                var div_array = parent_div.nextAll("div.div_episode").andSelf();
                 
-                 //Sets the active song to the song being played.  All other functions depend on this.
-            activeSong.pause();
+                var li_array = [];
+                for (i = 0; i < div_array.length; i++) {
+                  li_array.push($(div_array[i]).find("li.li_episode"));
+                }
 
+                // for (i = 0; i < li_array.length; i++) {
+                //   console.log(li_array[i]);
+                // }
+
+
+                $('#playListContainer>li').remove();
+                // $('#playListContainer').append(addPlayList);
+                // alert($('.main_frame').find('.add_play_list').html());
+                // $('#playListContainer').append($('.main_frame').find('.add_play_list').html());
+
+                for (i = 0; i < li_array.length; i++) {
+                  li_array[i].clone().appendTo('#playListContainer');
+                  // $('#playListContainer').append(li_array[i]);
+                }
+                
+                $("#playListContainer").audioControls({
+                autoPlay : false,
+                timer: 'increment',
+                buffer: false,
+                onAudioChange : function(response){
+                    $('.songPlay').text(response.title + ' ...');
+                },
+                onVolumeChange : function(vol){
+                    var obj = $('.volume');
+                    if(vol <= 0){
+                        obj.attr('class','volume mute');
+                    } else if(vol <= 33){
+                        obj.attr('class','volume volume1');
+                    } else if(vol > 33 && vol <= 66){
+                        obj.attr('class','volume volume2');
+                    } else if(vol > 66){
+                        obj.attr('class','volume volume3');
+                    } else {
+                        obj.attr('class','volume volume1');
+                    }
+                }
             });
-    }   **/
-        
-    //Does a switch of the play/pause with one button.
-    function playPause(id) {
-        //Sets the active song since one of the functions could be play.
-        
-        activeSong = document.getElementById(id);
-        //Checks to see if the song is paused, if it is, play it from where it left off otherwise pause it.
 
-            
-            //$('.playing_cube').removeClass('state_in_playing');
-            if (activeSong.paused) {
-             //Sets the active song to the song being played.  All other functions depend on this.
-             activeSong.play();
-        } else {
-            activeSong.pause();
-        }
-        };
-    function addClass() {  
-    $('.songPlay').on('click',function(){
-    $(this).parent().addClass('state_in_playing');
-    });  
-    };
+                 
+           });
 
-    function removeClass() {  
-    $('.songPause').on('click',function(){
-    $(this).parent().removeClass('state_in_playing');
-    });  
-    };
-    //Updates the current time function so it reflects where the user is in the song.
-    //This function is called whenever the time is updated.  This keeps the visual in sync with the actual time.
-    function updateTime_1() {
-        var currentSeconds = (Math.floor(activeSong.currentTime % 60) < 10 ? '0' : '') + Math.floor(activeSong.currentTime % 60);
-        var currentMinutes = Math.floor(activeSong.currentTime / 60);
-        //Sets the current song location compared to the song duration.
-        document.getElementById('songtime-1').innerHTML = currentMinutes + ":" + currentSeconds + ' / ' + Math.floor(activeSong.duration / 60) + ":" + (Math.floor(activeSong.duration % 60) < 10 ? '0' : '') + Math.floor(activeSong.duration % 60);
-
-        //Fills out the slider with the appropriate position.
-        var percentageOfSong = (activeSong.currentTime / activeSong.duration);
-        var percentageOfSlider = document.getElementById('songSlider-1').offsetWidth * percentageOfSong;
-
-        //Updates the track progress div.
-        document.getElementById('trackProgress-1').style.width = Math.round(percentageOfSlider) + "px";
-    }
-    function updateTime_2() {
-        var currentSeconds = (Math.floor(activeSong.currentTime % 60) < 10 ? '0' : '') + Math.floor(activeSong.currentTime % 60);
-        var currentMinutes = Math.floor(activeSong.currentTime / 60);
-        //Sets the current song location compared to the song duration.
-        document.getElementById('songtime-2').innerHTML = currentMinutes + ":" + currentSeconds + ' / ' + Math.floor(activeSong.duration / 60) + ":" + (Math.floor(activeSong.duration % 60) < 10 ? '0' : '') + Math.floor(activeSong.duration % 60);
-
-        //Fills out the slider with the appropriate position.
-        var percentageOfSong = (activeSong.currentTime / activeSong.duration);
-        var percentageOfSlider = document.getElementById('songSlider-1').offsetWidth * percentageOfSong;
-
-        //Updates the track progress div.
-        document.getElementById('trackProgress-2').style.width = Math.round(percentageOfSlider) + "px";
-    }
-
-    function volumeUpdate(number) {
-        //Updates the volume of the track to a certain number.
-        activeSong.volume = number / 100;
-    }
-    //Changes the volume up or down a specific number
-    function changeVolume(number, direction) {
-        //Checks to see if the volume is at zero, if so it doesn't go any further.
-        if (activeSong.volume >= 0 && direction == "down") {
-            activeSong.volume = activeSong.volume - (number / 100);
-        }
-        //Checks to see if the volume is at one, if so it doesn't go any higher.
-        if (activeSong.volume <= 1 && direction == "up") {
-            activeSong.volume = activeSong.volume + (number / 100);
-        }
-
-        //Finds the percentage of the volume and sets the volume meter accordingly.
-        var percentageOfVolume = activeSong.volume / 1;
-        var percentageOfVolumeSlider = document.getElementById('volumeMeter').offsetWidth * percentageOfVolume;
-
-        document.getElementById('volumeStatus').style.width = Math.round(percentageOfVolumeSlider) + "px";
-    }
-    //Sets the location of the song based off of the percentage of the slider clicked.
-    function setLocation(percentage) {
-        activeSong.currentTime = activeSong.duration * percentage;
-    }
-    /*
-    Gets the percentage of the click on the slider to set the song position accordingly.
-    Source for Object event and offset: http://website-engineering.blogspot.com/2011/04/get-x-y-coordinates-relative-to-div-on.html
-    */
-    function setSongPosition_1(obj, e) {
-        //Gets the offset from the left so it gets the exact location.
-        var songSliderWidth = obj.offsetWidth;
-        var evtobj = window.event ? event : e;
-        clickLocation = evtobj.layerX - obj.offsetLeft;
-
-        var percentage = (clickLocation / songSliderWidth);
-        //Sets the song location with the percentage.
-        setLocation(percentage);
-    }
-     function setSongPosition_2(obj, e) {
-        //Gets the offset from the left so it gets the exact location.
-        var songSliderWidth = obj.offsetWidth;
-        var evtobj = window.event ? event : e;
-        clickLocation = evtobj.layerX - obj.offsetLeft;
-
-        var percentage = (clickLocation / songSliderWidth);
-        //Sets the song location with the percentage.
-        setLocation(percentage);
-    }
-
-    //Set's volume as a percentage of total volume based off of user click.
-    function setVolume(percentage) {
-        activeSong.volume = percentage;
-
-        var percentageOfVolume = activeSong.volume / 1;
-        var percentageOfVolumeSlider = document.getElementById('volumeMeter').offsetWidth * percentageOfVolume;
-
-        document.getElementById('volumeStatus').style.width = Math.round(percentageOfVolumeSlider) + "px";
-    }
-
-    //Set's new volume id based off of the click on the volume bar.
-    function setNewVolume(obj, e) {
-        var volumeSliderWidth = obj.offsetWidth;
-        var evtobj = window.event ? event : e;
-        clickLocation = evtobj.layerX - obj.offsetLeft;
-
-        var percentage = (clickLocation / volumeSliderWidth);
-        setVolume(percentage);
-    }
-    //Stop song by setting the current time to 0 and pausing the song.
-    function stopSong() {
-        activeSong.currentTime = 0;
-        activeSong.pause();
-    }
+            $("#playListContainer").audioControls({
+                autoPlay : false,
+                timer: 'increment',
+                buffer: false,
+                onAudioChange : function(response){
+                    $('.songPlay').text(response.title + ' ...');
+                },
+                onVolumeChange : function(vol){
+                    var obj = $('.volume');
+                    if(vol <= 0){
+                        obj.attr('class','volume mute');
+                    } else if(vol <= 33){
+                        obj.attr('class','volume volume1');
+                    } else if(vol > 33 && vol <= 66){
+                        obj.attr('class','volume volume2');
+                    } else if(vol > 66){
+                        obj.attr('class','volume volume3');
+                    } else {
+                        obj.attr('class','volume volume1');
+                    }
+                }
+            });
+        });

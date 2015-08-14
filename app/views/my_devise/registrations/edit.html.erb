@@ -14,7 +14,7 @@
 
       <div class="absolute setting_photo_frame upload-preview">
         <% user_avatar_url = @user.avatar.url || image_path('upload/demo.jpg') %>
-        <%= image_tag(@user.avatar.url) %>
+        <%= image_tag(user_avatar_url) %>
         <!-- <img src="images/upload/demo.jpg"> -->
       </div>
 
@@ -69,32 +69,7 @@
 
 
 
-
-<!-- Change Default Label Of Input Type="File" Button Element -->
-<script>
-
-  $(document).ready(function(){
-
-    $("#myFileButton").on("click", function() {
-      $('#myFileInput').trigger('click');
-    });
-
-
-    var preview = $(".upload-preview img");
-
-    $(".file").change(function(event){
-       var input = $(event.currentTarget);
-       var file = input[0].files[0];
-       var reader = new FileReader();
-       reader.onload = function(e){
-           image_base64 = e.target.result;
-           preview.attr("src", image_base64);
-       };
-       reader.readAsDataURL(file);
-    });
-  });
-</script>
-
+<%= javascript_include_tag 'upload_miniature' %>
 
 
   

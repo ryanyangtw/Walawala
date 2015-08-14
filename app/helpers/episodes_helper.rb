@@ -4,4 +4,12 @@ module EpisodesHelper
     "#{index+1}.#{episode.title}"
   end
 
+  def render_episode_title(title)
+    title
+  end
+
+  def render_episode_description(description)
+    description
+  end
+
 end

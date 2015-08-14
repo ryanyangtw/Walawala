@@ -25,7 +25,8 @@ class EpisodesController < ApplicationController
     #@program = current_user.programs.find(params[:program_id])
     @episode = @program.episodes.build(episode_params)
     if(@episode.save)
-      redirect_to program_path(@program)
+      redirect_to path_with_hash_tag(programs_path)
+      # redirect_to program_path(@program)
       #@episode.update_program
     else
       render :new
@@ -46,7 +47,8 @@ class EpisodesController < ApplicationController
 
   def update
     if(@episode.update(episode_params))
-      redirect_to program_path(@program)
+      redirect_to path_with_hash_tag(programs_path)
+      # redirect_to program_path(@program)
     else
       render :edit
     end
@@ -54,15 +56,15 @@ class EpisodesController < ApplicationController
   end
 
   def destroy
+
     if(@episode.destroy)
-      redirect_to program_path(@program)
+      redirect_to path_with_hash_tag(programs_path)
+      # redirect_to program_path(@program)
     end
   end
 
-
+  # deprecated
   def vote
-
-
     @episode = Episode.find(params[:id])
     @tag = Tag.find(params[:tag_id])
 
