@@ -55,8 +55,8 @@ gem 'ransack', github: 'activerecord-hackery/ransack', branch: 'rails-4.1'
 
 
 #add for seo
-gem 'seo_helper', '~> 1.0', :git => 'git://github.com/techbang/seo_helper.git'
-gem 'sitemap_generator'
+# gem 'seo_helper', '~> 1.0', :git => 'git://github.com/techbang/seo_helper.git'
+# gem 'sitemap_generator'
 
 #fb open graph
 gem 'open_graph_helper', :github => 'techbang/open_graph_helper'
@@ -93,7 +93,7 @@ gem 'unicorn', '~> 4.8.3'
 #role engine
 gem 'cancancan', '~> 1.9'
 
-gem "figaro"
+# gem "figaro"
 
 gem 'sidekiq'
 gem 'sinatra', require: false
