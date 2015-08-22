@@ -125,7 +125,7 @@ group :development, :test do
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv', "~> 2.0"
   gem 'capistrano-cookbook', require: false
-
+  gem "capistrano-sidekiq"
   gem 'letter_opener'
 end
 
