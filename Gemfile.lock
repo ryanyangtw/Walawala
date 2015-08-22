@@ -28,6 +28,13 @@ GIT
   specs:
     seo_helper (1.0.2)
 
+GIT
+  remote: https://github.com/getsentry/raven-ruby.git
+  revision: f64e7ec69621dc9108f8ab206de814584ad6164c
+  specs:
+    sentry-raven (0.14.0)
+      faraday (>= 0.7.6)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -463,6 +470,7 @@ DEPENDENCIES
   ruby-audioinfo
   sass-rails (~> 4.0.3)
   sdoc (~> 0.4.0)
+  sentry-raven!
   seo_helper (~> 1.0)!
   settingslogic
   sidekiq

@@ -134,7 +134,7 @@ end
 
 #should be delete
 #add for heroku
-group :production do
+group :staging, :production do
   gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
   #gem 'rails_12factor'
   #add for gzip on heroku
