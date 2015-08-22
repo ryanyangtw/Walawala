@@ -1,18 +1,19 @@
-<div class="relative upload_program">
-    <div class="u_p_frame poz_center">
-        <p class="u_p_title">修改節目</p>
+  <div class="bg-purple">  
+    <div class="relative upload_program">
+        <div class="u_p_frame poz_center">
+            <p class="u_p_title">修改節目</p>
 
 
-        <%= form_for @program, :html=> {multipart: true} do |f| %>
+            <%= form_for @program, :html=> {multipart: true} do |f| %>
 
-          <%=render(:partial=>"form", :locals=>{:f=>f}) %>
-        <%end%>
+              <%=render(:partial=>"form", :locals=>{:f=>f}) %>
+            <%end%>
 
+        </div>
+        
     </div>
-    
-    <%= render(partial: 'shared/footer') %>
-</div>
-
+        <%= render(partial: 'shared/footer') %>
+    </div>
 
 
 

@@ -17,7 +17,7 @@ Rails.application.routes.draw do
     end
 
     collection do
-      get :search
+      post :search
     end
   end
   
@@ -48,6 +48,8 @@ Rails.application.routes.draw do
 
   resources :password_resets, only: [:show, :create]
   get 'expired_token', to: 'pages#expired_token'
+
+  get 'search', to: 'pages#search'
 
   
 

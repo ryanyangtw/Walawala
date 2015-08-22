@@ -64,15 +64,16 @@
 
 
                 
-
+						<%= will_paginate(@programs, class: " search_pagination") %>
             </div>
         </div>
+
+
     </div>
+<%= render(partial: 'shared/footer') %>
 </div>    
 
-<%= will_paginate(@programs, class: "absolute pagination") %>
 
-<%= render(partial: 'shared/footer') %>
     
 
 

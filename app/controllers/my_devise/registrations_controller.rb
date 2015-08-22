@@ -91,6 +91,14 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController #Appli
 
 
 
+  # protected
+  # def after_sign_up_path_for(resource)
+  #   binding.pry
+  #   path_with_hash_tag(subscribe_categories_path)
+  # end
+
+
+
   private
 
   # check if we need password to update user data

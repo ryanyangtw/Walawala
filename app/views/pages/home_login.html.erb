@@ -3,7 +3,9 @@
 <div class="bg-purple">
     <div class="relative home_logged">
         <div class="relative h_l_header">
+          <%= link_to(path_with_hash_tag(category_path(Category.first))) do%>
             <div class="absolute selected_btn hover_opacity">精選節目</div>
+          <% end %>
         </div>
 
        
@@ -22,7 +24,7 @@
                   <div class="h_l_share"></div>
                   <!-- <div class="add_play_list"> -->
                   <li class="h_l_item_btn li_episode" data-src="<%= episode.audio_url %>">
-                    <a> <%= episode.title %> </a>
+                    <!-- <a> <%#= episode.title %> </a> -->
                   </li>
                   <!-- </div> -->
                   <p><%= episode.title %></p>
@@ -54,10 +56,10 @@
         </ul> -->
 
        <!--  <audio id="song_1">
-            <source src="<%= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
+            <source src="<%#= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
         </audio>
         <audio id="song_2">
-            <source src="<%= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
+            <source src="<%#= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
         </audio> -->
 
 

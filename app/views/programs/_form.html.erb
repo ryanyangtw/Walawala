@@ -26,14 +26,14 @@
 		        <%= image_tag(program_image_url) %>
 		        <!-- <img src="images/upload/demo.jpg"> -->
 		      </div>
-      		<div class= "u_p_pic_over_word">上傳圖片</div>
-        	<!-- <div class="u_p_pic_over_word">上傳圖片</div> -->
+          <!-- <div class="u_p_pic_over_word">上傳圖片</div> -->
         </div>
+      		
 				
 				<%= f.file_field(:image, id: "myFileInput", :autofocus => true, style: "display: none; visibility: hidden;", class: "file u_p_pic_input_btn") %>
         <!-- <input class="u_p_pic_input_btn" name="" type="file"> -->
+    <div class= "relative u_p_pic_over_word">上傳圖片</div>
     </div>
-
 
 	  <%= f.text_field(:subject, class: "u_p_program_name", placeholder: "輸入節目名稱（10字內）")%>
 
@@ -61,21 +61,21 @@
         <% end %>
     </div>
 
-    <!-- <div class="u_p_complete btn_hover">
+     <div class="u_p_complete btn_hover">
     	<%#= image_tag('upload_program/u_p_complete_off.png', class: "off") %>
     	<%#= image_tag('upload_program/u_p_complete_on.png', class: "on") %>
 	    <div class="absolute full">
-	        完成
+	        <%#= f.submit("完成",:class => 'u_p_complete_btn') %>
 	    </div>
-    </div> -->
+    </div> 
     <div class="u_p_complete_go btn_hover">
-  		<%= image_tag('upload_program/u_p_complete_off.png', class: "off") %>
-  		<%= image_tag('upload_program/u_p_complete_on.png', class: "on") %>
+  		<!-- <%# image_tag('upload_program/u_p_complete_off.png', class: "off") %> -->
+  		<%# image_tag('upload_program/u_p_complete_on.png', class: "on") %>
         <!-- <img class="off" src="images/upload_program/u_p_complete_go_off.png"> -->
         <!-- <img class="on" src="images/upload_program/u_p_complete_go_on.png"> -->
         
         <div class="absolute full">
-        	<%= f.submit("完成，前往上傳集") %>
+        	<%= f.submit("完成，前往上傳集",:class => 'u_p_complete_go_btn') %>
             <!-- 完成，前往上傳集 -->
         </div>
     </div>

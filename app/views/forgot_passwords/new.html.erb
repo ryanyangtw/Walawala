@@ -1,17 +1,19 @@
-<div class="relative reset_password">
-    <div class="r_p_frame poz_center">
-        <div class="absolute r_p_title">Forget Password ?</div>
-        <div class="absolute r_p_input_box">
-            <%= form_tag(forgot_passwords_path, class: "sign_in", remote: true) do %>
-                <%= email_field_tag('email', nil, class: "absolute r_p_input_mail", placeholder: "輸入註冊的Email") %>
-                <%= submit_tag('送出', class: "absolute r_p_btn hover_opacity", style: "border: none;") %>
-            <% end %>
+  <div class="bg-green">  
+    <div class="relative reset_password">
+        <div class="r_p_frame poz_center">
+            <div class="absolute r_p_title">Forget Password ?</div>
+            <div class="absolute r_p_input_box">
+                <%= form_tag(forgot_passwords_path, class: "sign_in", remote: true) do %>
+                    <%= email_field_tag('email', nil, class: "absolute r_p_input_mail", placeholder: "輸入註冊的Email") %>
+                    <%= submit_tag('送出', class: "absolute r_p_btn hover_opacity", style: "border: none;") %>
+                <% end %>
 
-            <!-- <input class="absolute r_p_input_mail" type="text" onfocus="if(this.value=='輸入註冊的Email') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='輸入註冊的Email';this.style.color='#999b9d';};" value="輸入註冊的Email">
-            <a href="#email_hint"><div class="absolute r_p_btn hover_opacity">送出</div></a> -->
+                <!-- <input class="absolute r_p_input_mail" type="text" onfocus="if(this.value=='輸入註冊的Email') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='輸入註冊的Email';this.style.color='#999b9d';};" value="輸入註冊的Email">
+                <a href="#email_hint"><div class="absolute r_p_btn hover_opacity">送出</div></a> -->
+            </div>
         </div>
+
+
     </div>
-
     <%= render(partial: "shared/footer")%>
-
-</div>
+  </div>

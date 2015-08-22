@@ -1,5 +1,5 @@
 
-
+<div class="bg-tiff">
     <div class="relative p_g">
 
     
@@ -47,8 +47,11 @@
 
             <p class="p_g_already"> <%= @program.subscriberz_count %>已訂閱</p>
             <div class="relative p_g_user">
-            	<%= image_tag(@program.owner.avatar_url) %> <%= @program.owner.name %>
+            	<%= image_tag(@program.owner.try(:avatar_url)) %> 
             	<!-- <img src="images/program/program_user.png" />youlanda -->
+            </div>
+            <div class="relative p_g_user_name">
+            <%= @program.owner.try(:name)%>
             </div>
 
             <div class="relative p_g_cate"> 
@@ -80,25 +83,31 @@
                     </p>
 
                     <% if user_signed_in? %>
-                      <div class="p_g_tag" style="z-index: 10;">
+                      <div class="p_g_tag"> 
                       	<% Tag.order(id: :asc).each do |tag| %>
                           <span class="p_g_tag_item hover_opacity tag">
   	                        
-                            <div id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
-                              
+                            
+     
                               <% if !current_user.has_voted?(tag, episode)%>
-                                <%= link_to(votes_path(episode, tag), method: :post, remote: true) do%>
-                                  <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox">
-                                <% end %>
+                                <div  id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
+                                  <%= link_to(votes_path(episode, tag), method: :post, remote: true) do%>
+                                    <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox">
+                                  <% end %>
+                                </div>
                               <% else %>
-                                <%= link_to(cancel_vote_path(episode, tag), method: :delete, remote: true) do %>
-                                  <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox" checked>
-                                <% end %>
+
+                                  <div class="p_g_checked" id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
+                                    <%= link_to(cancel_vote_path(episode, tag), method: :delete, remote: true) do %>
+                                      <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox" checked>
+                                    <% end %>
+
+                                  </div>
                               <% end %>
-                            </div>
+                           
 
 
-  	                        <label for="<%= tag.id %>" class="p_g_lable_box">
+  	                        <label for="<%= tag.id %>" class="p_g_lable_box ">
   	                        	<%= image_tag('program/tag_bg.png') %>
   	                        	<%= image_tag('program/tag_click.png', class: 'p_g_tag_click') %>
   	                        	<%= tag.title%>
@@ -115,7 +124,7 @@
 											<% episode.comments.each do |comment| %>
 												<div class="p_g_reply_item">
                             <div class="p_g_reply_pic">
-                            	<%= image_tag(comment.user.avatar_url) %>
+                            	<%= image_tag(comment.user.try(:avatar_url)) %>
                                 <!-- <img src="images/program/demo.jpg"> -->
                             </div>
                             <div class="p_g_reply_content">
@@ -143,7 +152,7 @@
 											<%= form_for(@comment, url: episode_comments_path(episode, @comment), remote: true) do |f|%>
 		                    <div class="p_g_reply_item p_g_reply_item_type">
 		                        <div class="p_g_reply_pic">
-		                        	<%= image_tag(current_user.avatar_url) %>
+		                        	<%= image_tag(current_user.try(:avatar_url)) %>
 		                            <!-- <img src="images/program/demo.jpg"> -->
 		                        </div>
 		                        <%= f.text_area(:content ,class: "p_g_reply_typecontent", rows: "2", placeholder: "留言......") %>
@@ -188,9 +197,9 @@
 
 
 
-        <%= render(partial: "shared/footer") %>
     </div>
-
+        <%= render(partial: "shared/footer") %>
+</div>
 
 		<%= javascript_include_tag 'pagination' %>
 

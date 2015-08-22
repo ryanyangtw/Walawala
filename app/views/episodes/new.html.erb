@@ -1,17 +1,17 @@
+ <div class="bg-purple">
+  <div class="relative upload_episode">
+      <div class="u_e_frame poz_center">
+          <p class="u_e_title">上傳新一集</p>
 
-<div class="relative upload_episode">
-    <div class="u_e_frame poz_center">
-        <p class="u_e_title">上傳新一集</p>
+            <%= form_for(@episode , :html=> {:multipart => true}, :url => program_episodes_path(@program , @episode)) do |f|%>
 
-          <%= form_for(@episode , :html=> {:multipart => true}, :url => program_episodes_path(@program , @episode)) do |f|%>
+              <%= render(:partial=>'form' , :locals=>{:f => f})%> 
+            <% end %>
 
-            <%= render(:partial=>'form' , :locals=>{:f => f})%> 
-          <% end %>
-
-    </div>        
-    <%= render(partial: 'shared/footer') %>
-</div>
-
+      </div>        
+  </div>
+      <%= render(partial: 'shared/footer') %>
+</div> 
 
 
 
@@ -32,4 +32,4 @@
 <%#end%>
 
 
-</div> -->
+</div>

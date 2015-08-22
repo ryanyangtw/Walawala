@@ -1,5 +1,5 @@
 <% if @user.valid? %>
-  window.location.replace('<%= root_path %>');
+  window.location.replace('<%= path_with_hash_tag( subscription_categories_path) %>');
 <% else %>
   
   $('.error_messages').html("");

@@ -7,7 +7,12 @@ class PagesController < ApplicationController
       #@subscriptions = current_user.subscriptions.order("last_episode_uploaded_at DESC")
       #@subscriptions = current_user.subscribed_programs.order("updated_at DESC")
 
-      @customize_episodes = current_user.customize_episodes(1, 10)
+      # page = 1
+      # if params[:page].present? 
+      #   page = params[:page]
+      # end
+
+      @customize_episodes = current_user.customize_episodes(1, 20)
       render 'pages/home_login'
     else
       render 'pages/home_unlogin'
@@ -15,6 +20,13 @@ class PagesController < ApplicationController
   end
 
   def index
+  end
+
+
+  def search
+    @q = Program.includes(:episodes).ransack(params[:q]) 
+    # @programs = @q.result(distinct: true).includes(:episodes) #.paginate(:page => params[:page], :per_page => 5 )
+    @programs = Program.none
   end
 
 end
