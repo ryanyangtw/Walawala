@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
   
-  root to: "pages#home"
-  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , :registrations => "registrations" }
+  root to: "pages#index"
+  get 'home', to: "pages#home"
+
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" , registrations: 'my_devise/registrations', sessions: 'my_devise/sessions'} #:registrations => "registrations" }
 
   #devise_for :users
   #devise_for :users, :controllers=>{ :registrations=>"registrations"}
@@ -11,6 +13,7 @@ Rails.application.routes.draw do
     member do
       post :subscribe
       post :cancel_subscription
+      get :more_episodes
     end
 
     collection do
@@ -19,10 +22,16 @@ Rails.application.routes.draw do
   end
   
   resources :episodes ,:only=>[:show] do
-    member do
-      post "tag/:tag_id/vote", to: "episodes#vote", as: :vote
-    end
+    # member do
+    #   post "tag/:tag_id/vote", to: "episodes#vote", as: :vote
+    #   post "tag/:tag_id/cancel_vote", to: "episodes#cancel_vote", as: :cancel_vote
+    # end
+
+    resources :comments
   end
+
+  post "episode/:episode_id/tag/:tag_id/vote", to: "votes#create", as: :votes
+  delete "episode/:episode_id/tag/:tag_id/cancel_vote", to: "votes#destroy", as: :cancel_vote
 
   resources :categories
   resources :tags
@@ -31,6 +40,16 @@ Rails.application.routes.draw do
   post "subscribe_categories", to: "users#subscribe_category"
 
   resources :feedback_subjects
+
+
+  get 'forgot_password', to: 'forgot_passwords#new'
+  resources :forgot_passwords, only: [:create]
+  get 'forgot_password_confirmation', to: 'forgot_passwords#confirm'
+
+  resources :password_resets, only: [:show, :create]
+  get 'expired_token', to: 'pages#expired_token'
+
+  get 'search', to: 'pages#search'
 
   
 
@@ -52,14 +71,13 @@ Rails.application.routes.draw do
         put :change_role
       end
     end
-
-
-
-
   end
-  
-  
 
+  #add for sidekiq dashboard
+  require 'sidekiq/web'
+  mount Sidekiq::Web, at: "/sidekiq"
+  
+  
   #add for grape api
   #mount Walawala::API => '/api'
   mount API::Root => '/'

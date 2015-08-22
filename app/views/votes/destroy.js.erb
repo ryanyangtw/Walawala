@@ -1,0 +1,5 @@
+// alert('sfsddf');
+var vote_link =  '<%= link_to(votes_path(@episode, @tag), method: :post, remote: true) do%><input type="checkbox" id="<%= @tag.id %>" class="p_g_tag_checkbox"><% end %>'
+$('#episode_<%= @episode.id %>_tag_<%= @tag.id %>_container').html(vote_link);
+
+$('#episode_<%= @episode.id %>_tag_<%= @tag.id %>_container').removeClass('p_g_checked');

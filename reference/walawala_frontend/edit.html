@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="relative edit">
+        <div class="relative edit_header">
+            <div class="absolute edit_programe_btn edit_btn hover_opacity">編輯節目內容</div>
+            <div class="absolute edit_episode_btn edit_btn hover_opacity">新增集數或編輯單集</div>
+            <div class="absolute edit_complete_btn edit_btn hover_opacity">完成編輯</div>
+        </div>
+        <div class="relative edit_content">
+            <div class="absolute edit_pic">
+                <img src="images/edit/demo.jpg">
+                <div class="absolute edit_pic_btn hover_opacity">更新節目圖片</div>
+            </div>
+            <div class="absolute edit_title">
+                <p>節目名稱</p>
+                <input maxlength="10" type="text" onfocus="if(this.value=='節目名稱最多十個字呦') {this.value='';this.style.color='#434244';}" onblur="if(this.value=='') {this.value='節目名稱最多十個字呦';this.style.color='#434244';};" value="節目名稱最多十個字呦">
+            </div>
+            <div class="absolute edit_cate">
+                <p>節目種類</p>
+                <div class="relative edit_select_box">
+                    <select>
+                        <option value="">新聞</option>
+                        <option value="">綜藝娛樂</option>
+                        <option value="">美食旅遊</option>
+                        <option value="">運動休閒</option>
+                        <option value="">健康養生</option>
+                        <option value="">教育學習</option>
+                        <option value="">IT科技</option>
+                        <option value="">心靈、宗教</option>
+                        <option value="">遊戲嗜好</option>
+                        <option value="">音樂</option>
+                        <option value="">政治商業</option>
+                        <option value="">故事</option>
+                        <option value="">兒童與家庭</option>
+                        <option value="">其他</option>
+                    </select>
+                </div>
+            </div>
+            <div class="absolute edit_text">
+                <p>節目介紹(上限100字)</p>
+                <textarea maxlength="100" onfocus="if(this.value=='輸入節目介紹') {this.value='';this.style.color='#434244';}" onblur="if(this.value=='') {this.value='輸入節目介紹';this.style.color='#434244';};" value="輸入節目介紹">輸入節目介紹</textarea>
+            </div>
+        </div>
+        <div class="footer">
+            <span>
+                <a href="">法律條款</a>
+            </span>
+            <span>
+                <a href="">聯絡我們</a>
+            </span>
+            <span>
+                <a href="">加入我們</a>
+            </span>
+            <span>
+                <a href="">廣告合作</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>

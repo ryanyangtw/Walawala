@@ -1,28 +1,113 @@
+<div class="bg-red">
+    <div class="relative search">
+        <div class="relative search_up_frame">
+
+        <%= search_form_for @q ,:url=> search_programs_path, :class=>"navbar-form navbar-left", :role=>"search" do |f| %>
+
+			  	<%= f.search_field :subject_or_introduction_or_episodes_title_or_episodes_description_cont, :class=>"absolute search_bar", :id=>"navbarInput-01", :type=>"search", :placeholder=>"Search"%>
+		         	
+		      <%= submit_tag("", :class => 'absolute search_btn hover_opacity', style: "z-index: 20;")%>
+			 
+  			<%end%>
+            <!-- <input class="absolute search_bar"/> -->
+            <div class="absolute search_btn hover_opacity"></div>
+        </div>
+        <div class="relative search_content">
+            <div class="relative search_box">
+
+
+							<% @programs.each do |program| %>
+								<div class="search_item">
+	                    <div class="search_pic">
+	                    	<%= image_tag(program.image_url) %>
+	                        <!-- <img src="images/sub_cate/demo.jpg"> -->
+	                    </div>
+	                    <div class="search_text">
+	                        <div class="search_head">
+	                        		<%= link_to(path_with_hash_tag(program_path(program))) do%>
+	                            <!-- <a href="#program"> -->
+	                                <span class="search_title">
+	                                	<%= render_program_subject(program.subject) %>
+	                                </span>
+	                            <!-- </a> -->
+	                            <% end %>
+	                        </div>
+	                         <div class="s_follow hover_opacity">
+	                        </div>
+	                        <div class="s_share hover_opacity">
+	                        </div>
+	                        <p class="search_intro">
+	                        	<%= program.introduction %>
+	                        </p>
+	                    </div>
+                </div>
+							<% end %>
+
+                <!-- <div class="search_item">
+                    <div class="search_pic">
+                        <img src="images/sub_cate/demo.jpg">
+                    </div>
+                    <div class="search_text">
+                        <div class="search_head">
+                            <a href="#program">
+                                <span class="search_title">節目名稱最多十個字</span>
+                            </a>
+                        </div>
+                         <div class="s_follow hover_opacity">
+                        </div>
+                        <div class="s_share hover_opacity">
+                        </div>
+                        <p class="search_intro">節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹節目介紹</p>
+                    </div>
+                </div> -->
+
+
+
+                
+						<%= will_paginate(@programs, class: " search_pagination") %>
+            </div>
+        </div>
+
+
+    </div>
+<%= render(partial: 'shared/footer') %>
+</div>    
+
+
+    
+
+
+
+
+
+
+<%= javascript_include_tag 'pagination' %>
+
+<!-- 
 <div class="row">
 
-  <h2> 搜尋字串:  <%= params[:q]["subject_or_introduction_or_episodes_title_or_episodes_description_cont"] %></h2>
-
+  <h2> 搜尋字串:  <%#= params[:q]["subject_or_introduction_or_episodes_title_or_episodes_description_cont"] %></h2>
   <hr>
 
 
 <div class="row">
 
-			 <% @programs.each do |program| %>
+			 <%# @programs.each do |program| %>
 			 <div class="col-sm-3 col-md-3">
 
 			    <div class="panel panel-default">
 			      <div class="img-box">
-			      	<%= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program) %>
+			      	<%#= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program) %>
 			    	</div>
 
 			      <div class="panel-body img-avatar">
-			      	<%= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded")%>
-			        <span><%= program.subject %></span>
+			      	<%#= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded")%>
+			        <span><%#= program.subject %></span>
 			    	</div>
 			    </div>
 			 </div>
-			 <% end %>
+			 <%# end %>
 
 </div>
 
-</div>
+</div> -->

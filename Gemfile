@@ -93,6 +93,14 @@ gem 'unicorn', '~> 4.8.3'
 #role engine
 gem 'cancancan', '~> 1.9'
 
+gem "figaro"
+
+gem 'sidekiq'
+gem 'sinatra', require: false
+gem 'slim'
+
+# gem 'will_paginate', '~> 3.0.6'
+
 
 
 group :development, :test do
@@ -118,7 +126,7 @@ group :development, :test do
   gem 'capistrano-rbenv', "~> 2.0"
   gem 'capistrano-cookbook', require: false
 
-
+  gem 'letter_opener'
 end
 
 
@@ -127,12 +135,10 @@ end
 #should be delete
 #add for heroku
 group :production do
-
+  gem "sentry-raven", :git => "https://github.com/getsentry/raven-ruby.git"
   #gem 'rails_12factor'
   #add for gzip on heroku
   #gem 'heroku-deflater'
-  
-
 end
 
 

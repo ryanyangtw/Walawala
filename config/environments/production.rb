@@ -109,4 +109,18 @@ Rails.application.configure do
   end
   ###################################################################
 
+  # Add for sending email
+  config.action_mailer.default_url_options = { host: 'https://bab.bo' }
+
+  ActionMailer::Base.smtp_settings = {
+    :port           => Settings.MAILGUN_SMTP_PORT, #E NV['MAILGUN_SMTP_PORT'],
+    :address        => Settings.MAILGUN_SMTP_SERVER, # ENV['MAILGUN_SMTP_SERVER'],
+    :user_name      => Settings.MAILGUN_SMTP_LOGIN, # ENV['MAILGUN_SMTP_LOGIN'],
+    :password       => Settings.MAILGUN_SMTP_PASSWORD, # ENV['MAILGUN_SMTP_PASSWORD'],
+    :domain         => 'bab.bo', # 'goodtime.com.tw',
+    :authentication => :plain,
+  }
+  ActionMailer::Base.delivery_method = :smtp
+
+  config.action_mailer.asset_host = 'http://bab.bo' # 'http://goodtime.com.tw'
 end

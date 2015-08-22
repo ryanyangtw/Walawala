@@ -1,0 +1,9 @@
+
+alert("fuck");
+$('#program_<%= @program.id %>_episodes_continer').html('');
+
+<% @episodes.each_with_index do |episode, index|%>
+  var episode = '<%= link_to(path_with_hash_tag(edit_program_episode_path(@program, episode))) do%><div class="u_episode_unit"><div class="u_episode_unit_"><%= image_tag('upload/u_episode_unit.png') %> <%= render_episode_title_with_index(index, episode) %><div class="u_episode_unit_time"><%= render_format_time(@program.created_at) %></div><div class="u_episode_word">修改此集</div></div></div><% end %>'
+
+  $('#program_<%= @program.id %>_episodes_continer').append(episode);
+<% end %>

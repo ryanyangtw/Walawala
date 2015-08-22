@@ -40,13 +40,13 @@ class RegistrationsController < Devise::RegistrationsController
 
     private
 
-      # check if we need password to update user data
-      # ie if password or email was changed
-      # extend this as needed
-      def needs_password?(user, params)
-        #user.email != params[:user][:email] ||
-          params[:user][:password].present?
-      end
+    # check if we need password to update user data
+    # ie if password or email was changed
+    # extend this as needed
+    def needs_password?(user, params)
+      #user.email != params[:user][:email] ||
+        params[:user][:password].present?
+    end
 
 
 end

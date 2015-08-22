@@ -1,0 +1,15 @@
+
+// 'div.s_c_i_follow'
+if($('#program_<%= @program.id %>').parentsUntil($.Body,'.s_c_i').hasClass('s_c_i_followed')){
+    $('#program_<%= @program.id %>').parentsUntil($.Body,'.s_c_i').removeClass('s_c_i_followed');
+} else {
+    $('#program_<%= @program.id %>').parentsUntil($.Body,'.s_c_i').addClass('s_c_i_followed');
+}
+
+
+$('#subscribe_program_<%= @program.id %>').attr("href", "<%= subscribe_program_path(@program) %>");
+
+
+
+// programs show page ex: pages/1
+$('.p_g_candisorder').addClass('p_g_canorder').removeClass('p_g_candisorder');

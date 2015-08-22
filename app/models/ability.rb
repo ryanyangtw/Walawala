@@ -5,6 +5,7 @@ class Ability
 
     if user.blank?
       can :read, :all
+      can :search, :all
     elsif user.role?(:regular)
       #can :read, :all
       #can :manage, Program

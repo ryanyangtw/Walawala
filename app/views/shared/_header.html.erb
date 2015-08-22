@@ -1,63 +1,264 @@
-	<nav class="navbar navbar-static-top navbar-default" role="navigation">
-  <div class="container">
-    <!-- Brand and toggle get grouped for better mobile display -->
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <%= link_to "Walawala", root_path, class:"navbar-brand" %>
+    <header class="absolute main unlogged">
+        <nav class="relative full">
+            <a href="#">
+                <h1 class="main absolute block">
+                    <%= image_tag('logo.png', alt: 'walawala logo') %>
+                  <!-- <img alt="walawala logo" src="images/logo.png"/> -->
+                </h1>
+            </a>
 
-      <% @q = Program.ransack(params[:q])%>
-      <%= render :partial=>'shared/ransack_form', :locals=>{:q => @q}%>
-     
+
+
+        <!-- 新的播放器 modify0809 -->
+        <div class="mainContainer" style="">
+
+        <!--<div class="containerPlayer"> -->
+        <div id="listContainer" class="playlistContainer" style="display: none;">
+        <ul id="playListContainer">
+
+          <% Episode.order(id: :desc).limit(20).each do |episode| %>
+            <li data-src="<%= episode.audio_url %>">
+                <a> <%= episode.title %> </a>
+            </li>
+          <% end %>
+            <!-- <li id="song" data-src="https://s3.amazonaws.com/9lessonslabs/songs/Everything+But+Mine.mp3">
+                <a>
+                    1
+                </a>
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/Linkin+Park+-+Numb.mp3">
+
+                  <a>
+2
+                </a>
+
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/rolling-in-the-deep-adele.mp3">
+
+                  <a>
+5
+                </a>
+
+            </li> -->
+
+            <!-- <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/love-the-way-you-lie-rihanna-feat-eminem.mp3">
+
+                    <a>
+3
+                </a> 
+
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/rolling-in-the-deep-adele.mp3">
+
+                    <a>
+4
+                </a>
+
+            </li>
+            <li data-src="https://s3.amazonaws.com/9lessonslabs/songs/when-i-was-your-man-bruno-mars.mp3">
+
+                    <a>
+5
+                </a>
+
+            </li> -->
+
+            
+        </ul>
     </div>
+        <div id="playerContainer" class="absolute">
+        <div id="controlContainer">  
+            <!--<li>
+                <a href="#" class="shuffle shuffleActive" data-attr="shuffled"></a>
+            </li> -->
+              
+                <li>
+                    <div class="play" data-attr="playPauseAudio"></div>
+                </li>
+               <!-- <li>
+                    <div class="play" data-attr="playPauseAudio"></div>
+                </li>  -->
+               
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-     
-
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to("首頁" , root_path) %></li>
-
-        
-        <% if user_signed_in? %>
-
-        <li><%#= link_to("設定回饋主題", feedback_subjects_path ) %></li>
-
-        <li><%#= link_to("設定標簽", tags_path) %></li>
-        
-        <li><%#= link_to("節目分類", categories_path) %></li>
-
-        <li><%#= link_to("訂閱分類", subscription_categories_path) %></li>
-
-        <li><%= link_to("新增節目", new_program_path)%>
-        </li>
-
+            <div class="audioDetails">
+                <span class="songPlay"></span>
+                <span data-attr="timer" class="audioTime"></span>
+            </div>
+            <div class="progress">
+                <div data-attr="seekableTrack" class="seekableTrack"></div>
+                <div class="updateProgress"></div>
+            </div>
+            
+        </div>
+            <div class="right" data-attr="nextAudio"></div>
+            
+            <div class="volume volume1"></div>
+        <div class="volumeControl">
+            <input class="bar" data-attr="rangeVolume" type="range" min="0" max="1" step="0.1" value="0.7" />
+        </div>
+    </div>
+    <!--</div> -->
+</div>
 
 
-        <li><%= image_tag(current_user.avatar.url(:small) ) if current_user.avatar.present?%>
-        </li>
-        <li><%= link_to(current_user.name, root_path)%>
-        </li>
-        
 
-        <li><%= link_to "帳號設定" , edit_user_registration_path %></li>
-        <li><%= link_to "登出" , destroy_user_session_path , method: :delete %></li>
 
-          <% if current_user.role?(:admin)%>
-            <li><%= link_to("管理頁面", admin_root_path, style:"color: #EF9827;")%></li>
-          <%end%>
-        <% else %>
-          <li><%= link_to "註冊", new_user_registration_path%></li>
-          <li><%= link_to "登入", new_user_session_path%></li>
-          <li><%= link_to "FB登入", user_omniauth_authorize_path(:facebook) %></li>
-        <% end %>
-        
-        
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container -->
-</nav>
+            <!--
+            <div class="main_player absolute">
+              <div class="playing_btn absolute cursor_pointer">
+                    <div class="start_btn absolute full">
+                        
+                        <%#= image_tag('start_icon.png', class: 'poz_center') %>
+                    </div>
+                    <div class="pause_btn absolute full">
+                        <%#= image_tag('pause_icon.png', class: 'poz_center') %>
+                  
+                    </div>
+                </div>
+              <div class="time_bar absolute">
+                    <div class="time_line absolute"></div>
+                    <div class="player_info absolute" id="player_info">
+                        <div class="player_info_name inline_block">節目名稱 - 集名稱</div>
+                        <div class="player_info_time absolute inline_block">00:00</div>
+                    </div>
+                    <div class="player_info_filter absolute full" id="player_info_filter"></div>
+                    <div class="time_line_bar absolute" id="time_line_bar"></div>
+                </div>
+                <div class="next_play_btn absolute"></div>
+              <div class="volume_sec absolute">
+                    <div class="volume_btn absolute full cursor_pointer"></div>
+                    <div class="volume_bar absolute">
+                        <div class="volume_bar_limit absolute cursor_pointer">
+                            <div class="volume_color absolute"></div>
+                            <div class="volume_drag_body absolute">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            -->
+
+
+            
+
+
+
+            <ul class="inline_block float_right">
+                <%= link_to(path_with_hash_tag(search_path)) do %>
+              
+                  <li class="inline_block cursor_pointer main_search">
+                   
+                      <span class="main_search_btn">
+                          <%= image_tag('icon_search.png') %>
+                          <!-- <img src="images/icon_search.png"> -->
+                      </span>
+                    
+                  </li>
+                <% end %>
+                
+<!--                         <input class="relative search_input" type="text" placeholder="輸入">
+                    </span>
+                     <span class="search_word"></span>
+                </li>-->
+                <li class="inline_block">
+                    <!-- <a href="#category"> -->
+                    <%= link_to(path_with_hash_tag(categories_path)) do %>
+                        <span>
+                            <%= image_tag('icon_category.png') %>
+                            <!-- <img src="images/icon_category.png"> -->
+                        </span>
+                    <% end %>
+                    <!-- </a> -->
+                </li>
+
+
+                <% if user_signed_in? %>
+                <li class="inline_block">
+                    <!-- <a href="#upload"> -->
+                    <%= link_to(path_with_hash_tag(programs_path)) do %>
+                        <span>
+                            <%= image_tag('icon_upload.png') %>
+                            <!-- <img src="images/icon_upload.png"> -->
+                        </span>
+                    <% end %>
+                    <!-- </a> -->
+                </li>
+
+               
+                  <li class="inline_block relative user_account user_account_in hide">
+                  
+                    <!-- <li class="inline_block relative user_account hide"> -->
+                      <div class="absolute user_account_bg"></div>
+                      <div class="relative user_account_in">
+                          <span>
+                              <%= image_tag('icon_userdemo.png') %>
+                              <!-- <img src="images/icon_userdemo.png"> -->
+                          </span>
+                      </div>
+                  </li>
+                  <div class="absolute triangle"></div>
+                  <div class="absolute login_menu">
+                    <%= link_to(path_with_hash_tag(edit_user_registration_path)) do %>
+                      <div class="absolute login_data_btn">個人資料修改</div>
+                    <% end %>
+                      <!-- <a href="#setting">
+                          <div class="absolute login_data_btn">個人資料修改</div>
+                      </a> -->
+                    <div class="absolute logout_btn">
+                      <%= link_to('登出', destroy_user_session_path, method: :delete, remote: true) %>
+                    </div>
+                  </div>
+                <% end %>
+
+                
+
+                <% if user_signed_in? %>
+                  <li class="inline_block relative user_account user_account_in"> 
+                    <!-- <div class="absolute user_account_bg"></div>      -->
+                    <span>
+                      <%= image_tag('icon_login.png') %>
+                    </span>   
+                  </li>
+                <% else %>
+
+                  <li class="inline_block relative user_account_not_login">
+                      <%= link_to(path_with_hash_tag(new_user_session_path)) do %>  
+                          <span>
+                            <%= image_tag('icon_login.png') %>
+                          </span>
+                      <% end %>
+                  </li>
+                <% end %>
+
+
+                <!-- <li class="inline_block relative user_account user_account_in hide">
+                    <div class="absolute user_account_bg"></div>
+                    <div class="relative user_account_in">
+                        <span>
+                            <%#= image_tag('icon_userdemo.png') %>
+                            
+                        </span>帳號
+                    </div>
+                </li>
+                <div class="absolute login_menu">
+                    <a href="#setting">
+                        <div class="absolute login_data_btn">個人資料修改</div>
+                    </a>
+                    <div class="absolute logout_btn">登出</div>
+                </div>
+                <li class="inline_block relative user_account_not_login">
+                    <a href='<%#= path_with_hash_tag(new_user_session_path) %>'> 
+                        <span>
+                            <%#= image_tag('icon_login.png') %>
+                            
+                        </span>
+                    </a>
+                </li> -->
+
+
+
+
+            </ul>
+        </nav>
+        <audio class="player_audio" id="player_audio"></audio>
+    </header>

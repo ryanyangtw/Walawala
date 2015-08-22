@@ -1,0 +1,14 @@
+<% if @comment.valid? %>
+
+  var new_comment = '<div class="p_g_reply_item"><div class="p_g_reply_pic"><%= image_tag(@comment.user.avatar_url) %></div><div class="p_g_reply_content"><%= render_comment_content(@comment.content) %></div></div>';
+
+  $('#episode_<%= @episode.id %>_reply_box').append(new_comment);
+  $('form').find('textarea').val('');
+
+<% else %>
+  alert('請確認留言已經填寫。謝謝：）');
+  <%# @comment.errors.full_messages.each do |msg| %>   
+  <%# end %>
+<% end %>
+
+

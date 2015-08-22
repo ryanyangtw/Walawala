@@ -1,17 +1,99 @@
-<div class="col-md-6 col-md-offset-3 well">
+ <div class="bg-purple"> 
+  <div class="relative edit_episode">
+        <div class="e_e_frame poz_center">
+            <p class="e_e_title">修改此集</p>
+            <div class="e_e_box">
+                <div class="e_e_delete btn_hover">
+                    <%= image_tag('edit_episode/e_e_delete_off.png', class: "off") %>
+                    <%= image_tag('edit_episode/e_e_delete_on.png', class: "on") %>
+                    <!-- <img class="off" src="images/edit_episode/e_e_delete_off.png"> -->
+                    <!-- <img class="on" src="images/edit_episode/e_e_delete_on.png"> -->
+                    <%= link_to( program_episode_path(@program, @episode), method: :delete, data: { confirm: "確定要刪除此集?" }) do %>
+                      <div class="absolute full">
+                          刪除此集
+                      </div>
+                    <% end %>
+                </div>
+
+                <%= form_for(@episode , :html=> {:multipart => true}, :url => program_episode_path(@program , @episode)) do |f|%>
+
+                  <div class="e_e_pic">
+                      <%= image_tag(@episode.program.image_url) %>
+                      <!-- <img src="images/edit_episode/demo.jpg"> -->
+                      <div class="e_e_pic_over">
+                          <div class="e_e_pic_over_word"><%= @program.subject %></div>
+                      </div>
+                  </div>
+
+                  <div class="e_e_cate_info">
+                    <%= @program.first_category.title %>
+                    <%= @program.second_category.title %>
+                    <%= @program.third_category.title %>
+                  </div>
+
+                  <%= f.text_field(:title , class: "u_e_program_name", placeholder: "輸入集名稱（10字內）")%>
+                  <!-- <input class="e_e_program_name" name="" type="text" onfocus="if(this.value=='輸入集名稱（10字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入集名稱（10字內）';this.style.color='#999999';};" value="輸入集名稱（10字內）"> -->
+                  <div class="e_e_program_choose">
+                      <div class="e_e_program_choose_btn">
+                          選擇音檔
+                          <%= f.file_field(:audio , :class => "u_e_program_input_btn") %>
+                          <!-- <input class="e_e_program_input_btn" name="" type="file"> -->
+                      </div>
+                      <div class="e_e_program_file_name div_filename"> <%= @episode.try(:audio).try(:file).try(:filename) %> </div>
+                  </div>
+                  
+                  <%= f.text_area(:description , :class => "u_e_program_text", placeholder: "輸入集描述（100字內）") %>
+                  <!-- <textarea class="e_e_program_text" onfocus="if(this.value=='輸入集描述（100字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入集描述（100字內）';this.style.color='#999999';};">集原描述集原描述集原描述集原描述集原描述</textarea> -->
+                  <div class="e_e_cancle btn_hover">
+                      <%= image_tag('edit_episode/e_e_cancle_off.png') %>
+                      <%= image_tag('edit_episode/e_e_cancle_on.png') %>
+                      <!-- <img class="off" src="images/edit_episode/e_e_cancle_off.png"> -->
+                      <!-- <img class="on" src="images/edit_episode/e_e_cancle_on.png"> -->
+                      
+                      <!-- <a href="#upload"> -->
+                      <%= link_to(path_with_hash_tag(programs_path)) do %>
+                          <div class="absolute full">
+                              取消
+                          </div>
+                      <% end %>
+                      <!-- </a> -->
+                  </div>
+                  <div class="e_e_complete btn_hover">
+                      <%= image_tag('edit_episode/e_e_complete_off.png') %>
+                      <%= image_tag('edit_episode/e_e_complete_on.png') %>
+                      <!-- <img class="off" src="images/edit_episode/e_e_complete_off.png"> -->
+                      <!-- <img class="on" src="images/edit_episode/e_e_complete_on.png"> -->
+                      <div class="absolute full">
+                        <%= f.submit("完成") %>
+                      </div>
+                  </div>
+
+                <% end %>
+
+
+            </div>
+        </div>
+      </div>
+        <%= render(partial: 'shared/footer') %>
+    </div>
+
+<%= javascript_include_tag 'show_filename_when_upload.js' %>
+
+
+<!-- <div class="col-md-6 col-md-offset-3 well">
 	<h1>修改此集</h1>
 
 
-<%= form_for(@episode , :html=> {:multipart => true}, :url => program_episode_path(@program , @episode)) do |f|%>
+<%#= form_for(@episode , :html=> {:multipart => true}, :url => program_episode_path(@program , @episode)) do |f|%>
 
-	<%= render(:partial=>'form' , :locals=>{:f => f})%>	
+	<%#= render(:partial=>'form' , :locals=>{:f => f})%>	
 
 	
 <hr class="style-six">
 	<div class="form-group">
-		<%= f.submit("修改", :class=>"btn btn-primary")%>
+		<%#= f.submit("修改", :class=>"btn btn-primary")%>
 	</div>
-<%end%>
+<%#end%>
 
 
-</div>
+</div> -->

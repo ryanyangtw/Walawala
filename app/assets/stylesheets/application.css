@@ -11,8 +11,10 @@
  * file per style scope.
  *
  * require_tree .
- *= require bootstrap_and_customization
- *= require pages
+ * require bootstrap_and_customization
+ * require pages
+ *= require css/reset.css
+ *= require css/index.css
 
  
  *= require_self
@@ -20,7 +22,7 @@
  */
 
 
-.img-box img {
+/*.img-box img {
   width: 100%;
   height: 261px;
-}
+}*/

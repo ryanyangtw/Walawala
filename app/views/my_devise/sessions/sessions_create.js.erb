@@ -1,0 +1,6 @@
+<% if @user %>
+  window.location.replace('<%= root_path %>');
+<% else %>
+  <% element = raw("<div class='s_u_alert'> 帳號或密碼錯誤 </div>") %>
+  $('.error_messages').append("<%= element %>");
+<% end %>

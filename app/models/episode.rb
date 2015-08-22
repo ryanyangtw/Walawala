@@ -24,6 +24,9 @@ class Episode < ActiveRecord::Base
   has_many :views, dependent: :destroy
   has_many :listeners, through: :views, source: :listener
 
+  # many to one
+  has_many :comments, dependent: :destroy
+
 
   validates :audio, presence: true , on: [:create]
 

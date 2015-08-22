@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    <div class="relative edit_episode">
+        <div class="e_e_frame poz_center">
+            <p class="e_e_title">修改此集</p>
+            <div class="e_e_box">
+                <div class="e_e_delete btn_hover">
+                    <img class="off" src="images/edit_episode/e_e_delete_off.png">
+                    <img class="on" src="images/edit_episode/e_e_delete_on.png">
+                    <div class="absolute full">
+                        刪除此集
+                    </div>
+                </div>
+                <div class="e_e_pic">
+                    <img src="images/edit_episode/demo.jpg">
+                    <div class="e_e_pic_over">
+                        <div class="e_e_pic_over_word">節目名稱最多十個字耶</div>
+                    </div>
+                </div>
+                <div class="e_e_cate_info">主分類 次分類 次分類</div>
+                <input class="e_e_program_name" name="" type="text" onfocus="if(this.value=='輸入集名稱（10字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入集名稱（10字內）';this.style.color='#999999';};" value="輸入集名稱（10字內）">
+                <div class="e_e_program_choose">
+                    <div class="e_e_program_choose_btn">
+                        選擇音檔
+                        <input class="e_e_program_input_btn" name="" type="file">
+                    </div>
+                    <div class="e_e_program_file_name">上傳完成後顯示檔名</div>
+                </div>
+                
+                <textarea class="e_e_program_text" onfocus="if(this.value=='輸入集描述（100字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入集描述（100字內）';this.style.color='#999999';};">集原描述集原描述集原描述集原描述集原描述</textarea>
+                <div class="e_e_cancle btn_hover">
+                    <img class="off" src="images/edit_episode/e_e_cancle_off.png">
+                    <img class="on" src="images/edit_episode/e_e_cancle_on.png">
+                    <a href="#upload">
+                        <div class="absolute full">
+                            取消
+                        </div>
+                    </a>
+                </div>
+                <div class="e_e_complete btn_hover">
+                    <img class="off" src="images/edit_episode/e_e_complete_off.png">
+                    <img class="on" src="images/edit_episode/e_e_complete_on.png">
+                    <div class="absolute full">
+                        完成
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="footer">
+            <span>
+                <a href="">法律條款</a>
+            </span>
+            <span>
+                <a href="">聯絡我們</a>
+            </span>
+            <span>
+                <a href="">加入我們</a>
+            </span>
+            <span>
+                <a href="">廣告合作</a>
+            </span>
+        </div>
+    </div>
+</body>
+</html>

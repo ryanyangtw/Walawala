@@ -14,6 +14,13 @@
 //= require jquery_ujs
 // require turbolinks
 // require_tree .
-//= require bootstrap-sprockets
+// require bootstrap-sprockets
 //= require program_show
 // require jquery_customization
+//= require scripts/jquery-1.10.2.min.js
+//= require scripts/jquery.easing.1.3.min.js
+//= require scripts/jquery-ui-1.10.3.custom.min.js
+//= require js/player.js
+//= require scripts/html5shiv.js
+//= require js/index.js
+//= require js/jquery.audioControls.min.js

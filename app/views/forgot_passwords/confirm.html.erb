@@ -1,0 +1,13 @@
+<div class="relative reset_password">
+
+    <div class="r_p_frame poz_center">
+        <div class="absolute r_p_title">信件已寄出</div>
+          
+          <%= link_to(path_with_hash_tag(root_path)) do %>
+            <div class="absolute e_h_okay hover_opacity">Okay</div> 
+          <% end %>
+          <!-- <a href="#home_unlogged"><div class="absolute e_h_okay hover_opacity">Okay</div></a> -->
+    </div>
+
+    <%= render(partial: "shared/footer")%>
+</div>

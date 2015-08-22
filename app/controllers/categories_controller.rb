@@ -6,7 +6,10 @@ class CategoriesController < ApplicationController
   end
 
   def show    
-    @category = Category.includes(:programs).find(params[:id])
+    @categories = Category.order("id ASC") 
+    #@category = Category.includes(:programs).find(params[:id])
+    category = Category.find(params[:id])
+    @programs = category.programs.paginate(page: params[:page], per_page: 20)
   end
 
   def new

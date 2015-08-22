@@ -1,0 +1,7 @@
+<% if @user %>
+  window.location.hash = '<%= path_without_backslash(forgot_password_confirmation_path) %>';
+  // window.location.replace('<%= path_with_hash_tag(forgot_password_confirmation_path) %>');
+<% else %>
+  alert("<%= flash[:error] %>");
+  // window.location.replace('<%= path_with_hash_tag(forgot_password_path) %>');
+<% end %>

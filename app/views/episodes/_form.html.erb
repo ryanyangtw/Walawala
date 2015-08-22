@@ -1,32 +1,81 @@
 
+<div class="u_e_box">
+  <div class="u_e_pic">
+      <%= image_tag(@episode.program.image_url) %>
+      <!-- <img src="images/upload_episode/demo.jpg"> -->
+      <div class="u_e_pic_over">
+          <div class="u_e_pic_over_word"> <%= @episode.program.subject %> </div>
+      </div>
+  </div>
+  <div class="u_e_cate_info">
+    <%= @episode.program.first_category.title %>
+    <%= @episode.program.second_category.title %>
+    <%= @episode.program.third_category.title %>
+  </div>
+
+	<%= f.text_field(:title , class: "u_e_program_name", placeholder: "輸入集名稱（10字內）")%>
+  <!-- <input class="u_e_program_name" name="" type="text" onfocus="if(this.value=='輸入集名稱（10字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入集名稱（10字內）';this.style.color='#999999';};" value="輸入集名稱（10字內）"> -->
+  <div class="u_e_program_choose">
+      <div class="u_e_program_choose_btn">
+          選擇音檔
+          <%= f.file_field(:audio , :class => "u_e_program_input_btn") %>
+          <!-- <input class="u_e_program_input_btn" name="" type="file"> -->
+      </div>
+      <div class="u_e_program_file_name div_filename">上傳完成後顯示檔名</div>
+  </div>
+  <%= f.text_area(:description , :class => "u_e_program_text", placeholder: "輸入集描述（100字內）") %>
+  <!-- <textarea class="u_e_program_text" onfocus="if(this.value=='輸入集描述（100字內）') {this.value='';this.style.color='#999999';}" onblur="if(this.value=='') {this.value='輸入集描述（100字內）';this.style.color='#999999';};">輸入集描述（100字內）</textarea> -->
+  <div class="u_e_cancle btn_hover">
+  	<%= image_tag('upload_episode/u_e_cancle_off.png') %>
+  	<%= image_tag('upload_episode/u_e_cancle_on.png') %>
+      <!-- <img class="off" src="images/upload_episode/u_e_cancle_off.png"> -->
+      <!-- <img class="on" src="images/upload_episode/u_e_cancle_on.png"> -->
+    <!-- <a href="#upload"> -->
+    <%= link_to(path_with_hash_tag(programs_path)) do %>
+      <div class="absolute full">
+          取消
+      </div>
+    <% end %>
+    <!-- </a> -->
+  </div>
+  <div class="u_e_complete btn_hover">
+  		
+      <!-- <img class="off" src="images/edit_episode/e_e_complete_off.png"> -->
+      <!-- <img class="on" src="images/edit_episode/e_e_complete_on.png"> -->
+
+         <%= f.submit("完成", :class => 'u_e_complete_btn btn_hover') %>
+
+  </div>
+</div>
+
+
+
+<%= javascript_include_tag 'show_filename_when_upload.js' %>
+<!-- 
 <hr class="style-six">
-		<%= render partial: 'shared/errors', locals: {obj: @episode}%>
+		<%#= render partial: 'shared/errors', locals: {obj: @episode}%>
 
 <div class="form-group">
 	
-	<%= f.label(:title,'名稱:') %>
-	<%= f.text_field(:title , :class => "form-control") %>
+	<%#= f.label(:title,'名稱:') %>
+	<%#= f.text_field(:title , :class => "form-control") %>
 
 </div>
 
 <div class = "form-group">
-	<%= f.label(:audio, "上傳一集:") %>
-	<%= f.file_field(:audio , :class => "form-control") %>
+	<%#= f.label(:audio, "上傳一集:") %>
+	<%#= f.file_field(:audio , :class => "form-control") %>
 
 </div>
 
 <div class="form-group">
 	
-	<%= f.label(:description,'描述:') %>
-	<%= f.text_area(:description , :class => "form-control") %>
+	<%#= f.label(:description,'描述:') %>
+	<%#= f.text_area(:description , :class => "form-control") %>
 </div>
-
-
-
-
 	
 <hr class="style-six">
-
+ -->
 	
 
 

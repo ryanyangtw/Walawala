@@ -1,36 +1,123 @@
 
+
+<div class="u_p_box">
+
+		<% if !@program.new_record? %>
+			<%= link_to(program_path(@program), method: :delete, :data => {:confirm => '確定要刪除此節目嗎?'}) do %>
+				<div class="e_p_delete btn_hover">
+		        <!-- <img class="off" src="images/edit_program/e_p_delete_off.png"> -->
+		        <!-- <img class="on" src="images/edit_program/e_p_delete_on.png"> -->
+		        <%= image_tag("edit_program/e_p_delete_off.png", class: "off") %>
+		        <%= image_tag("edit_program/e_p_delete_on.png", class: "on") %>
+		       	<div class="absolute full">
+		            刪除此節目
+		        </div>
+		    </div>
+	    <% end %>
+    <% end %>
+
+
+    <div class="u_p_pic hover_opacity">
+        <div class="absolute full"></div>
+
+        <div id="myFileButton" class="u_p_pic_over">	
+        	<div class="upload-preview">
+		        <% program_image_url = @program.image.url || image_path('upload/demo.jpg') %>
+		        <%= image_tag(program_image_url) %>
+		        <!-- <img src="images/upload/demo.jpg"> -->
+		      </div>
+          <!-- <div class="u_p_pic_over_word">上傳圖片</div> -->
+        </div>
+      		
+				
+				<%= f.file_field(:image, id: "myFileInput", :autofocus => true, style: "display: none; visibility: hidden;", class: "file u_p_pic_input_btn") %>
+        <!-- <input class="u_p_pic_input_btn" name="" type="file"> -->
+    <div class= "relative u_p_pic_over_word">上傳圖片</div>
+    </div>
+
+	  <%= f.text_field(:subject, class: "u_p_program_name", placeholder: "輸入節目名稱（10字內）")%>
+
+		<% @categories = Category.order(id: :desc) %>
+
+		<!-- options_for_select( @birthday_year_hash, @user.birthday_year) -->
+		<%= f.select(:first_category, options_from_collection_for_select(@categories, 'id', 'title', :selected => @program.first_category.try(:id)), {:prompt => "主分類"}, class: "u_p_program_select_0") %>
+		<%= f.select(:second_category, options_from_collection_for_select(@categories, 'id', 'title', :selected => @program.second_category.try(:id)), {:prompt => "次分類"}, class: "u_p_program_select_1") %>
+		<%= f.select(:third_category, options_from_collection_for_select(@categories, 'id', 'title', :selected => @program.third_category.try(:id)), {:prompt => "次分類"},class: "u_p_program_select_2") %>
+
+
+		<%= f.text_area(:introduction, class: "u_p_program_text", placeholder: "輸入節目描述（100字內）")%>
+
+		<div class="u_p_cancle btn_hover">
+			<%= image_tag('upload_program/u_p_cancle_off.png', class: "off") %>
+			<%= image_tag('upload_program/u_p_cancle_on.png', class: "on") %>
+        <!-- <img class="off" src="images/upload_program/u_p_cancle_off.png"> -->
+        <!-- <img class="on" src="images/upload_program/u_p_cancle_on.png"> -->
+        <%= link_to(path_with_hash_tag(programs_path)) do %>
+        <!-- <a href="#upload"> -->
+	        <div class="absolute full">
+	            取消
+	        </div>
+        <!-- </a> -->
+        <% end %>
+    </div>
+
+     <div class="u_p_complete btn_hover">
+    	<%#= image_tag('upload_program/u_p_complete_off.png', class: "off") %>
+    	<%#= image_tag('upload_program/u_p_complete_on.png', class: "on") %>
+	    <div class="absolute full">
+	        <%#= f.submit("完成",:class => 'u_p_complete_btn') %>
+	    </div>
+    </div> 
+    <div class="u_p_complete_go btn_hover">
+  		<!-- <%# image_tag('upload_program/u_p_complete_off.png', class: "off") %> -->
+  		<%# image_tag('upload_program/u_p_complete_on.png', class: "on") %>
+        <!-- <img class="off" src="images/upload_program/u_p_complete_go_off.png"> -->
+        <!-- <img class="on" src="images/upload_program/u_p_complete_go_on.png"> -->
+        
+        <div class="absolute full">
+        	<%= f.submit("完成，前往上傳集",:class => 'u_p_complete_go_btn') %>
+            <!-- 完成，前往上傳集 -->
+        </div>
+    </div>
+
+</div>
+
+
+<%= javascript_include_tag 'upload_miniature.js' %>
+
+<!-- 
 <hr class="style-six">
 
-		<%= render partial: 'shared/errors', locals: {obj: @program}%>
+		<%#= render partial: 'shared/errors', locals: {obj: @program}%>
 
 		<div class="form-group">
 			
-			<%= f.label(:subject ,'節目名稱:') %>
-			<%= f.text_field(:subject , :class => "form-control") %>
+			<%#= f.label(:subject ,'節目名稱:') %>
+			<%#= f.text_field(:subject , :class => "form-control") %>
 		</div>
 
 
-		<% Category.all.each do |category| %>
-			<%= check_box_tag "program[categories_ids][]", category.id,  @program.category_ids.include?(category.id), :id=> dom_id(category) %>
-			<%= label_tag dom_id(category) , category.title%>
-		<%end%>
+		<%# Category.all.each do |category| %>
+			<%#= check_box_tag "program[categories_ids][]", category.id,  @program.category_ids.include?(category.id), :id=> dom_id(category) %>
+			<%#= label_tag dom_id(category) , category.title%>
+		<%#end%>
 
 
 		<div class = "form-group">
-			<%= f.label(:image, "節目封面:") %>
-			<%= f.file_field(:image , :class => "form-control") %>
+			<%#= f.label(:image, "節目封面:") %>
+			<%#= f.file_field(:image , :class => "form-control") %>
 
 		</div>
 
 
 		<div class="form-group">
 			
-			<%= f.label('節目介紹:') %>
-			<%= f.text_area(:introduction , :class => "form-control" , rows: "8") %>
+			<%#= f.label('節目介紹:') %>
+			<%#= f.text_area(:introduction , :class => "form-control" , rows: "8") %>
 		</div>
 
 			
-		<hr class="style-six">
+		<hr class="style-six"> -->
 
 	
 

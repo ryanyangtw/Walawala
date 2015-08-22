@@ -1,72 +1,13 @@
-    
-    <% if user_signed_in? %>
-      <!--#do something-->
-
-    <% else %>
-    <div class="jumbotron center">
-      <h1>Welcome to  Walawala~</h1>
-      <p>
-      <%= link_to "登入" , new_user_session_path ,class:'btn btn-default btn-lg' %>
-
-      <%= link_to "FB登入", user_omniauth_authorize_path(:facebook), :class=> 'btn btn-info btn-lg' %>
-
-      <%= link_to "註冊" , new_user_registration_path ,class:'btn btn-primary btn-lg' %>
-      </p>
+    <div style= "width:100%;margin:0px auto 0px auto">
+        <div class="relative main_frame">
+            <%= render partial: 'unlogin_frame'%>
+        </div>
     </div>
-    <% end %>
-
-<div class="row">
-
-       <% @programs.each do |program| %>
-       <div class="col-sm-3 col-md-3">
-
-          <div class="panel panel-default">
-            <div class="img-box">
-              <%= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program)%>
-            </div>
-
-            <div class="panel-body img-avatar">
-              <%= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded") if(!program.owner.nil? && program.owner.avatar.present?)%>
-              <span><%= program.subject %></span>
-            </div>
-          </div>
-       </div>
-       <% end %>
-
-</div>
-
-
-<% if user_signed_in? #&& current_user.has_subscriptions?%>
-  <div class="row">
-    <div class="well well-lg container">
     
-      <h2>您訂閱的節目</h2>
-      <hr>
+    
 
-        <% @subscriptions.each do |program| %>
-         <div class="col-sm-3 col-md-3">
+    <%= render partial: 'loading' %>
 
-            <div class="panel panel-default">
-              <div class="img-box">
-                <%= link_to image_tag(program.image.url(:medium) , :class=>"img-rounded"), program_path(program) %>
-              </div>
+    <%= render partial: 'shared/header' %>
 
-              <div class="panel-body img-avatar">
-                <%= image_tag(program.owner.avatar.url(:small), :class=>"img-rounded") if !program.owner.nil?%>
-                <span><%= program.subject %></span>
-              </div>
-            </div>
-         </div>
-        <% end%>
-        
-    </div>
-  </div>
-<% end%>
-
-<div class="center">
-
-<%#= will_paginate @programs, renderer: BootstrapPagination::Rails %>
-</div>
-
-
-
+    <%= render partial: 'components' %>

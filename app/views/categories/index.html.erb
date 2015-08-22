@@ -1,5 +1,49 @@
+	
+	<div class="bg-tiff">
+		<div class="relative category">
+        <div class="relative category_content">
+        	
+        	<% @categories.each_with_index do |category, index| %>
 
-		<%= link_to("新增節目分類", new_category_path, :class=> 'btn btn-info btn-lg')%>
+        		<%= link_to(path_with_hash_tag(category_path(category))) do%>
+	        		<% if index == 0 %>
+	        			<div class="cate_item s_in">
+	        		<% else %>
+	        			<div class="cate_item c_in">
+	        		<% end %>
+	                <div class="cate_icon">
+	                	<%= image_tag(category.image.url) %>
+	                	<!-- <img class="" src="images/category/icon_seleted.png"/> -->
+	                </div>
+	            <% if index == 0 %>
+	                <div class="cate_out_">
+	                    <div class="s_out cate_out">
+	                    	<%= image_tag('category/s_out.png') %>
+	                        <!-- <img src="images/category/s_out.png"/ > -->
+	                    </div>
+	                </div>
+	            <% else %>
+	            		<div class="cate_out_">
+	                    <div class="s_out cate_out">
+	                    	<%= image_tag('category/c_out.png') %>
+	                        <!-- <img src="images/category/s_out.png"/ > -->
+	                    </div>
+	                </div>
+	            <% end %>
+	                <p><%= category.title %></p>
+	            </div>
+            <% end %>
+        	<% end %> 
+        </div>
+
+
+
+		</div>
+		<%= render(partial: "shared/footer") %>
+	</div>
+
+
+<!-- 		<%#= link_to("新增節目分類", new_category_path, :class=> 'btn btn-info btn-lg')%>
 
 		<hr>
 
@@ -16,17 +60,17 @@
 				</thead>
 
 				<tbody>
-					<% @categories.each do |category|%>
+					<%# @categories.each do |category|%>
 					<tr>
 	
-						<td><%=link_to category.title, category_path(category) %></td>
+						<td><%#=link_to category.title, category_path(category) %></td>
 				
-						<td><%= category.description %></td>
-						<td><%= image_tag(category.image.url(:small))%> </td>
-						<td><%= link_to "編輯", edit_category_path(category) ,:class=>"btn btn-info"%></td>
-						<td><%= link_to "刪除", category_path(category) ,:method=>:delete, :class=>"btn btn-danger" %></td>
+						<td><%#= category.description %></td>
+						<td><%#= image_tag(category.image.url(:small))%> </td>
+						<td><%#= link_to "編輯", edit_category_path(category) ,:class=>"btn btn-info"%></td>
+						<td><%#= link_to "刪除", category_path(category) ,:method=>:delete, :class=>"btn btn-danger" %></td>
 					</tr>
-					<%end%>
+					<%#end%>
 				</tbody>
-			</table>
+			</table> -->
 

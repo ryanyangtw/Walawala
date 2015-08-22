@@ -37,6 +37,9 @@ module Walawala
 
     # add fot display localize timezone
     config.time_zone = "Taipei"
+
+    # To re-enable this authenticity token for remote forms:
+    config.action_view.embed_authenticity_token_in_remote_forms = true
     
   end
 end
