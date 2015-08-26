@@ -41,11 +41,18 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController #Appli
 
 
   def update
-
     self.resource = resource_class.to_adapter.get!(send(:"current_#{resource_name}").to_key)
     prev_unconfirmed_email = resource.unconfirmed_email if resource.respond_to?(:unconfirmed_email)
 
-    resource_updated = update_resource(resource, account_update_params)
+    # User can update profile without password if he is register from fb
+    if resource.register_from_fb?
+      resource_updated = resource.update_without_password(account_update_params)
+    else
+      resource_updated = update_resource(resource, account_update_params)
+    end
+    
+    # resource_updated = update_resource(resource, account_update_params)
+    
     yield resource if block_given?
     if resource_updated
       if is_flashing_format?
@@ -62,7 +69,6 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController #Appli
       # respond_with resource
       # render js: "alert('密碼輸入錯誤');"
       flash[:error] = "密碼輸入錯誤"
-      binding.pry
       redirect_to path_with_hash_tag(edit_user_registration_path)
     end
 

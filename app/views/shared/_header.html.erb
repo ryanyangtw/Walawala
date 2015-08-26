@@ -1,10 +1,15 @@
     <header class="absolute main unlogged">
         <nav class="relative full">
             <a href="#">
-                <h1 class="main absolute block">
-                    <%= image_tag('logo.png', alt: 'walawala logo') %>
+                <div class="main absolute ">
+                    <div class="block absolute">
+                    <%= image_tag('logo_new.png', alt: 'walawala logo',class: 'logo_img') %>
+                    </div>
+                    <!-- <h1 class="main absolute block">
+                     <%# image_tag('logo_new.png', alt: 'walawala logo',class: 'logo_img') %>
+                     </h1> -->
                   <!-- <img alt="walawala logo" src="images/logo.png"/> -->
-                </h1>
+                </div>
             </a>
 
 
@@ -184,7 +189,21 @@
                     <!-- </a> -->
                 </li>
 
-               
+                <% else %>
+                  <li class="inline_block">
+                      <!-- <a href="#upload"> -->
+                      <%= link_to(path_with_hash_tag(new_user_session_path)) do %>
+                          <span>
+                              <%= image_tag('icon_upload.png') %>
+                              <!-- <img src="images/icon_upload.png"> -->
+                          </span>
+                      <% end %>
+                      <!-- </a> -->
+                  </li>
+                <% end%>
+
+
+                <% if user_signed_in? %>
                   <li class="inline_block relative user_account user_account_in hide">
                   
                     <!-- <li class="inline_block relative user_account hide"> -->

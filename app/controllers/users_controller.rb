@@ -10,10 +10,10 @@ class UsersController < ApplicationController
   end
 
   def subscribe_category
- 
-    params[:user][:subscribed_category_ids] ||= []
 
-    if(current_user.update(user_params))
+    params[:user][:subscribed_category_ids] ||= []
+    current_user.subscribed_category_ids = params[:user][:subscribed_category_ids]
+    if(current_user.valid?)
       # flash[:notice] = "還迎您來到walawala"
       redirect_to root_path
     else

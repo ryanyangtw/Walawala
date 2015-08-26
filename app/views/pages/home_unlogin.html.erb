@@ -1,8 +1,8 @@
 <div class="bg-unlogin">
     <div class="relative unlogin">
         <div class="u_l_frame poz_center">
-            <p class="u_l_title">CREATE YOUR OWN RADIO STATION</p>
-            <a href="#login">
+            <p class="u_l_title">華人最大 廣播專屬樂聲平台</p>
+            <%= link_to(path_with_hash_tag(category_path(Category.first))) do %>
                 <div class="absolute u_l_btn u_l_btn_0">
                     <div class="full">
                         <%= image_tag('unlogged/btn_choice.png') %>
@@ -10,15 +10,16 @@
                     </div>
                     <div class="absolute u_l_btn_in">
                         <div class="absolute u_l_main_word">
-                            CHOICE
+                            挑選音樂
                         </div>
                         <div class="absolute u_l_sub_word">
-                            Start your adventure broadcasting
+                            開始您的音樂之旅
                         </div>
                     </div>
                 </div>
-            </a>
-            <a href="#login">
+            <% end %>
+
+            <%= link_to(path_with_hash_tag(new_user_registration_path)) do %>
                 <div class="absolute u_l_btn u_l_btn_1">
                     <div class="full">
                         <%= image_tag('unlogged/btn_upload.png') %>
@@ -26,14 +27,14 @@
                     </div>
                     <div class="absolute u_l_btn_in">
                         <div class="absolute u_l_main_word">
-                            UPLOAD
+                            上傳節目
                         </div>
                         <div class="absolute u_l_sub_word">
-                            Create your own radio station
+                            創建個人廣播頻道
                         </div>
                     </div>
                 </div>
-            </a>
+            <% end %>
             <a href="#login">
                 <div class="absolute u_l_btn u_l_btn_2">
                     <div class="full">
@@ -42,10 +43,10 @@
                     </div>
                     <div class="absolute u_l_btn_learnmore">
                         <div class="absolute u_l_main_word">
-                            LEARN MORE
+                            瞭解更多
                         </div>
                         <div class="absolute u_l_sub_word">
-                            About baboo
+                            關於八寶
                         </div>
                     </div>
                 </div>

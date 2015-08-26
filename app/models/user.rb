@@ -227,6 +227,10 @@ class User < ActiveRecord::Base
     self.votes.destroy(vote)
   end
 
+  def register_from_fb?
+    self.provider == "facebook"
+  end
+
 
 
   def self.from_omniauth(auth)

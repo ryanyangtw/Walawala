@@ -66,134 +66,136 @@
 
         <ul class="relative p_g_content">
         	<% @episodes.each do |episode| %>
-        		<div class="p_g_item">
-                <div class="p_g_item_head">
-                    <div class="p_g_item_name"> <%= render_episode_title(episode.title) %> </div>
-                    <div class="p_g_date"> <%= render_format_time(episode.updated_at) %> </div>
-                    <div class="p_g_more hover_opacity">
-                    	<%= image_tag('program/p_g_more_on.png') %>
-                    	<%= image_tag('program/p_g_more_off.png') %>
-                        <!-- <img class="p_g_more_on" src="images/program/p_g_more_on.png">
-                        <img class="p_g_more_off" src="images/program/p_g_more_off.png"> -->
-                    </div>
-                </div>
-                <div class="p_g_item_info">
-                    <p>
-                        <%= render_episode_description(episode.description) %>
-                    </p>
-
-                    <% if user_signed_in? %>
-                      <div class="p_g_tag"> 
-                      	<% Tag.order(id: :asc).each do |tag| %>
-                          <span class="p_g_tag_item hover_opacity tag">
-  	                        
-                            
-     
-                              <% if !current_user.has_voted?(tag, episode)%>
-                                <div  id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
-                                  <%= link_to(votes_path(episode, tag), method: :post, remote: true) do%>
-                                    <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox">
-                                  <% end %>
-                                </div>
-                              <% else %>
-
-                                  <div class="p_g_checked" id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
-                                    <%= link_to(cancel_vote_path(episode, tag), method: :delete, remote: true) do %>
-                                      <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox" checked>
-                                    <% end %>
-
-                                  </div>
-                              <% end %>
-                           
-
-
-  	                        <label for="<%= tag.id %>" class="p_g_lable_box ">
-  	                        	<%= image_tag('program/tag_bg.png') %>
-  	                        	<%= image_tag('program/tag_click.png', class: 'p_g_tag_click') %>
-  	                        	<%= tag.title%>
-  	                            <!-- <img src="images/program/tag_bg.png"/> -->
-  	                            <!-- <img class="p_g_tag_click" src="images/program/tag_click.png">好放鬆 -->
-  	                        </label for="male">
-                          </span>
-  											<% end %>   
+            <div class=" div_episode">
+          		<div class="p_g_item">
+                  <div class="p_g_item_head">
+                      <div class="p_g_item_name"> <%= render_episode_title(episode.title) %> </div>
+                      <div class="p_g_date"> <%= render_format_time(episode.updated_at) %> </div>
+                      <div class="p_g_more hover_opacity">
+                      	<%= image_tag('program/p_g_more_on.png') %>
+                      	<%= image_tag('program/p_g_more_off.png') %>
+                          <!-- <img class="p_g_more_on" src="images/program/p_g_more_on.png">
+                          <img class="p_g_more_off" src="images/program/p_g_more_off.png"> -->
                       </div>
-                    <% end %>
+                  </div>
+                  <div class="p_g_item_info">
+                      <p>
+                          <%= render_episode_description(episode.description) %>
+                      </p>
+
+                      <% if user_signed_in? %>
+                        <div class="p_g_tag"> 
+                        	<% Tag.order(id: :asc).each do |tag| %>
+                            <span class="p_g_tag_item hover_opacity tag">
+    	                        
+                              
+       
+                                <% if !current_user.has_voted?(tag, episode)%>
+                                  <div  id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
+                                    <%= link_to(votes_path(episode, tag), method: :post, remote: true) do%>
+                                      <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox">
+                                    <% end %>
+                                  </div>
+                                <% else %>
+
+                                    <div class="p_g_checked" id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
+                                      <%= link_to(cancel_vote_path(episode, tag), method: :delete, remote: true) do %>
+                                        <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox" checked>
+                                      <% end %>
+
+                                    </div>
+                                <% end %>
+                             
 
 
-										<div id='<%= "episode_#{episode.id}_reply_box" %>' class='p_g_reply_box'>
-											<% episode.comments.each do |comment| %>
-												<div class="p_g_reply_item">
-                            <div class="p_g_reply_pic">
-                            	<%= image_tag(comment.user.try(:avatar_url)) %>
-                                <!-- <img src="images/program/demo.jpg"> -->
-                            </div>
-                            <div class="p_g_reply_content">
-                             	<%= render_comment_content(comment.content) %>
-                            </div>
+    	                        <label for="<%= tag.id %>" class="p_g_lable_box ">
+    	                        	<%= image_tag('program/tag_bg.png') %>
+    	                        	<%= image_tag('program/tag_click.png', class: 'p_g_tag_click') %>
+    	                        	<%= tag.title%>
+    	                            <!-- <img src="images/program/tag_bg.png"/> -->
+    	                            <!-- <img class="p_g_tag_click" src="images/program/tag_click.png">好放鬆 -->
+    	                        </label for="male">
+                            </span>
+    											<% end %>   
                         </div>
-											<% end %>
-										</div>
+                      <% end %>
 
 
-                    <!-- <div class="p_g_reply_box">
-                        <div class="p_g_reply_item">
-                            <div class="p_g_reply_pic">
-                                <img src="images/program/demo.jpg">
-                            </div>
-                            <div class="p_g_reply_content">
-                                留言留言留言留言留言留言
-                            </div>
-                        </div>
-                        
-                    </div> -->
-
-										<% if user_signed_in? %>
-
-											<%= form_for(@comment, url: episode_comments_path(episode, @comment), remote: true) do |f|%>
-		                    <div class="p_g_reply_item p_g_reply_item_type">
-		                        <div class="p_g_reply_pic">
-		                        	<%= image_tag(current_user.try(:avatar_url)) %>
-		                            <!-- <img src="images/program/demo.jpg"> -->
-		                        </div>
-		                        <%= f.text_area(:content ,class: "p_g_reply_typecontent", rows: "2", placeholder: "留言......") %>
-		                        <!-- <textarea class="p_g_reply_typecontent">留言......</textarea> -->
-		                    </div>
-		                    <%= f.submit("送出", class: "p_g_reply_submit hover_opacity") %>
-		                    <!-- <div class="p_g_reply_submit hover_opacity">送出</div> -->
-											<% end %>
-	 
-                    <% end %>
-                </div>
+  										<div id='<%= "episode_#{episode.id}_reply_box" %>' class='p_g_reply_box'>
+  											<% episode.comments.each do |comment| %>
+  												<div class="p_g_reply_item">
+                              <div class="p_g_reply_pic">
+                              	<%= image_tag(comment.user.try(:avatar_url)) %>
+                                  <!-- <img src="images/program/demo.jpg"> -->
+                              </div>
+                              <div class="p_g_reply_content">
+                               	<%= render_comment_content(comment.content) %>
+                              </div>
+                          </div>
+  											<% end %>
+  										</div>
 
 
-                <div class="p_g_player_box">
-                    <div class="playing_cube div_episode">
-                        <!-- <div class='add_play_list'> -->
-                            <li class="songPlay_btn li_episode" data-src="<%= episode.audio_url %>">
-                            	<%= image_tag('program/p_g_start_icon.png') %>
-                            	<!-- <img src="images/program/p_g_start_icon.png"> -->
-                            </li>
-                        <!-- </div> -->
+                      <!-- <div class="p_g_reply_box">
+                          <div class="p_g_reply_item">
+                              <div class="p_g_reply_pic">
+                                  <img src="images/program/demo.jpg">
+                              </div>
+                              <div class="p_g_reply_content">
+                                  留言留言留言留言留言留言
+                              </div>
+                          </div>
+                          
+                      </div> -->
 
-                        <div class="songPause">
-                        	<%= image_tag('program/p_g_pause_icon.png') %>
-                        	<!-- <img src="images/program/p_g_pause_icon.png"> -->
-                        </div>
-                    </div>
+  										<% if user_signed_in? %>
 
-                    <div class="p_progress">
-                        <div data-attr="seekableTrack" class="seekableTrack"></div>
-                        <div class="updateProgress hide"></div>
-                    </div>
-                    <div class="p_g_share hover_opacity">分享</div>
-                    
-                </div>
+  											<%= form_for(@comment, url: episode_comments_path(episode, @comment), remote: true) do |f|%>
+  		                    <div class="p_g_reply_item p_g_reply_item_type">
+  		                        <div class="p_g_reply_pic">
+  		                        	<%= image_tag(current_user.try(:avatar_url)) %>
+  		                            <!-- <img src="images/program/demo.jpg"> -->
+  		                        </div>
+  		                        <%= f.text_area(:content ,class: "p_g_reply_typecontent", rows: "2", placeholder: "留言......") %>
+  		                        <!-- <textarea class="p_g_reply_typecontent">留言......</textarea> -->
+  		                    </div>
+  		                    <%= f.submit("送出", class: "p_g_reply_submit hover_opacity") %>
+  		                    <!-- <div class="p_g_reply_submit hover_opacity">送出</div> -->
+  											<% end %>
+  	 
+                      <% end %>
+                  </div>
+
+
+                  <div class="p_g_player_box">
+                      <div class="playing_cube">
+                          <!-- <div class='add_play_list'> -->
+                              <li class="songPlay_btn li_episode" data-src="<%= episode.audio_url %>">
+                              	<%= image_tag('program/p_g_start_icon.png') %>
+                              	<!-- <img src="images/program/p_g_start_icon.png"> -->
+                              </li>
+                          <!-- </div> -->
+
+                          <div class="songPause">
+                          	<%= image_tag('program/p_g_pause_icon.png') %>
+                          	<!-- <img src="images/program/p_g_pause_icon.png"> -->
+                          </div>
+                      </div>
+
+                      <div class="p_progress">
+                          <div data-attr="seekableTrack" class="seekableTrack"></div>
+                          <div class="updateProgress hide"></div>
+                      </div>
+                      <div class="p_g_share hover_opacity">分享</div>
+                      
+                  </div>
+              </div>
             </div>
         	<% end %>
 
         </ul>
 
-				<%= will_paginate(@episodes, class: "absolute pagination") %>
+				<%= will_paginate(@episodes, class: ".p_g_pagination pagination relative") %>
 
 
 

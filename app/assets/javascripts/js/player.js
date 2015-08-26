@@ -26,7 +26,7 @@ $(document).ready(function(){
                 // var dataSrc =  $(this).parent('.add_play_list');
                 // var addPlayList = dataSrc.html();
 
-                var parent_div = $(this).parent('.div_episode');
+                var parent_div = $(this).closest('.div_episode');
                 var div_array = parent_div.nextAll("div.div_episode").andSelf();
                 
                 var li_array = [];
