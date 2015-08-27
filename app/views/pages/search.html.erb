@@ -2,9 +2,15 @@
     <div class="relative search">
         <div class="relative search_up_frame">
 
-        <%= search_form_for @q ,:url=> search_programs_path, :class=>"navbar-form navbar-left", :role=>"search", method: :post, remote: true do |f| %>
+        <%= hidden_field_tag(:can_submit, 1) %>
+
+        <%= search_form_for(@q ,:url=> search_programs_path, :class=>"navbar-form navbar-left", :role=>"search", method: :post, remote: true, id: "search_form") do |f| %>
 
 			  	<%= f.search_field :subject_or_introduction_or_episodes_title_or_episodes_description_cont, :class=>"absolute search_bar", :id=>"navbarInput-01", :type=>"search", :placeholder=>"Search"%>
+
+          <%= hidden_field_tag(:page, 1) %>
+
+          <%= hidden_field_tag(:per_page, 20) %>
 		         	
 		      <%= submit_tag("", :class => 'absolute search_btn hover_opacity', style: "z-index: 20;")%>
 			 
@@ -56,7 +62,72 @@
 </div>    
 
 
-    
+
+
+<script>
+
+  jQuery(function() {
+
+    var searchForm = $('#search_form');
+    var submitButton = searchForm.find('input[type="submit"]');
+    submitButton.on("click", function() {
+      var nameField = searchForm.find('input[name="page"]');
+      nameField.val(1);
+    });
+
+    // if ($('.pagination').length) {
+    $(window).scroll(function() {
+
+
+      var canSubmitField = $('#can_submit');
+      var canSubmit = canSubmitField.val();
+      // var url;
+      // url = $('.pagination .next_page').attr('href');
+      console.log("window scolltop: " + $(window).scrollTop());
+      console.log("document height: " + $(document).height());
+      console.log("window height: " +$(window).height());
+      if (canSubmit && $(window).scrollTop() + $(window).height() == $(document).height()) {
+
+        
+        // $('.pagination').text("Fetching more products...");
+        $('#search_form').submit(function(e){
+          e.preventDefault(); //STOP default action
+          e.stopImmediatePropagation();
+
+          var postData = $(this).serializeArray();
+          var formURL = $(this).attr("action");
+          $.ajax(
+          {
+              url : formURL,
+              type: "POST",
+              data : postData,
+              success:function(data, textStatus, jqXHR) 
+              {
+                  //data: return data from server
+              },
+              error: function(jqXHR, textStatus, errorThrown) 
+              {
+                  //if fails      
+              }
+          });
+          // e.preventDefault(); //STOP default action
+          // e.unbind(); //unbind. to stop multiple form submit.
+
+          // Change flag to false
+          canSubmitField.val(0);
+          return false
+        });
+     
+        return $('#search_form').submit();
+      }
+    });
+    return $(window).scroll();
+    // }
+  });
+
+
+
+</script>
 
 
 

@@ -8,9 +8,9 @@
       </div>
   </div>
   <div class="u_e_cate_info">
-    <%= @episode.program.first_category.title %>
-    <%= @episode.program.second_category.title %>
-    <%= @episode.program.third_category.title %>
+    <%= @episode.program.try(:first_category).try(:title) %>
+    <%= @episode.program.try(:second_category).try(:title) %>
+    <%= @episode.program.try(:third_category).try(:title) %>
   </div>
 
 	<%= f.text_field(:title , class: "u_e_program_name", placeholder: "輸入集名稱（10字內）")%>

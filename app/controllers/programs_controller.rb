@@ -86,10 +86,16 @@ class ProgramsController < ApplicationController
   end
 
   def search
-
-    @q = Program.includes(:episodes).ransack(params[:q]) 
-    @programs = @q.result(distinct: true).includes(:episodes) #.paginate(:page => params[:page], :per_page => 5 )
+    page = params[:page].to_i
+    per_page = params[:per_page].to_i
+    offset = (page-1) * per_page
     
+    # if session[:search_page] && session[:search_page] != page
+    # session[:search_page] = page
+    @q = Program.includes(:episodes).ransack(params[:q]) 
+    @programs = @q.result(distinct: true).includes(:episodes).order(id: :desc).limit(per_page).offset(offset)  #.paginate(:page => params[:page], :per_page => 5 )
+
+
     respond_to do |format|
       format.js
     end

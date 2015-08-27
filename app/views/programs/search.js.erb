@@ -1,7 +1,10 @@
 
 var search_reault_box = $('.search_result_box');
 
-search_reault_box.html("");
+// search_reault_box.html("");
+<% if params[:page] == "1" %>
+  search_reault_box.html("");
+<% end %>
 
 <% if @programs.exists? %>
   <% @programs.each do |program| %>
@@ -27,21 +30,30 @@ search_reault_box.html("");
                           </div>\
                     </div>';
 
-
     search_reault_box.append(result);
   <% end %>
 
+  var nameField = $('#search_form input[name="page"]');
+  var currentValue = parseInt(nameField.val());
+  nameField.val( currentValue + 1);
+
+  var canSubmitField = $('#can_submit');
+  var canSubmit = canSubmitField.val(1);
+
 <% else %>
+  <% if params[:page] == "1" %>
+    var nothing = '<div class="search_item">\
+                            <div class="search_text">\
+                                <div class="search_head">\
+                                    <p>沒有找到符合的項目</p>\
+                                </div>\
+                            </div>\
+                      </div>';
 
-  var nothing = '<div class="search_item">\
-                          <div class="search_text">\
-                              <div class="search_head">\
-                                  <p>找不到符合的項目</p>\
-                              </div>\
-                          </div>\
-                    </div>';
-
-  search_reault_box.append(nothing);
+    search_reault_box.append(nothing);
+  <% else %>
+    alert("已經沒有其他符合的項目");
+  <% end %>
 <% end %>
 
 
