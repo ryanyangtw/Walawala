@@ -102,9 +102,11 @@ class ProgramsController < ApplicationController
   # end
 
   def more_episodes
-
+    page = params[:page].to_i - 1
+    per_page = params[:per_page].to_i
+    offset = 4 + (page * per_page)
     # @episodes = @program.episodes.order(id: :desc).limit(20).offset(30)
-    @episodes = @program.episodes.order(id: :asc)
+    @episodes = @program.episodes.order(id: :asc).limit(per_page).offset(offset)
     
     respond_to do |format|
       format.js

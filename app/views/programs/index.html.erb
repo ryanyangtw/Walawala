@@ -42,7 +42,7 @@
                       <div class="u_new_btn hover_opacity">上傳新一集</div>
                   <% end %>
 
-                  <div id= "program_<%= program.id %>_episodes_continer">
+                  <div id= "program_<%= program.id %>_episodes_container">
                     <!-- </a> -->
                     <% program.episodes.order(id: :asc).limit(4).each_with_index do |episode, index|%>
                     <!-- <a href="#edit_episode"> -->
@@ -61,7 +61,7 @@
                   </div>
               </div>
 
-              <%= link_to(more_episodes_program_path(program), remote: true) do %>
+              <%= link_to(more_episodes_program_path(program, page: 1, per_page: 20), remote: true, id: "program_#{program.id}_more_episodes_link") do %>
                 <div class="u_episode_unit_more hover_opacity">
                   <%= image_tag('upload/u_episode_unit_more.png', class: "poz_center") %>
                     <!-- <img class="poz_center" src="images/upload/u_episode_unit_more.png"> -->
