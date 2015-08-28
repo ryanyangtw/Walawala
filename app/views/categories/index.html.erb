@@ -12,7 +12,7 @@
 	        			<div class="cate_item c_in">
 	        		<% end %>
 	                <div class="cate_icon">
-	                	<%= image_tag(category.image.url) %>
+	                	<%= image_tag(category.image_web.try(:url)) %>
 	                	<!-- <img class="" src="images/category/icon_seleted.png"/> -->
 	                </div>
 	            <% if index == 0 %>

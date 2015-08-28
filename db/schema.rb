@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150813081807) do
+ActiveRecord::Schema.define(version: 20150828144313) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,6 +25,7 @@ ActiveRecord::Schema.define(version: 20150813081807) do
     t.integer  "programz_count", default: 0
     t.string   "image2x"
     t.string   "image3x"
+    t.string   "image_web"
   end
 
   create_table "comments", force: true do |t|

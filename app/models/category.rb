@@ -14,6 +14,7 @@ class Category < ActiveRecord::Base
   mount_uploader :image, ImageUploader
   mount_uploader :image2x, ImageUploader
   mount_uploader :image3x, ImageUploader
+  mount_uploader :image_web, ImageUploader
   
   #many to mant
   has_many :program_categories, dependent: :destroy
