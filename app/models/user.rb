@@ -78,7 +78,7 @@ class User < ActiveRecord::Base
       self.subscribed_categories.each do |c|
         p = c.programs.order('subscriberz_count desc').offset(index).first
         if p.present? && !self.subscribed_programs.exists?(p)
-          recommended_array << p.episodes.last
+          recommended_array << p.episodes.last if p.episodes.present?
         end
       end
     end
@@ -188,9 +188,16 @@ class User < ActiveRecord::Base
     self.voted_episode.exists?(episode)
   end
 
-  def already_subscribed?(program)
-    self.subscribed_programs.exists?(program)
+  def already_subscribed?(resource)
+    if resource.is_a?(Program)
+      self.subscribed_programs.exists?(resource)
+    elsif resource.is_a?(Episode)
+      self.subscribed_episodes.exists?(resource)
+    else
+      false
+    end
   end
+
 
   def ensure_authentication_token
     self.authentication_token ||= generate_authentication_token

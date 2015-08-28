@@ -354,14 +354,21 @@
             }
         );
         $.main_frame.on('click','div.h_l_follow',function(){
-            switch(true){
-                case ($(this).parent().hasClass('to_f')):
-                    $(this).parent().removeClass('to_f').addClass('cancel_f');
-                break;
-                case ($(this).parent().hasClass('cancel_f')):
-                    $(this).parent().removeClass('cancel_f').addClass('to_f');
-                break;
-            }
+            // switch(true){
+            //     case ($(this).parent().hasClass('to_f')):
+            //         $(this).parent().removeClass('to_f').addClass('cancel_f');
+            //     break;
+            //     case ($(this).parent().hasClass('cancel_f')):
+            //         $(this).parent().removeClass('cancel_f').addClass('to_f');
+            //     break;
+            // }
+
+            // if ($(this).parents().eq(1).hasClass('s_c_i_followed')){
+            //   $(this).parents().eq(1).removeClass("s_c_i_followed");}
+            // else {
+            //   $(this).parents().eq(1).addClass("s_c_i_followed");
+            // }
+        
             
         });
 
@@ -464,18 +471,22 @@
 
        $.main_frame.on('click',".h_l_share, .p_g_share, .s_c_i_share, .s_share",function(){
             //alert(fbhtml_url);
-            var html_url = "<%= root_url %>" + $(this).attr('data-href');
-            // alert(html_url); 
+            var path = $(this).attr('data-href');
+            // if(path.charAt(0) === "/"){
+            //   path = path.substring(1); 
+            // }
+            var url = "<%= root_url %>" + path;
+            var encoding_url = encodeURIComponent(url);
 
-            window.open('http://www.facebook.com/sharer/sharer.php?u='+html_url);return false;
+            window.open('http://www.facebook.com/sharer/sharer.php?u='+ encoding_url);return false;
         });
-        $.main_frame.on('click','div.s_follow',function(){
-            if($(this).parentsUntil($.Body,'.search_item').hasClass('s_followed')){
-                $(this).parentsUntil($.Body,'.search_item').removeClass('s_followed');
-            } else {
-                $(this).parentsUntil($.Body,'.search_item').addClass('s_followed');
-            }
-        });
+        // $.main_frame.on('click','div.s_follow',function(){
+        //     if($(this).parentsUntil($.Body,'.search_item').hasClass('s_c_i_followed')){
+        //         $(this).parentsUntil($.Body,'.search_item').removeClass('s_c_i_followed');
+        //     } else {
+        //         $(this).parentsUntil($.Body,'.search_item').addClass('s_c_i_followed');
+        //     }
+        // });
 
         // $.main_frame.on('click','div.s_c_i_follow',function(){
         //     if($(this).parentsUntil($.Body,'.s_c_i').hasClass('s_c_i_followed')){
@@ -494,9 +505,7 @@
         $.main_frame.on('click','div.r_p_btn',function(){
             alert('送出！！');
         });
-        $.main_frame.on('click','div.h_l_share',function(){
-            alert('分享??');
-        });
+       
         // $.main_frame.on('click','div.e_p_delete',function(){
         //     alert('確定要刪除??');
         // });

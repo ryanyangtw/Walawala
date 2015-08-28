@@ -8,9 +8,17 @@ var search_reault_box = $('.search_result_box');
 
 <% if @programs.exists? %>
   <% @programs.each do |program| %>
-    var result = '<div class="search_item">\
+    var result = '<% if user_signed_in? %>\
+                    <% if current_user.already_subscribed?(program) %>\
+                      <div class="search_item container s_c_i_followed">\
+                    <% else %>\
+                      <div class="search_item container">\
+                    <% end %>\
+                  <% else %>\
+                    <div class="search_item container">\
+                  <% end %>\
                           <div class="search_pic">\
-                            <%= image_tag(program.image_url) %>\
+                            <%= image_tag(program.image_url, class: "search_img")%>\
                           </div>\
                           <div class="search_text">\
                               <div class="search_head">\
@@ -20,9 +28,20 @@ var search_reault_box = $('.search_result_box');
                                       </span>\
                                   <% end %>\
                               </div>\
-                               <div class="s_follow hover_opacity">\
-                              </div>\
-                              <div class="s_share hover_opacity">\
+                              <% if user_signed_in? %>\
+                                <% if current_user.already_subscribed?(program) %>\
+                                  <%= link_to(cancel_subscription_program_path(program), method: :post, remote: true, class: "subscribe_program_#{program.id}") do%>\
+                                    <%= div_for(program, class: "s_follow  hover_opacity program_#{program.id}") do %>\
+                                    <% end %>\
+                                  <% end %>\
+                                <% else %>\
+                                  <%= link_to(subscribe_program_path(program), method: :post, remote: true, class: "subscribe_program_#{program.id}") do%>\
+                                    <%= div_for(program, class: "s_follow  hover_opacity program_#{program.id}") do %>\
+                                    <% end %>\
+                                  <% end %>\
+                                <% end %>\
+                              <% end %>\
+                              <div class="s_share hover_opacity" data-href="<%= path_with_hash_tag(program_path(program)) %>">\
                               </div>\
                               <p class="search_intro">\
                                 <%= program.introduction %>\

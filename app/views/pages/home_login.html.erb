@@ -8,20 +8,49 @@
           <% end %>
         </div>
 
-       
-
+ 
 
         <ul class="relative h_l_content">
             
             <% @customize_episodes.each do |episode|%>
-              <div class="h_l_item state_0 to_f div_episode">
+
+              <% if user_signed_in? %>
+                <% if current_user.already_subscribed?(episode) %>
+                  <div class="h_l_item state_0 to_f div_episode container s_c_i_followed">
+                <% else %>
+                  <div class="h_l_item state_0 to_f div_episode container">
+                <% end %>
+              <% else %>
+                <div class="h_l_item state_0 to_f div_episode container">
+              <% end %>
+              <!-- <div class="h_l_item state_0 to_f div_episode container"> -->
+
                   <div class="h_l_item_pic">
                       <%= image_tag(episode.program.image_url) %>
                       <!-- <img src="images/home_logged/demo.jpg"> -->
                   </div>
                   <div class="filter"></div>
-                  <div class='h_l_follow'></div>
-                  <div class="h_l_share"></div>
+                    
+                  <!-- <div class='h_l_follow'></div>          -->
+                  <% if user_signed_in? %>
+                    <% if current_user.already_subscribed?(episode) %>
+               
+                      <%= link_to(cancel_subscription_program_path(episode.program), method: :post, remote: true, class: "subscribe_program_#{episode.program.id}") do%>
+                    
+                        <%= div_for(episode.program, class: "h_l_follow hover_opacity program_#{episode.program.id}") do %>
+                        <% end %>
+                        <!-- <div class="s_c_i_follow hover_opacity"></div> -->
+                      <% end %>
+                    <% else %>
+                      <%= link_to(subscribe_program_path(episode.program), method: :post, remote: true, class: "subscribe_program_#{episode.program.id}") do%>
+                        <!-- <div class="s_c_i_follow hover_opacity"></div> -->
+                        <%= div_for(episode.program, class: "h_l_follow hover_opacity program_#{episode.program.id}") do %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  <% end %>
+                  
+                  <div class="h_l_share" data-href="<%= path_with_hash_tag(program_path(episode.program)) %>"></div>
                   <!-- <div class="add_play_list"> -->
                   <li class="h_l_item_btn li_episode" data-src="<%= episode.audio_url %>">
                     <!-- <a> <%#= episode.title %> </a> -->

@@ -9,7 +9,7 @@ class CategoriesController < ApplicationController
     @categories = Category.order("id ASC") 
     #@category = Category.includes(:programs).find(params[:id])
     category = Category.find(params[:id])
-    @programs = category.programs.paginate(page: params[:page], per_page: 20)
+    @programs = category.programs.paginate(page: params[:page], per_page: 15)
   end
 
   def new

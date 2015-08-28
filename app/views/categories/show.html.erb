@@ -21,13 +21,13 @@
               	<% @programs.each do |program| %>
               		<% if user_signed_in? %>
   	            		<% if current_user.already_subscribed?(program) %>
-  	            			<div class="s_c_i s_c_i_followed">
+  	            			<div class="s_c_i s_c_i_followed container">
   	            		<% else %>
-  	            			<div class="s_c_i">
+  	            			<div class="s_c_i container">
   	            		<% end %>
 
                   <% else %>
-                    <div class="s_c_i">
+                    <div class="s_c_i container">
   	            	<% end %>
 
                       <div class="s_c_i_pic">
@@ -51,28 +51,28 @@
   										
   									  <% if user_signed_in? %>
   									  	<% if current_user.already_subscribed?(program) %>
-  									  		<%= link_to(cancel_subscription_program_path(program), method: :post, remote: true, id: "subscribe_program_#{program.id}") do%>
+  									  		<%= link_to(cancel_subscription_program_path(program), method: :post, remote: true, class: "subscribe_program_#{program.id}") do%>
   											
-  									  			<%= div_for(program, class: "s_c_i_follow hover_opacity") do %>
+  									  			<%= div_for(program, class: "s_c_i_follow hover_opacity program_#{program.id}") do %>
   									  			<% end %>
   									  			<!-- <div class="s_c_i_follow hover_opacity"></div> -->
   									  		<% end %>
   									  	<% else %>
-  									  		<%= link_to(subscribe_program_path(program), method: :post, remote: true, id: "subscribe_program_#{program.id}") do%>
+  									  		<%= link_to(subscribe_program_path(program), method: :post, remote: true, class: "subscribe_program_#{program.id}") do%>
   									  			<!-- <div class="s_c_i_follow hover_opacity"></div> -->
-  									  			<%= div_for(program, class: "s_c_i_follow hover_opacity") do %>
+  									  			<%= div_for(program, class: "s_c_i_follow hover_opacity program_#{program.id}") do %>
   									  			<% end %>
   									  		<% end %>
   									  	<% end %>
                       <% end %>
 
-                      <div class="s_c_i_share hover_opacity" data-href="<%=  program_path(program) %>"></div>
+                      <div class="s_c_i_share hover_opacity" data-href="<%=  path_with_hash_tag(program_path(program)) %>"></div>
                  	</div>
-              	<% end %>
-                  
+                <% end %>
+                  <%= will_paginate(@programs, class: " pagination p_g_pagination relative") %>
               </div>
               
-          <%= will_paginate(@programs, class: "absolute pagination") %>
+          
           </div>
 
 
