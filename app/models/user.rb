@@ -129,7 +129,6 @@ class User < ActiveRecord::Base
       end
     end
 
-
     # TODO: Cache Recommendation Result
     customization
     

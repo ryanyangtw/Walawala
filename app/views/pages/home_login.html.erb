@@ -10,7 +10,7 @@
 
  
 
-        <ul class="relative h_l_content">
+        <ul class="relative h_l_content episodes_container">
             
             <% @customize_episodes.each do |episode|%>
 
@@ -63,49 +63,49 @@
           
 
         </ul>
+
+
             
-       
-
-        <!-- <ul class="relative h_l_content">
-            <div class="h_l_item state_0 to_f">
-                <div class="h_l_item_pic">
-                    <%#= image_tag('home_logged/demo.jpg') %>
-                   
-                </div>
-                <div class="filter"></div>
-                <div class='h_l_follow'></div>
-                <div class="h_l_share"></div>
-                <div class="add_play_list">
-                
-                <li class="h_l_item_btn"  data-src="https://s3.amazonaws.com/9lessonslabs/songs/Linkin+Park+-+Numb.mp3"><a>2</a></li>
-                </div>
-                <p>集名稱 episode title</p>
-                <div class="h_l_item_name">節目名稱</div>
-            </div>
-        </ul> -->
-
-       <!--  <audio id="song_1">
-            <source src="<%#= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
-        </audio>
-        <audio id="song_2">
-            <source src="<%#= audio_path('sodagreen.mp3')%>" type="audio/mp3" /> Your browser does not support the audio tag.
-        </audio> -->
-
 
         <%= render(partial: "shared/footer", locals: { footer_class: "relative footer" })%>
-        <!-- <div class="footer">
-            <span>
-                <a href="">法律條款</a>
-            </span>
-            <span>
-                <a href="">聯絡我們</a>
-            </span>
-            <span>
-                <a href="">加入我們</a>
-            </span>
-            <span>
-                <a href="">廣告合作</a>
-            </span>
-        </div> -->
     </div>
 </div>
+
+
+<div class="waterfall_pagination hide">
+  <%= hidden_field_tag(:can_submit, 1) %>
+  <%= link_to("fuck you", more_customize_episodes_path(page: 2, per_page: 20), method: :post, remote: true, class: "pagination_link") %>
+</div>
+
+
+
+<script>
+
+  jQuery(function() {
+
+    // var searchForm = $('#search_form');
+    // var submitButton = searchForm.find('input[type="submit"]');
+    // submitButton.on("click", function() {
+    //   var nameField = searchForm.find('input[name="page"]');
+    //   nameField.val(1);
+    // });
+
+    // if ($('.pagination').length) {
+    $(window).scroll(function() {
+
+
+      var canSubmitField = $('#can_submit');
+      var canSubmit = canSubmitField.val();
+      // var url;
+      // url = $('.pagination .next_page').attr('href');
+      if (canSubmit && $(window).scrollTop() + $(window).height() == $(document).height()) {
+
+        $(".pagination_link").get(0).click();;
+        // canSubmitField.val(0);
+      }
+    });
+    return $(window).scroll();
+    // }
+  });
+
+</script>

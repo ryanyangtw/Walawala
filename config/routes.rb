@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  post "episode/more_customize_episodes", to: "episodes#more_customize_episodes", as: :more_customize_episodes
   post "episode/:episode_id/tag/:tag_id/vote", to: "votes#create", as: :votes
   delete "episode/:episode_id/tag/:tag_id/cancel_vote", to: "votes#destroy", as: :cancel_vote
 

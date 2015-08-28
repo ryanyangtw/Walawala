@@ -11,7 +11,7 @@ class PagesController < ApplicationController
       # if params[:page].present? 
       #   page = params[:page]
       # end
-
+      
       @customize_episodes = current_user.customize_episodes(1, 20)
       render 'pages/home_login'
     else

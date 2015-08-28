@@ -1,7 +1,7 @@
 class EpisodesController < ApplicationController
   before_action :find_program, :only => [:new ,:create, :edit,:update, :destroy]
   before_action :set_episode, :only => [:edit, :update,:destroy]
-  before_action :authenticate_user!, only: [:vote]
+  before_action :authenticate_user!, only: [:vote, :more_recommeded_episodes]
 
   authorize_resource :episode
   authorize_resource :program
@@ -78,6 +78,15 @@ class EpisodesController < ApplicationController
       redirect_to :back
     end
 
+  end
+
+
+  def more_customize_episodes
+    
+    page = params[:page].to_i
+    per_page = params[:per_page].to_i
+    @customize_episodes = current_user.customize_episodes(page, per_page)
+    # binding.pry
   end
 
 
