@@ -80,7 +80,6 @@ class User < ActiveRecord::Base
         if p.present? && !self.subscribed_programs.exists?(p)
           last_three_episodes = p.episodes.order(id: :desc).limit(3)
           recommended_array << last_three_episodes.to_a if last_three_episodes.present?
-          binding.pry
         end
       end
     end
