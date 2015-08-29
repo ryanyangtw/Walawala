@@ -1,26 +1,28 @@
-<div class="relative reset_password">
-    
-    <div class="r_alert_frame error_messages">
+<div class="bg-green">
+    <div class="relative reset_password">
+        
+        <div class="r_alert_frame error_messages">
+        </div>
+        
+        <div class="r_p_large_frame poz_center">
+            <div class="absolute r_p_title">Pick a new Password ?</div>
+
+              <%= form_tag(password_resets_path, remote: true) do %>
+                <%= password_field_tag('password', nil, class: "absolute r_p_build_password", placeholder: "輸入新密碼") %>
+                <%= password_field_tag('password_confirmation', nil, class: "absolute r_p_check_password", placeholder: "再輸入一次新密碼") %>
+                <%= hidden_field_tag(:token, @token) %>
+
+                <%= submit_tag('Okay', class: "absolute r_p_okay hover_opacity", style: "border: none;") %>
+
+              <% end %>
+
+               <!--  <input class="absolute r_p_build_password" type="text" onfocus="if(this.value=='輸入新密碼') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='輸入新密碼';this.style.color='#999b9d';};" value="輸入新密碼">    
+                <input class="absolute r_p_check_password" type="text" onfocus="if(this.value=='再輸入一次新密碼') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='再輸入一次新密碼';this.style.color='#999b9d';};" value="再輸入一次新密碼">
+
+                <a href="#password_hint"><div class="absolute r_p_okay hover_opacity">Okay</div></a> -->
+
+        </div>
+
+        <%= render(partial: "shared/footer")%>
     </div>
-    
-    <div class="r_p_large_frame poz_center">
-        <div class="absolute r_p_title">Pick a new Password ?</div>
-
-          <%= form_tag(password_resets_path, remote: true) do %>
-            <%= password_field_tag('password', nil, class: "absolute r_p_build_password", placeholder: "輸入新密碼") %>
-            <%= password_field_tag('password_confirmation', nil, class: "absolute r_p_check_password", placeholder: "再輸入一次新密碼") %>
-            <%= hidden_field_tag(:token, @token) %>
-
-            <%= submit_tag('Okay', class: "absolute r_p_okay hover_opacity", style: "border: none;") %>
-
-          <% end %>
-
-           <!--  <input class="absolute r_p_build_password" type="text" onfocus="if(this.value=='輸入新密碼') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='輸入新密碼';this.style.color='#999b9d';};" value="輸入新密碼">    
-            <input class="absolute r_p_check_password" type="text" onfocus="if(this.value=='再輸入一次新密碼') {this.value='';this.style.color='#999b9d';}" onblur="if(this.value=='') {this.value='再輸入一次新密碼';this.style.color='#999b9d';};" value="再輸入一次新密碼">
-
-            <a href="#password_hint"><div class="absolute r_p_okay hover_opacity">Okay</div></a> -->
-
-    </div>
-
-    <%= render(partial: "shared/footer")%>
 </div>

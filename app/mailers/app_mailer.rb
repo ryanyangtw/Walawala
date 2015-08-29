@@ -9,6 +9,9 @@ class AppMailer < ActionMailer::Base
   end
 
   def send_forgot_password(user)
+    logger.debug("--------------------------------------------------")
+    logger.debug("in send_forgot_password action mailer")
+    logger.debug("--------------------------------------------------")
     @user = user
     mail to: user.email, subject: "Please reset your password"
   end

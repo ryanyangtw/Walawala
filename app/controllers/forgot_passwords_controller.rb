@@ -7,7 +7,13 @@ class ForgotPasswordsController < ApplicationController
 
     if @user
       @user.create_token!
+      logger.debug("----------------------------------")
+      logger.debug("before")
+      logger.debug("----------------------------------")
       AppMailer.delay.send_forgot_password(@user)
+      logger.debug("----------------------------------")
+      logger.debug("after")
+      logger.debug("----------------------------------")
       # redirect_to forgot_password_confirmation_path
     else
       flash.now[:error] = params[:email].blank? ? "Email cannot be blank." : "There is no user with that email in the system."
