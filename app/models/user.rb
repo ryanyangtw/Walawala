@@ -79,7 +79,8 @@ class User < ActiveRecord::Base
         p = c.programs.order('subscriberz_count desc').offset(index).first
         if p.present? && !self.subscribed_programs.exists?(p)
           last_three_episodes = p.episodes.order(id: :desc).limit(3)
-          recommended_array << last_three_episodes if last_three_episodes.present?
+          recommended_array << last_three_episodes.to_a if last_three_episodes.present?
+          binding.pry
         end
       end
     end
@@ -89,7 +90,7 @@ class User < ActiveRecord::Base
     programs_list.each do |p|
       if p.present? && !self.subscribed_programs.exists?(p)
          last_three_episodes = p.episodes.order(id: :desc).limit(3)
-         recommended_array << last_three_episodes if last_three_episodes.present?
+         recommended_array << last_three_episodes.to_a if last_three_episodes.present?
       end
     end
 
