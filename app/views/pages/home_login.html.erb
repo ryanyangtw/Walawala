@@ -13,7 +13,9 @@
         <ul class="relative h_l_content episodes_container">
             
             <% @customize_episodes.each do |episode|%>
-
+                  <% puts "--------------------------------------------"%>
+                  <% p episode.inspect%>
+                  <% puts "--------------------------------------------"%>
               <% if user_signed_in? %>
                 <% if current_user.already_subscribed?(episode) %>
                   <div class="h_l_item state_0 to_f div_episode container s_c_i_followed">
@@ -27,7 +29,6 @@
 
                   <div class="h_l_item_pic">
                       <%= image_tag(episode.program.image_url) %>
-                      <!-- <img src="images/home_logged/demo.jpg"> -->
                   </div>
                   <div class="filter"></div>
                     
