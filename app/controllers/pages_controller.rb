@@ -11,13 +11,10 @@ class PagesController < ApplicationController
       # if params[:page].present? 
       #   page = params[:page]
       # end
-      logger.debug("------------------------------------------")
-      logger.debug("before customize_episodes")
-      logger.debug("------------------------------------------")
+      # logger.debug("------------------------------------------")
+      # logger.debug("before customize_episodes")
+      # logger.debug("------------------------------------------")
       @customize_episodes = current_user.customize_episodes(1, 20)
-      logger.debug("------------------------------------------")
-      logger.debug("after customize_episodes")
-      logger.debug("------------------------------------------")
       render 'pages/home_login'
     else
       render 'pages/home_unlogin'

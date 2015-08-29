@@ -1,6 +1,6 @@
 
 var episodes_container = $('.episodes_container');
-console.log(episodes_container.get(0));
+// console.log(episodes_container.get(0));
 
 <% if @customize_episodes.any? %>
   <% @customize_episodes.each do |episode| %>
@@ -32,8 +32,9 @@ console.log(episodes_container.get(0));
                   <% end %>\
                   <div class="h_l_share" data-href="<%= path_with_hash_tag(program_path(episode.program)) %>"></div>\
                   <li class="h_l_item_btn li_episode" data-src="<%= episode.audio_url %>">\
+                    <a> <%= render_episode_title(episode) %> </a>\
                   </li>\
-                  <p><%= episode.title %></p>\
+                  <p><%= render_episode_title(episode) %></p>\
                   <div class="h_l_item_name"><%= truncate(episode.program.subject, length: 9) %></div>\
               </div>'; 
 
