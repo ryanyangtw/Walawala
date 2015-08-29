@@ -16,11 +16,11 @@ module ProgramsHelper
 
   def render_program_category_title(program, category_piority)
     if category_piority == :first
-      program.first_category.title
+      program.try(:first_category).try(:title)
     elsif category_piority == :second
-      program.second_category.title
+      program.try(:second_category).try(:title)
     elsif category_piority == :third
-      program.third_category.title
+      program.try(:third_category).try(:title)
     end
   end
 
