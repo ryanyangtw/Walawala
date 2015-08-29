@@ -78,10 +78,21 @@ class User < ActiveRecord::Base
       self.subscribed_categories.each do |c|
         p = c.programs.order('subscriberz_count desc').offset(index).first
         if p.present? && !self.subscribed_programs.exists?(p)
-          recommended_array << p.episodes.last if p.episodes.present?
+          last_three_episodes = p.episodes.order(id: :desc).limit(3)
+          recommended_array << last_three_episodes if last_three_episodes.present?
         end
       end
     end
+
+    # Recommended ten most popular program to user
+    programs_list = Program.order(subscriberz_count: :desc).limit(10)
+    programs_list.each do |p|
+      if p.present? && !self.subscribed_programs.exists?(p)
+         last_three_episodes = p.episodes.order(id: :desc).limit(3)
+         recommended_array << last_three_episodes if last_three_episodes.present?
+      end
+    end
+
 
     #We will recommend 3 special episode in every 15 episodes
     # num_of_recomended_episodes_per_page = 3
@@ -90,12 +101,13 @@ class User < ActiveRecord::Base
 
 
     # Caculate episodes offset point 
-    if((page-2)*num_of_recomended_episodes_per_page < recommended_array.size)
-      offset_point = (page-1) * (per_page - num_of_recomended_episodes_per_page)
-    else
-      offset_point = ((page-1) * per_page) - recommended_array.size
-    end
+    # if((page-2)*num_of_recomended_episodes_per_page < recommended_array.size)
+    #   offset_point = (page-1) * (per_page - num_of_recomended_episodes_per_page)
+    # else
+    #   offset_point = ((page-1) * per_page) - recommended_array.size
+    # end
 
+    offset_point = (page - 1) * (per_page - num_of_recomended_episodes_per_page)
     original_subscribed_episodes = self.subscribed_episodes.order('updated_at desc').limit(per_page-selected_recommended_episodes.size).offset(offset_point)
     original_subscribed_episodes = original_subscribed_episodes.to_a
 
@@ -117,7 +129,7 @@ class User < ActiveRecord::Base
     if customization.length < per_page
       # newest_episodes = Episode.order(id: :desc).limit(per_page - customization.length).to_a
       # customization = customization + newest_episodes
-      newest_episodes = Episode.order(id: :desc).limit(50).to_a
+      newest_episodes = Episode.order(id: :desc).limit(20).offset(offset_point).to_a
       newest_episodes.each do |episode| 
         if !customization.include?(episode)
           customization << episode

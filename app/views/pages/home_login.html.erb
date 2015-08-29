@@ -53,7 +53,7 @@
                   <div class="h_l_share" data-href="<%= path_with_hash_tag(program_path(episode.program)) %>"></div>
                   <!-- <div class="add_play_list"> -->
                   <li class="h_l_item_btn li_episode" data-src="<%= episode.audio_url %>">
-                    <!-- <a> <%#= episode.title %> </a> -->
+                    <a> <%= render_episode_title(episode) %> </a>
                   </li>
                   <!-- </div> -->
                   <p><%= episode.title %></p>

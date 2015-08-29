@@ -24,4 +24,9 @@ module ProgramsHelper
     end
   end
 
+
+  def render_program_image(program)
+    image_tag(program.image_url)
+  end
+
 end

@@ -4,7 +4,7 @@
       <div class="absolute pop_close hover_opacity"></div>
       <div class="relative float_left h_l_pop_a">
           <div class="relative h_l_pop_pic">
-              <%= image_tag('pop_box/demo.jpg') %>
+              <%= render_program_image(@program) %>
           </div>
           <p class="text_align_left"><%= render_program_owner_name(@program) %></p>
           <p class="text_align_left"><%= render_program_category_title(@program, :first) %></p>
