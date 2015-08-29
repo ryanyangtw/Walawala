@@ -5,7 +5,7 @@ module EpisodesHelper
   end
 
   def render_episode_title(episode)
-    truncate(episode.title, length: 13)
+    truncate(episode.title, length: 18)
   end
 
   def render_episode_description(episode)
