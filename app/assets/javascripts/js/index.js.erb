@@ -383,23 +383,23 @@
                 break;
             }
         });
-        $.main_frame.on('click','div.h_l_item_name',function(){
-            $.h_l_pop.fadeIn(200);
-        });
-        $.Body.find('div.pop_box_bg,div.pop_close').click(
-            function(){
-                $(this).parentsUntil($.Body,'.pop_box').fadeOut(300);
-                window.location.hash = "#users/edit";
-            }
-        );
-        $.Body.find('div.pop_box_bg,div.c_p_cancle').click(
-            function(){
-                $(this).parentsUntil($.Body,'.pop_box').fadeOut(300);
-                window.location.hash = "#users/edit";
-            }
-        );
+        // $.main_frame.on('click','div.h_l_item_name',function(){
+        //     $.h_l_pop.fadeIn(200);
+        // });
+        // $.Body.find('div.pop_box_bg,div.pop_close').on("click",
+        //     function(){
+        //         $(this).parentsUntil($.Body,'.pop_box').fadeOut(300);
+        //         window.location.hash = "#";
+        //     }
+        // );
+        // $.Body.find('div.pop_box_bg,div.c_p_cancle').click(
+        //     function(){
+        //         $(this).parentsUntil($.Body,'.pop_box').fadeOut(300);
+        //         window.location.hash = "#users/edit";
+        //     }
+        // );
 
-        $.Body.find('div.h_l_pop_more').click(
+        $.Body.find('div.h_l_pop_more').on("click",
             function(){
                 $.h_l_pop.fadeOut(300);
             }

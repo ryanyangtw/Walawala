@@ -32,6 +32,7 @@ $(document).ready(function(){
                 var li_array = [];
                 for (i = 0; i < div_array.length; i++) {
                   li_array.push($(div_array[i]).find("li.li_episode"));
+
                 }
 
                 // for (i = 0; i < li_array.length; i++) {

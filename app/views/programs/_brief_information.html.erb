@@ -1,0 +1,31 @@
+<div class="fixed full pop_box h_l_pop">
+  <div class="absolute full pop_box_bg"></div>
+  <div class="absolute h_l_pop_frame">
+      <div class="absolute pop_close hover_opacity"></div>
+      <div class="relative float_left h_l_pop_a">
+          <div class="relative h_l_pop_pic">
+              <%= image_tag('pop_box/demo.jpg') %>
+          </div>
+          <p class="text_align_left"><%= render_program_owner_name(@program) %></p>
+          <p class="text_align_left"><%= render_program_category_title(@program, :first) %></p>
+          <p class="text_align_left"><%= render_program_category_title(@program, :second) %></p>
+          <p class="text_align_left"><%= render_program_category_title(@program, :third) %></p>
+         
+      </div>
+      <div class="relative float_left h_l_pop_b">
+          <p class="text_align_left h_l_episode_name"><%= render_program_subject(@program) %></p>
+          <p class="text_align_left h_l_episode_intro"><%= render_program_introduction(@program) %></p>
+          <div class="h_l_episode_s">
+            <% @program.episodes.order(updated_at: :desc).limit(4).each do |episode|%>
+              <div class="h_l_episode_s_item">
+                <div class="h_l_episode_s_title"><%= render_episode_title(episode) %></div>
+                <div class="h_l_episode_s_date"><%= render_episode_created_at(episode)%></div>
+              </div>          
+            <% end %>
+          </div>
+      </div>
+      <%= link_to(path_with_hash_tag(program_path(@program))) do %>
+          <div class="h_l_pop_more hover_opacity"></div>
+      <% end %>
+  </div>
+</div>

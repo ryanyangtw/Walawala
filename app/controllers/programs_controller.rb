@@ -1,7 +1,7 @@
 class ProgramsController < ApplicationController
   before_action :authenticate_user!, only: [:index, :edit, :update, :destroy]
   before_action :set_program_in_from_current_user, only: [:edit, :update, :destroy, :more_episodes]
-  before_action :set_program, :only => [:subscribe, :cancel_subscription]
+  before_action :set_program, :only => [:subscribe, :cancel_subscription, :brief_information]
   before_action :find_all_categories, :only => [:new,:edit]
 
   authorize_resource
@@ -120,6 +120,7 @@ class ProgramsController < ApplicationController
   end
 
 
+  def brief_information; end
 
   #def vote  
 #

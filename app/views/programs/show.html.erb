@@ -4,7 +4,7 @@
 
     
         <div class="absolute p_g_info">
-            <div class="relative p_g_name"><%= render_program_subject(@program.subject) %></div>
+            <div class="relative p_g_name"><%= render_program_subject(@program) %></div>
             <div class="relative p_g_pic">
             	<%= image_tag(@program.image_url) %>
             	<!-- <img src="images/program/demo.jpg"> -->
@@ -69,7 +69,7 @@
             <div class=" div_episode">
           		<div class="p_g_item">
                   <div class="p_g_item_head">
-                      <div class="p_g_item_name"> <%= render_episode_title(episode.title) %> </div>
+                      <div class="p_g_item_name"> <%= render_episode_title(episode) %> </div>
                       <div class="p_g_date"> <%= render_format_time(episode.updated_at) %> </div>
                       <div class="p_g_more hover_opacity">
                       	<%= image_tag('program/p_g_more_on.png') %>
@@ -80,7 +80,7 @@
                   </div>
                   <div class="p_g_item_info">
                       <p>
-                          <%= render_episode_description(episode.description) %>
+                          <%= render_episode_description(episode) %>
                       </p>
 
                       <% if user_signed_in? %>

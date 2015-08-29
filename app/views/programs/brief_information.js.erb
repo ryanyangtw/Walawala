@@ -1,0 +1,23 @@
+
+$('.program_brief_imformation').html("<%= escape_javascript(render partial: 'brief_information') %>")
+
+
+var h_l_pop = $('div.h_l_pop');
+h_l_pop.fadeIn(200);
+
+
+
+$('div.pop_box_bg,div.pop_close,div.c_p_cancle').on("click",
+  function(){
+    $(this).parentsUntil($('body'), '.pop_box').fadeOut(300);
+    window.location.hash = "#";
+  }
+);
+
+
+
+$('div.h_l_pop_more').on("click",
+  function(){
+    $(this).parentsUntil($('body'), '.pop_box').fadeOut(300);
+  }
+);
