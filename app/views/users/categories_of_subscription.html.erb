@@ -15,13 +15,13 @@
         <div class="s_c_pic">
             <div class="s_c_black">
                 <div class="s_c_box">
-                  <%= image_tag(category.image_url, style: "width: 100%; height: 100%") %>
+                  <%= image_tag(category.image_web_url, style: "width: 100%; height: 100%") %>
                     <!-- <img class="s_c_icon" src="../images/s_c_icon-03.png"> -->
                 </div>
                 <div class="s_c_subtitle"><%= category.title %></div>
                 
                 <% if current_user.subscribed_categories.include?(category) %>
-                  <div class="s_c_check like" style="display: block;"></div>
+                  <div class="s_c_check like" style="display: inline-block;"></div>
                 <% else %>
                   <div class="s_c_check"></div>
                 <% end %>
