@@ -8,6 +8,8 @@ module API
 
 
         desc "Get Guest Account"       
+        params do
+        end
         get '/guest_account' do
         end
 
