@@ -102,6 +102,18 @@ module API
             end
           end
         end
+
+
+        desc "Get Guest Account"        
+        get 'guest_account' do
+          @user = User.find_by(email: "guest@bab.bo")
+          if(@user)
+            @user.renew_data!
+            render rabl: "#{@@default_user_path}/show"
+          else
+            error!(@user.errors.full_messages)
+          end
+        end
     
       end   #resources user
 

@@ -883,7 +883,7 @@
 })(jQuery);
     
 $(function(){
-    $.Body =$('body');  
+    $.Body =$('body');       // $.Body是jquery全域變數，其實也可以用javascript全域變數，但用$.比較清楚
     $.Window = $(window);
     $.loading = $.Body.find('div.loading');
     $.main_frame = $.Body.find('div.main_frame');
