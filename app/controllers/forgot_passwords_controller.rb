@@ -1,4 +1,3 @@
-require 'workers/email_worker'
 class ForgotPasswordsController < ApplicationController
   def new
   end

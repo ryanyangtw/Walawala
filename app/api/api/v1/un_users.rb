@@ -8,7 +8,7 @@ module API
 
 
         desc "Get Guest Account"       
-        post '/guest_account' do
+        get '/guest_account' do
           @user = User.find_by(email: "guest@bab.bo")
           if(@user)
             @user.renew_data!
