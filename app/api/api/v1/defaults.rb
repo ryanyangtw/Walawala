@@ -23,9 +23,9 @@ module API
             raise e
           else
           #puts params
-          #Raven.capture_exception(e)
+          Raven.capture_exception(e)
           
-          error_response(message: ["系統發生錯誤..XD"] , status: 500)
+          error_response(message: ["系統發生錯誤，請稍後再試，謝謝：）"] , status: 500)
           end
         end
 
