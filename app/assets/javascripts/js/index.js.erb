@@ -32,7 +32,7 @@
             };
         }
     }
-    $.fn.ResizeInIt = function () {
+    $.fn.ResizeInIt = function () {      // $.fn 就是創造prototype的意思，每個jquery物件都有次方法可用
         var b_h = 0;
         function resizing () {
             b_h = $.Body.height();
@@ -571,7 +571,7 @@
 
 
 
-        function showMsg(msg)
+        function showMsg(msg)   // 只能在PlayerInit裡面使用
         {
             var ww = $(document).width(),
                 wh = $(document).height();
@@ -880,7 +880,7 @@
         property = null;
         _self = null;      
     }
-})(jQuery);
+})(jQuery);  //立即執行
     
 $(function(){
     $.Body =$('body');       // $.Body是jquery全域變數，其實也可以用javascript全域變數，但用$.比較清楚
