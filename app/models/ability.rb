@@ -6,9 +6,11 @@ class Ability
     if user.blank?
       can :read, :all
       can :search, :all
+      # basic_read_only
     elsif user.role?(:regular)
       #can :read, :all
       #can :manage, Program
+      regular_read_only
       can :manage, Program, user_id: user.id
       can :manage, Episode, program: { user_id: user.id} #check authorization thorough association
       #can :manage, Episode
@@ -16,7 +18,6 @@ class Ability
     elsif user.role?(:admin)
       can :manage, :all
     end
-
 
 
 
@@ -68,4 +69,21 @@ class Ability
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/wiki/Defining-Abilities
   end
+
+
+
+  protected
+
+  def regular_read_only
+    can :read, :all
+    can :search, :all
+
+    can :subscribe, Program
+    can :cancel_subscription, Program
+    can :more_episodes, Program
+    can :brief_information, Program
+    can :vote, Episode
+    can :more_customize_episodes, Episode
+  end
+
 end

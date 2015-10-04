@@ -3,6 +3,7 @@
         <div class="e_e_frame poz_center">
             <p class="e_e_title">修改此集</p>
             <div class="e_e_box">
+
                 <div class="e_e_delete btn_hover">
                     <%= image_tag('edit_episode/e_e_delete_off.png', class: "off") %>
                     <%= image_tag('edit_episode/e_e_delete_on.png', class: "on") %>
@@ -14,6 +15,7 @@
                       </div>
                     <% end %>
                 </div>
+          
 
                 <%= form_for(@episode , :html=> {:multipart => true}, :url => program_episode_path(@program , @episode)) do |f|%>
 
@@ -25,10 +27,11 @@
                       </div>
                   </div>
 
+
                   <div class="e_e_cate_info">
-                    <%= @program.first_category.title %>
-                    <%= @program.second_category.title %>
-                    <%= @program.third_category.title %>
+                    <%= @program.first_category.try(:title) %>
+                    <%= @program.second_category.try(:title) %>
+                    <%= @program.third_category.try(:title) %>
                   </div>
 
                   <%= f.text_field(:title , class: "u_e_program_name", placeholder: "輸入集名稱（10字內）")%>
@@ -69,7 +72,6 @@
                   </div>
 
                 <% end %>
-
 
             </div>
         </div>

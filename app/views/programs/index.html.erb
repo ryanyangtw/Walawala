@@ -51,7 +51,7 @@
                             <div class="u_episode_unit_">
                                 <%= image_tag('upload/u_episode_unit.png') %> <%= render_episode_title_with_index(index, episode) %>
                                 <!-- <img src="images/upload/u_episode_unit.png"/> 1.集名稱 episode title -->
-                                <div class="u_episode_unit_time"><%= render_format_time(program.created_at) %></div>
+                                <div class="u_episode_unit_time"><%= render_format_time(episode.updated_at) %></div>
                                 <div class="u_episode_word">修改此集</div>
                             </div>
                         </div>
