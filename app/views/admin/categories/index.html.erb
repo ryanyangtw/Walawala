@@ -32,7 +32,7 @@
 						<td><%= image_tag(category.image3x.url(:small), style: "width:  50px;")%> </td>
 						<td><%= image_tag(category.image_web.url(:small), style: "width:  50px;")%> </td>
 						<td><%= link_to "編輯", edit_admin_category_path(category) ,:class=>"btn btn-info"%></td>
-						<td><%= link_to "刪除", admin_category_path(category) ,:method=>:delete, :class=>"btn btn-danger" %></td>
+						<td><%= link_to "刪除", admin_category_path(category) ,:method=>:delete, :class=>"btn btn-danger", data: {confirm: "Are you sure?"} %></td>
 					</tr>
 					<%end%>
 				</tbody>

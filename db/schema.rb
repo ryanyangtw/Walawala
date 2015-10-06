@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150828144313) do
+ActiveRecord::Schema.define(version: 20151006070548) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -46,6 +46,7 @@ ActiveRecord::Schema.define(version: 20150828144313) do
     t.integer  "length_of_audio",            default: 0
     t.integer  "number_of_unique_listeners", default: 0
     t.integer  "number_of_total_listeners",  default: 0
+    t.boolean  "archived",                   default: false, null: false
   end
 
   create_table "feedback_subjects", force: true do |t|
@@ -79,6 +80,7 @@ ActiveRecord::Schema.define(version: 20150828144313) do
     t.datetime "updated_at"
     t.integer  "subscriberz_count", default: 0
     t.boolean  "recommendable",     default: false
+    t.boolean  "archived",          default: false, null: false
   end
 
   create_table "tags", force: true do |t|

@@ -13,6 +13,8 @@
 
 class Program < ActiveRecord::Base
 
+  default_scope { where(archived: false) }
+
   mount_uploader :image, ImageUploader
 
 
@@ -118,6 +120,16 @@ class Program < ActiveRecord::Base
     set_category_with_piority(category_id, 3)  
   end
 
+
+  def archive
+    self.archived = true
+
+    episodes.each do |episode|
+      episode.archive
+    end
+
+    self.save
+  end
 
 
 

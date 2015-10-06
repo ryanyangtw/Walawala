@@ -59,7 +59,7 @@ class ProgramsController < ApplicationController
   end
 
   def destroy
-    if(@program.destroy)
+    if(@program.archive)
       redirect_to path_with_hash_tag(programs_path)
       # redirect_to root_path
     end

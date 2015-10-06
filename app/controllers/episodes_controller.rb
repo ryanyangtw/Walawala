@@ -57,7 +57,7 @@ class EpisodesController < ApplicationController
 
   def destroy
 
-    if(@episode.destroy)
+    if(@episode.archive)
       redirect_to path_with_hash_tag(programs_path)
       # redirect_to program_path(@program)
     end

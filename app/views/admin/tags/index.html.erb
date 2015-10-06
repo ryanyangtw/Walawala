@@ -22,7 +22,7 @@
 						<td><%=link_to tag.title, "#" %></td>
 			
 						<td><%= link_to "編輯", edit_admin_tag_path(tag) ,:class=>"btn btn-info"%></td>
-						<td><%= link_to "刪除", admin_tag_path(tag) ,:method=>:delete, :class=>"btn btn-danger" %></td>
+						<td><%= link_to "刪除", admin_tag_path(tag) ,:method=>:delete, :class=>"btn btn-danger", data: {confirm: "Are you sure?"} %></td>
 					</tr>
 					<%end%>
 				</tbody>

@@ -51,12 +51,14 @@ class Admin::EpisodesController < AdminController
 
 
   def edit
+    set_referer
   end
 
   def update
     if(@episode.update(episode_params))
       flash[:notice] = "success update episode"
-      redirect_to admin_episodes_path
+      redirect_to get_referer
+      # redirect_to admin_episodes_path
     else
       #render :edit
     end
@@ -66,8 +68,16 @@ class Admin::EpisodesController < AdminController
   def destroy
     if(@episode.destroy)
       flash[:notice] = "success delete episode"
-      redirect_to admin_episodes_path
+      # redirect_to admin_episodes_path
+      redirect_to :back
       #redirect_to program_path(@program)
+    end
+  end
+
+  def destroy_multiple
+
+    if(Episode.destroy_all(id: params[:episode_ids]))
+      redirect_to :back
     end
   end
 

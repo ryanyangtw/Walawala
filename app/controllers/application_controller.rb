@@ -15,6 +15,14 @@ class ApplicationController < ActionController::Base
   end
 
 
+  def set_referer
+    session[:return_to] ||= request.referer
+  end
+
+  def get_referer
+    session.delete(:return_to)
+  end
+
   protected
 
   def configure_permitted_parameters

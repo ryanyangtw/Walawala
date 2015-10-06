@@ -13,6 +13,8 @@
 
 class Episode < ActiveRecord::Base
 
+  default_scope { where(archived: false) }
+
   mount_uploader :audio, AudioUploader
 
   belongs_to :program, touch: true
@@ -92,7 +94,10 @@ class Episode < ActiveRecord::Base
   #   end
   # end
 
-
+  def archive
+    self.archived = true
+    self.save
+  end
 
   private
   def calculate_length_of_audio

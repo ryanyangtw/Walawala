@@ -63,8 +63,15 @@ Rails.application.routes.draw do
         post :recommend
         post :cancel_recommendation
       end
+      collection do
+        delete :destroy_multiple
+      end
     end
-    resources :episodes #,:only=>[:index, :destroy]
+    resources :episodes do #,:only=>[:index, :destroy]
+      collection do
+        delete :destroy_multiple
+      end
+    end 
     resources :categories
     resources :feedback_subjects
     resources :tags

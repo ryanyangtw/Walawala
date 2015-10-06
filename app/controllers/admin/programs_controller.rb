@@ -43,6 +43,7 @@ class Admin::ProgramsController < AdminController
   end
 
   def edit
+    set_referer
     #binding.pry
   end
 
@@ -53,7 +54,8 @@ class Admin::ProgramsController < AdminController
       @program.category_ids = params[:program][:categories_ids]
 
       flash[:notice] = "Success to update program"
-      redirect_to admin_program_path(@program)
+      # redirect_to admin_program_path(@program)
+      redirect_to get_referer
     else
       flash[:notice] = "Something wrong"
       render :edit
@@ -64,10 +66,25 @@ class Admin::ProgramsController < AdminController
   def destroy
     if(@program.destroy)
       flash[:notice] = "Success to delete program"
-      redirect_to admin_root_path
+      redirect_to :back
+      # redirect_to admin_root_path
     end
+  end
+
+
+  def destroy_multiple
+    # Program.find
+
+    if(Program.destroy_all(id: params[:program_ids]))
+      redirect_to :back
+    end
+    # programs = Program.find(program_ids)
+    # programs.each do |program|
+    #   program.archived
+    # end
 
   end
+
 
   def recommend 
     @program.set_to_recommendation

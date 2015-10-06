@@ -1,7 +1,23 @@
 <span style="font-size: 32px;">節目管理頁面</span> <span>(依照更新日期排序)</span> <span>(藍色表示今天更新過的項目)</span>
 <div class="pull-right" style="padding-bottom: 20px;">
   <%= link_to("新增節目", new_admin_program_path, :class => "btn btn-info btn-lg") %>
+
+
+  <%#= form_tag(destroy_multiple_admin_programs_path, method: :delete, data: {confirm: "Are you sure?"}) do %>   
+
+    <%#= check_box_tag "program_ids[]", "39"%>
+    <%# @programs.each do |program| %>
+      <%#= hidden_field_tag("program_ids[]", program.id) %>
+    <%# end %>
+
+    <%#= submit_tag("Delete selected", class: "btn btn-danger btn-lg") %>
+  <%#end%>
+
+
 </div>
+
+
+
 
 <hr>
 
@@ -11,6 +27,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th></th>
           <th>#</th>
           <th>更新日期</th>
           <th>節目名稱</th>
@@ -23,49 +40,58 @@
         </tr>
       </thead>
       <tbody>
-        <% @programs.each do |program| %>
-        <%if program.updated_today? %>
-          <tr class="info">
-        <%else%>
-          <tr>
-        <%end%>
-          <td> 
-            <%= program.id %>
-          </td>
-    
-          <td>
-            <%= program.updated_at.to_formatted_s(:short) %>
-          </td>
-          <td>
-            <h3><%= link_to( program.subject , admin_program_path(program))%></h3>   
-          </td>
-          <td>   
-          <%=link_to admin_program_path(program) do%>     
-              <%= image_tag(program.image.url(:small)) %>
-          <%end%>    
-          </td>
-          <td>
-          <%= program.introduction %>
-          </td>
-          
-          <td>
-            <%= program.subscribers.size %>
-          </td>
-          <td><%= link_to('編輯', edit_admin_program_path(program), :class=>'btn btn-info btn-sm')%></td>
-          <td><%= link_to('刪除', admin_program_path(program), :class=>'btn btn-danger btn-sm', method: :delete)%></td>
 
-          <td> 
-          <%if program.recommendable %>
-            <%= link_to('取消推薦', cancel_recommendation_admin_program_path(program) , :class => 'btn btn-warning btn-sm', method: :post) %>
-          <% else %>
-            <%= link_to('推薦',recommend_admin_program_path(program)  , :class => 'btn btn-primary btn-sm', method: :post) %>
+        <%= form_tag(destroy_multiple_admin_programs_path, method: :delete, data: {confirm: "Are you sure?"}) do %> 
+
+          <% @programs.each do |program| %>
+          <%if program.updated_today? %>
+            <tr class="info">
+          <%else%>
+            <tr>
           <%end%>
 
-          </td>
-    
-        </tr>
+            <td> 
+              <%= check_box_tag("program_ids[]", program.id) %>
+            </td>
+            <td> 
+              <%= program.id %>
+            </td>
+      
+            <td>
+              <%= program.updated_at.to_formatted_s(:short) %>
+            </td>
+            <td>
+              <h3><%= link_to( program.subject , admin_program_path(program))%></h3>   
+            </td>
+            <td>   
+            <%=link_to admin_program_path(program) do%>     
+                <%= image_tag(program.image.url(:small)) %>
+            <%end%>    
+            </td>
+            <td>
+            <%= program.introduction %>
+            </td>
+            
+            <td>
+              <%= program.subscribers.size %>
+            </td>
+            <td><%= link_to('編輯', edit_admin_program_path(program), :class=>'btn btn-info btn-sm')%></td>
+            <td><%= link_to('刪除', admin_program_path(program), :class=>'btn btn-danger btn-sm', method: :delete, data: {confirm: "Are you sure?"})%></td>
+
+            <td> 
+            <%if program.recommendable %>
+              <%= link_to('取消推薦', cancel_recommendation_admin_program_path(program) , :class => 'btn btn-warning btn-sm', method: :post) %>
+            <% else %>
+              <%= link_to('推薦',recommend_admin_program_path(program)  , :class => 'btn btn-primary btn-sm', method: :post) %>
+            <%end%>
+
+            </td>
+      
+          </tr>
+          <% end %>
+
+          <%= submit_tag("刪除所有選取的項目", class: "btn btn-danger btn-lg") %>
         <% end %>
-    
       </tbody>
     </table>
   </div>

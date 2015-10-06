@@ -6,6 +6,7 @@
     <table class="table table-striped">
       <thead>
         <tr>
+          <th></th>
           <th>#</th>
           <th>更新日期 </th>
           <th>隸屬節目</th>
@@ -24,13 +25,17 @@
       </thead>
   
       <tbody>
-
+        <%= form_tag(destroy_multiple_admin_episodes_path, method: :delete, data: {confirm: "Are you sure?"}) do %> 
           <%@episodes.each do |episode|%>
             <%if episode.updated_today?%>
               <tr class="info">
             <% else %>
               <tr>
             <% end %>
+
+              <td> 
+                <%= check_box_tag("episode_ids[]", episode.id) %>
+              </td>
   
               <td><%= episode.id %></td>
               <td><%= episode.updated_at.to_formatted_s(:short) %> </td>
@@ -54,13 +59,15 @@
 
               <td><%= link_to('編輯', edit_admin_episode_path(episode), :class=>'btn btn-info btn-lg')%></td>
               
-              <td><%= link_to('刪除', admin_episode_path(episode), :method => :delete,:class=>'btn btn-danger btn-lg')%></td>
+              <td><%= link_to('刪除', admin_episode_path(episode), :method => :delete,:class=>'btn btn-danger btn-lg', data: {confirm: "Are you sure?"})%></td>
 
  
             </tr>
           
-          <%end%> 
+          <% end %> 
 
+          <%= submit_tag("刪除所有選取的項目", class: "btn btn-danger btn-lg") %>
+        <% end %>
       </tbody>
 
 
