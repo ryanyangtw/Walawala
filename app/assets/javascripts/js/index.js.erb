@@ -373,16 +373,38 @@
         });
 
 
-        $.main_frame.on('click','div.h_l_item_btn',function(){
-            switch(true){
-                case ($(this).parent().hasClass('state_0')):
-                    $(this).parent().removeClass('state_0').addClass('state_1');
-                break;
-                case ($(this).parent().hasClass('state_1')):
-                    $(this).parent().removeClass('state_1').addClass('state_0');
-                break;
+        $.main_frame.on('click','.h_l_item_btn',function(){
+         if ($(this).hasClass('state_0'))
+                    {
+                    $(this).removeClass('state_0').addClass('state_1');}
+       
+                else if ($(this).hasClass('state_1')){
+                    $(this).removeClass('state_1').addClass('state_0');
+                }
+
             }
-        });
+        );
+
+        $.main_frame.on('click','.songPlay_btn',function(){
+                $(this).hide();
+                $(this).next(".songPause").show();
+                $("body").find(".play").addClass("playAudio");
+                });
+        $.main_frame.on('click','.songPause',function(){
+                $(this).hide();
+                $.main_frame.find(".songPlay_btn").show();
+                $("body").find(".play").addClass("pauseAudio");
+                });
+
+        // $.main_frame.on('mouseleave ','.h_l_item_btn',function(){
+        //     if ($(this).hasClass("state_1")){
+        //     $(this).addClass("state_2");}
+        //     });
+
+        // $.main_frame.on('mouseenter ','.h_l_item_btn',function(){
+        //     if ($(this).hasClass("state_2")){
+        //     $(this).removeClass("state_2").addClass("state_1");}
+        //     });
         // $.main_frame.on('click','div.h_l_item_name',function(){
         //     $.h_l_pop.fadeIn(200);
         // });

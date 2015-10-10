@@ -3,7 +3,12 @@ $(document).ready(function(){
                 $('.volumeControl').fadeToggle(100);
             });
 
-
+           $("body").find(".songPlay_btn").on("click", function() {
+        e._audio.paused ? e.play() : e.pause()
+      });
+      $("body").find(".songPause").on("click", function() {
+        e._audio.paused ? e.play() : e.pause()
+      });
            $(".main_frame").on('click','.songPlay_btn',function(){
                 if ($(this).parents('.p_g_player_box').find('.updateProgress').hasClass('hide')){
                 $(this).parents('.main_frame').find('.updateProgress').addClass('hide')    
