@@ -29,6 +29,7 @@ class EpisodesController < ApplicationController
       # redirect_to program_path(@program)
       #@episode.update_program
     else
+      flash[:error] = @episode.errors.full_messages
       render :new
     end
 
@@ -50,6 +51,7 @@ class EpisodesController < ApplicationController
       redirect_to path_with_hash_tag(programs_path)
       # redirect_to program_path(@program)
     else
+      flash[:error] = @episode.errors.full_messages
       render :edit
     end
 

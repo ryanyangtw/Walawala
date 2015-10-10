@@ -35,6 +35,7 @@ class ProgramsController < ApplicationController
       redirect_to path_with_hash_tag(new_program_episode_path(@program))
     else
       # Todo: error messages
+      flash[:error] = @program.errors.full_messages
       redirect_to path_with_hash_tag(new_program_path)
       # render :back
     end
@@ -52,7 +53,8 @@ class ProgramsController < ApplicationController
       # @program.category_ids = params[:program][:categories_ids]
       # redirect_to program_path(@program)
     else
-      redirect_to path_with_hash_tag(edit_program_path(@ptrgram))
+      flash[:error] = @program.errors.full_messages
+      redirect_to path_with_hash_tag(edit_program_path(@program))
       # render :edit
     end
 

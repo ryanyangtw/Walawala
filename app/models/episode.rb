@@ -31,6 +31,7 @@ class Episode < ActiveRecord::Base
 
 
   validates :audio, presence: true , on: [:create]
+  validates :description, length: { maximum: 100 }
 
   before_create :calculate_length_of_audio
 

@@ -36,7 +36,9 @@ class Program < ActiveRecord::Base
   #has_many :votes, dependent: :destroy
   #has_many :voter, through: :votes, source: :user
 
-  validates :subject, presence: true
+  # validates :subject, presence: true
+  validates_presence_of :subject, :image
+  validates :introduction, length: { maximum: 100 }
 
 
   scope :sort_by_update_time, -> { order("updated_at desc") }
@@ -85,10 +87,12 @@ class Program < ActiveRecord::Base
   end
 
   def set_to_recommendation
+    self.categories << Category.first # Add program to 精選
     self.update_column(:recommendable, true)
   end
 
   def cancel_from_recommendation
+    self.categories.destroy(Category.first)
     self.update_column(:recommendable ,false)
   end
 
