@@ -1,8 +1,3 @@
-<meta property="og:url" content="<%= program_url(@program) %>"/>
-<meta property="og:title" content= "華人最大 廣播專屬樂聲平台" />
-<meta property="og:description" content= "開始您的音樂之旅" />
-<meta property="og:image" content= "<%= image_url(@program.image_url) %>" />
-
 
 
 <div class="bg-tiff">
@@ -211,7 +206,19 @@
         <%= render(partial: "shared/footer") %>
 </div>
 
-		<%= javascript_include_tag 'pagination' %>
+		
+  <%# content_for :js_for_specific_page do%>
+  <%= javascript_include_tag 'pagination' %>
+  <%#= javascript_include_tag 'programs' %>
+  <%# end %>
+  <script>
+    $(document).ready(function(){
+      $('meta[property=og\\:url]').attr('content', "<%= program_url(@program) %>");
+      $('meta[property=og\\:title]').attr('content', "123華人最大 廣播專屬樂聲平台");
+      $('meta[property=og\\:description]').attr('content', "123開始您的音樂之旅");
+      $('meta[property=og\\:image]').attr('content', "<%= image_url(@program.image_url) %>");
+    });
+  </script>
 
 
 
