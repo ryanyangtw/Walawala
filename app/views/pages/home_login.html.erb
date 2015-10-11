@@ -99,11 +99,11 @@
       
       var canSubmitField = $('#can_submit');
       var canSubmit = canSubmitField.val();
-      alert("scroll");
+      
       // var url;
       // url = $('.pagination .next_page').attr('href');
-      if (canSubmit && $(window).scrollTop() + $(window).height() == $(document).height()) {
-        alert("success");
+      if (canSubmit && $(window).scrollTop() + $(window).height() + 1 == $(document).height()) {
+        // alert("success");
         $(".pagination_link").get(0).click();;
         // canSubmitField.val(0);
       }
