@@ -67,7 +67,7 @@
 
         <ul class="relative p_g_content">
         	<% @episodes.each do |episode| %>
-            <div class=" div_episode">
+            <div class="div_episode">
           		<div class="p_g_item">
                   <div class="p_g_item_head">
                       <div class="p_g_item_name"> <%= render_episode_title(episode) %> </div>
@@ -86,30 +86,38 @@
 
                       <% if user_signed_in? %>
                         <div class="p_g_tag"> 
+
+
                         	<% Tag.order(id: :asc).each do |tag| %>
+
+                          
                             <span class="p_g_tag_item hover_opacity tag">
     	                        
-                              
        
                                 <% if !current_user.has_voted?(tag, episode)%>
+
+                                    
                                   <div  id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
+
+
                                     <%= link_to(votes_path(episode, tag), method: :post, remote: true) do%>
-                                      <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox">
+                                      <input type="checkbox" id='<%= episode.id.to_i * 10 + tag.id.to_i %>'  class="p_g_tag_checkbox">
                                     <% end %>
                                   </div>
                                 <% else %>
 
+                                    
                                     <div class="p_g_checked" id='<%= "episode_#{episode.id}_tag_#{tag.id}_container" %>'>
+
+
                                       <%= link_to(cancel_vote_path(episode, tag), method: :delete, remote: true) do %>
-                                        <input type="checkbox" id="<%= tag.id %>" class="p_g_tag_checkbox" checked>
+                                        <input type="checkbox" id='<%= episode.id.to_i * 10 + tag.id.to_i %>' class="p_g_tag_checkbox" checked>
                                       <% end %>
 
                                     </div>
                                 <% end %>
                              
-
-
-    	                        <label for="<%= tag.id %>" class="p_g_lable_box ">
+    	                        <label for="<%= episode.id.to_i * 10 + tag.id.to_i %>" class="p_g_lable_box ">
     	                        	<%= image_tag('program/tag_bg.png') %>
     	                        	<%= image_tag('program/tag_click.png', class: 'p_g_tag_click') %>
     	                        	<%= tag.title%>
@@ -212,12 +220,22 @@
   <%#= javascript_include_tag 'programs' %>
   <%# end %>
   <script>
-    $(document).ready(function(){
-      $('meta[property=og\\:url]').attr('content', "<%= program_url(@program) %>");
-      $('meta[property=og\\:title]').attr('content', "123華人最大 廣播專屬樂聲平台");
-      $('meta[property=og\\:description]').attr('content', "123開始您的音樂之旅");
-      $('meta[property=og\\:image]').attr('content', "<%= image_url(@program.image_url) %>");
-    });
+    // $(document).ready(function(){
+
+    //   // $('.p_g_tag_item.hover_opacity.tag').on("click", function() {
+    //   //   alert("vote");
+    //   //   console.log(this);
+    //   //   // console.log($(this).child("a").get(0));
+    //   //   // $(this).siblings(".link").get(0).click();
+    //   // });
+
+    //   // $('meta[property=og\\:url]').attr('content', "<%#= program_url(@program) %>");
+    //   // $('meta[property=og\\:title]').attr('content', "123華人最大 廣播專屬樂聲平台");
+    //   // $('meta[property=og\\:description]').attr('content', "123開始您的音樂之旅");
+    //   // $('meta[property=og\\:image]').attr('content', "<%#= image_url(@program.image_url) %>");
+    
+
+    // });
   </script>
 
 

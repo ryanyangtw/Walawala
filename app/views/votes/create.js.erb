@@ -1,5 +1,8 @@
 // alert('create');
-var cancel_vote_link =  '<%= link_to(cancel_vote_path(@episode, @tag), method: :delete, remote: true) do %><input type="checkbox" id="<%= @tag.id %>" class="p_g_tag_checkbox"><% end %>'
+var cancel_vote_link =  '<%= link_to(cancel_vote_path(@episode, @tag), method: :delete, remote: true) do %>\
+                          <input type="checkbox" id="<%= @episode.id.to_i * 10 + @tag.id.to_i %>" class="p_g_tag_checkbox">\
+                        <% end %>'
+
 $('#episode_<%= @episode.id %>_tag_<%= @tag.id %>_container').html(cancel_vote_link);
 
 $('#episode_<%= @episode.id %>_tag_<%= @tag.id %>_container').addClass('p_g_checked');

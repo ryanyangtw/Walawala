@@ -4,14 +4,15 @@ var episodes_container = $('.episodes_container');
 
 <% if @customize_episodes.any? %>
   <% @customize_episodes.each do |episode| %>
+
     var customize_episode = '<% if user_signed_in? %>\
                 <% if current_user.already_subscribed?(episode) %>\
-                  <div class="h_l_item state_0 to_f div_episode container s_c_i_followed">\
+                  <div class="h_l_item  to_f div_episode container s_c_i_followed">\
                 <% else %>\
-                  <div class="h_l_item state_0 to_f div_episode container">\
+                 <div class="h_l_item  to_f div_episode container">\
                 <% end %>\
               <% else %>\
-                <div class="h_l_item state_0 to_f div_episode container">\
+                <div class="h_l_item  to_f div_episode container">\
               <% end %>\
                   <div class="h_l_item_pic">\
                       <%= image_tag(episode.program.image_url) %>\
@@ -31,11 +32,13 @@ var episodes_container = $('.episodes_container');
                     <% end %>\
                   <% end %>\
                   <div class="h_l_share" data-href="<%= path_with_hash_tag(program_path(episode.program)) %>"></div>\
-                  <li class="h_l_item_btn li_episode" data-src="<%= episode.audio_url %>">\
+                  <li class="state_0 h_l_item_btn li_episode" data-src="<%= episode.audio_url %>" data-attr="playPauseAudio" >\
                     <a> <%= render_episode_title(episode) %> </a>\
                   </li>\
                   <p><%= render_episode_title(episode) %></p>\
-                  <div class="h_l_item_name"><%= truncate(episode.program.subject, length: 9) %></div>\
+                  <%= link_to(brief_information_program_path(episode.program), remote: true) do %>\
+                    <div class="h_l_item_name"><%= truncate(episode.program.subject, length: 9) %></div>\
+                  <% end %>\
               </div>'; 
 
     episodes_container.append(customize_episode);
@@ -45,7 +48,8 @@ var episodes_container = $('.episodes_container');
   var canSubmit = canSubmitField.val(1);
 
   $('.pagination_link').attr("href", "<%= more_customize_episodes_path(page: params[:page].to_i + 1, per_page: 20) %>");
-
+  
+  <%# binding.pry %>
 <% else %>
    alert("已經沒有其他的推薦");
 <% end %>

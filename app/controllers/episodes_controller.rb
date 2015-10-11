@@ -84,7 +84,7 @@ class EpisodesController < ApplicationController
 
 
   def more_customize_episodes
-    
+
     page = params[:page].to_i
     per_page = params[:per_page].to_i
     @customize_episodes = current_user.customize_episodes(page, per_page)
