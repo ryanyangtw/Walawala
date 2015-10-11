@@ -99,12 +99,14 @@
       
       var canSubmitField = $('#can_submit');
       var canSubmit = canSubmitField.val();
+      var offset = 1
 
       // var url;
       // url = $('.pagination .next_page').attr('href');
-      if (canSubmit && $(window).scrollTop() + $(window).height() + 1 > $(document).height()) {
-        alert("success");
-        $(".pagination_link").get(0).click();;
+      if (canSubmit && $(window).scrollTop() + $(window).height() + offset > $(document).height()) {
+        // alert("success");
+        $(".pagination_link").get(0).click();
+        offset = offset + 1;
         // canSubmitField.val(0);
       }
     });
