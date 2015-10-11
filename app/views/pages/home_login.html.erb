@@ -96,9 +96,10 @@
     // if ($('.pagination').length) {
     $(window).scroll(function() {
 
-      alert("fuck");
+      
       var canSubmitField = $('#can_submit');
       var canSubmit = canSubmitField.val();
+      alert("scroll");
       // var url;
       // url = $('.pagination .next_page').attr('href');
       if (canSubmit && $(window).scrollTop() + $(window).height() == $(document).height()) {
