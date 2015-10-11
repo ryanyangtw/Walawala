@@ -15,6 +15,7 @@ Rails.application.routes.draw do
       post :cancel_subscription
       get :more_episodes
       get :brief_information
+      get :share
     end
 
     collection do

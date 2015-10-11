@@ -1,0 +1,12 @@
+<% content_for :fb_meta_tag do%>
+  <meta property="og:url" content="<%= share_program_url(@program) %>"/>
+  <meta property="og:title" content= "華人最大 廣播專屬樂聲平台" />
+  <meta property="og:description" content= "開始您的音樂之旅" />
+  <meta property="og:image" content= "<%= image_url(@program.image_url) %>" />
+<% end %>
+
+<h1> Loading.......</h1>
+
+<script>
+  window.location.replace('<%= url_with_hash_tag(program_path(@program)) %>');
+</script>
