@@ -96,13 +96,13 @@
     // if ($('.pagination').length) {
     $(window).scroll(function() {
 
-
+      alert("fuck");
       var canSubmitField = $('#can_submit');
       var canSubmit = canSubmitField.val();
       // var url;
       // url = $('.pagination .next_page').attr('href');
       if (canSubmit && $(window).scrollTop() + $(window).height() == $(document).height()) {
-
+        alert("success");
         $(".pagination_link").get(0).click();;
         // canSubmitField.val(0);
       }
