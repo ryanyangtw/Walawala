@@ -52,7 +52,8 @@ class Program < ActiveRecord::Base
     per_page = 15 if per_page.blank?
     
     programs_list = Program.recomendable.sort_by_update_time.limit(per_page).offset((page-1)*per_page)
-    episodes_list = programs_list.map{|p| p.newest_episode }
+    # episodes_list = programs_list.map{|p| p.newest_episode }
+    episodes_list = programs_list.map{|p| p.episodes.order(id: :desc).flatten }.flatten
     episodes_list
   end
 
