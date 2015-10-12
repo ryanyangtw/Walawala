@@ -1,12 +1,13 @@
 // $('#program_<%= @program.id %>_episodes_container').html('');
 
 <% @episodes.each_with_index do |episode, index|%>
+
   var episode = '<%= link_to(path_with_hash_tag(edit_program_episode_path(@program, episode))) do%>\
                   <div class="u_episode_unit"><div class="u_episode_unit_">\
                     <%= image_tag('upload/u_episode_unit.png') %>\
                     <%= render_episode_title_with_index(4 + index + (params[:page].to_i - 1)*params[:per_page].to_i, episode) %>\
                     <div class="u_episode_unit_time">\
-                      <%= render_format_time(@program.created_at) %>\
+                      <%= render_format_time(@program.updated_at) %>\
                     </div>\
                       <div class="u_episode_word">修改此集</div>\
                     </div>\
