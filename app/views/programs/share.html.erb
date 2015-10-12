@@ -9,12 +9,13 @@
 
 <h1> Loading.......</h1>
 
-<h3><%= @program.subject %></h3>
-<h4><%= @program.introduction %></h4>
-<%= image_tag(@program.image_url) %>
-
+<!-- 
+<h3><%#= @program.subject %></h3>
+<h4><%#= @program.introduction %></h4>
+<%#= image_tag(@program.image_url) %>
+ -->
 
 
 <script>
-  // window.location.replace('<%= url_with_hash_tag(program_path(@program)) %>');
+  window.location.replace('<%= url_with_hash_tag(program_path(@program)) %>');
 </script>
