@@ -4,9 +4,7 @@ class Ability
   def initialize(user)
 
     if user.blank?
-      can :read, :all
-      can :search, :all
-      # basic_read_only
+      basic_read_only
     elsif user.role?(:regular)
       #can :read, :all
       #can :manage, Program
@@ -74,6 +72,12 @@ class Ability
 
   protected
 
+  def basic_read_only
+    can :read, :all
+    can :search, :all
+    can :share, Program
+  end
+
   def regular_read_only
     can :read, :all
     can :search, :all
@@ -82,6 +86,7 @@ class Ability
     can :cancel_subscription, Program
     can :more_episodes, Program
     can :brief_information, Program
+    can :share, Program
     can :vote, Episode
     can :more_customize_episodes, Episode
   end
