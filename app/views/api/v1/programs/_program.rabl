@@ -16,6 +16,7 @@ end
 
 node(:subscribed){|program| program.subscribers.exists?(current_user) ? 'true' : 'false'}
 node(:num_of_subscribers){|program| program.subscribers.size}
+node(:share_url){|program| share_program_url(program)}
 
 if[locals[:show_woner]]
   child :owner => "owner" do |owner|
