@@ -139,7 +139,7 @@ div.main_frame              {width: 100%;margin: 0px auto 0px auto; top: 53px;he
 .h_l_item:hover .state_2     {display: none;}
 .h_l_item_btn               {background-image: url(<%= asset_path('home_logged/state_all_btn.png') %>);}
 .state_0       {display: none; background-position: 0px 0px;}
-.state_1       {display: none; background-position: -128px 0px;}
+.state_1       {display: none;background: url(<%= asset_path('audio/audio_icons.png') %>) no-repeat 4px -99px;}
 
 .filter                     {background-image: url(<%= asset_path('color_2.png') %>);}
 .color_0 .filter            {background-image: url(<%= asset_path('color_0.png') %>);}
@@ -313,11 +313,11 @@ filter: alpha(opacity = 0);
 .s_u_line                     {width: 192px; height: 1px; background: #CBCBCB; left: 45px; top: 298px;}
 .s_u_al_word                  {left: 71px; top: 315px;}
 .s_u_login_btn                {width: 100px; height: 31px; left: 122px; top: 307px; font-family: '微軟正黑體','century gothic regular',Arial; color: #000000; font-size: 0.875rem; line-height: 2.214;text-align: center; cursor: pointer;text-decoration: underline;}
-.s_u_alert                    {width: 99%; height: 21px; left: 41px; top: 302px; font-family: '微軟正黑體','century gothic regular',Arial; color: #434345; font-size: 0.675rem; line-height: 2.214;text-align: center; cursor: pointer;text-decoration: none;background-color:#EBD2D3;border: 2px solid #991E23;margin-top:5px;border-radius:5px;}
+.s_u_alert                    {width: 270px; min-height: 21px left: 41px; top: 302px; font-family: '微軟正黑體','century gothic regular',Arial; color: #434345; font-size: 0.675rem; line-height: 2.214;text-align: center; cursor: pointer;text-decoration: none;background-color:#EBD2D3;border: 2px solid #991E23;margin-top:5px;border-radius:5px;overflow-y:visible;}
 .s_u_login_sub                {width: 120px; height: 31px; left: 34px; top: 254px; font-family: '微軟正黑體','century gothic regular',Arial; color: #000000; font-size: 0.875rem; line-height: 2.214;text-align: center; cursor: pointer;}
 
 /*login*/
-.l_alert_frame              {width:280px;height:80px;border-radius:5px;margin:0px auto;overflow:auto;margin:20px auto 30px auto;}
+.l_alert_frame              {width:280px;height:130px;border-radius:5px;margin:0px auto;overflow:auto;margin:20px auto 30px auto;}
 .login                      {padding: 1px 0px 0px 0px; min-height: 98%;}
 .login .footer              {position: absolute; bottom: 0px;}
 .l_frame                    {width: 280px; height: 310px; background: #FFF; border-radius: 5px;}
@@ -426,7 +426,7 @@ filter: alpha(opacity = 100);
 .u_e_cancle                 {position: absolute; width: 75px; height: 31px; left: 351px; top: 201px; font-family: '微軟正黑體','century gothic regular',Arial; color: #666666; font-size: 1rem; text-align: center; line-height: 1.9375;}
 .u_e_complete               {position: absolute; width: 75px; height: 31px; left: 435px; top: 201px; font-family: '微軟正黑體','century gothic regular',Arial; color: #666666; font-size: 1rem; text-align: center; line-height: 1.9375;}
 .u_e_complete_btn           {background-color:#453745;color:#FFF;width:75px;height: 33px;border:none;border-radius: 5px;font-size: 1rem; text-align: center; line-height: 1.9375; }
-.u_e_program_choose         {position: absolute; width: 306px; height: 32px; outline: none; border-radius: 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #999999; border: 1px solid #B3B3B3; font-size: 0.8125rem; left: 202px; top: 42px;}
+.u_e_program_choose         {position: absolute; width: 306px; height: 32px; outline: none; border-radius: 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #999999; border: 1px solid #B3B3B3; font-size: 0.8125rem; left: 202px; top: 42px;overflow: hidden;}
 .u_e_program_choose_btn     {position: absolute; width: 86px; height: 34px; left: -1px; top: -1px; background: #453745; border-radius: 7px 0px 0px 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #FFFFFF; font-size: 0.8125rem; line-height: 2.61538462; text-align: center;}
 .u_e_program_input_btn      {position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; cursor: pointer;
 opacity: 0; 
@@ -448,7 +448,7 @@ filter: alpha(opacity = 0);
 .e_e_program_text           {position: absolute; width: 276px; height: 66px; padding: 15px; resize: none; border-radius: 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #999999; border: 1px solid #B3B3B3; font-size: 0.8125rem; left: 202px; top: 84px; outline: none; background: #FFFFFF;}   
 .e_e_cancle                 {position: absolute; width: 75px; height: 31px; left: 351px; top: 201px; font-family: '微軟正黑體','century gothic regular',Arial; color: #666666; font-size: 1rem; text-align: center; line-height: 1.9375;}
 .e_e_complete               {position: absolute; width: 75px; height: 31px; left: 435px; top: 201px; font-family: '微軟正黑體','century gothic regular',Arial; color: #666666; font-size: 1rem; text-align: center; line-height: 1.9375;}
-.e_e_program_choose         {position: absolute; width: 306px; height: 32px; outline: none; border-radius: 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #999999; border: 1px solid #B3B3B3; font-size: 0.8125rem; left: 202px; top: 42px;}
+.e_e_program_choose         {position: absolute; width: 306px; height: 32px; outline: none; border-radius: 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #999999; border: 1px solid #B3B3B3; font-size: 0.8125rem; left: 202px; top: 42px;overflow: hidden;}
 .e_e_program_choose_btn     {position: absolute; width: 86px; height: 34px; left: -1px; top: -1px; background: #453745; border-radius: 7px 0px 0px 7px; font-family: '微軟正黑體','century gothic regular',Arial; color: #FFFFFF; font-size: 0.8125rem; line-height: 2.61538462; text-align: center;}
 .e_e_program_input_btn      {position: absolute; width: 100%; height: 100%; left: 0px; top: 0px; cursor: pointer;
 opacity: 0; 
@@ -688,7 +688,7 @@ filter: alpha(opacity = 100);
 div.state_in_playing div.songPlay {display:none;}
 div.state_in_playing div.songPause {display:block;}
 .songPlay {display:block;}
-.songPause{display:none;}
+.songPause{display:none;background: url(<%= asset_path('audio/audio_icons.png') %>) no-repeat 10px -67px;width:36px;height:36px;opacity:0.4;margin-left: -4px;}
 /*Song location slider*/
 .songSlider{
     position: absolute; width: 459px; height: 5px; left: 142px; top: 25px; border-radius: 2px; overflow-x: hidden; overflow: visible; background-color: #CCCCCC;

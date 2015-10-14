@@ -28,7 +28,6 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController #Appli
       #respond_with resource
     end
     
-    
     respond_to do |format|
       # Add fotmat.js to handle request from js(ajax)
       @error_messages = @user.errors.full_messages
@@ -68,7 +67,8 @@ class MyDevise::RegistrationsController < Devise::RegistrationsController #Appli
       clean_up_passwords resource
       # respond_with resource
       # render js: "alert('密碼輸入錯誤');"
-      flash[:error] = "密碼輸入錯誤"
+      # flash[:error] = ["密碼輸入錯誤"]
+      flash[:error] = resource.errors.full_messages
       redirect_to path_with_hash_tag(edit_user_registration_path)
     end
 

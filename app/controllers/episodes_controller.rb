@@ -30,7 +30,8 @@ class EpisodesController < ApplicationController
       #@episode.update_program
     else
       flash[:error] = @episode.errors.full_messages
-      render :new
+      redirect_to path_with_hash_tag(new_program_episode_path(@program))
+      # render :new
     end
 
     #if(is_program_exist?(params[:subject]))
@@ -52,10 +53,11 @@ class EpisodesController < ApplicationController
       # redirect_to program_path(@program)
     else
       flash[:error] = @episode.errors.full_messages
-      render :edit
+      redirect_to path_with_hash_tag(edit_program_episode_path(@program, @episode))
     end
-
   end
+
+
 
   def destroy
 

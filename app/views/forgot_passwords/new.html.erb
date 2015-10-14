@@ -1,5 +1,10 @@
   <div class="bg-green">  
     <div class="relative reset_password">
+    <div class="l_alert_frame error_messages">
+       <% if flash[:error].present? %>
+        <div class='s_u_alert'> <%= flash[:error] %> </div>
+      <% end %>
+      </div>
         <div class="r_p_frame poz_center">
             <div class="absolute r_p_title">Forget Password ?</div>
             <div class="absolute r_p_input_box">

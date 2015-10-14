@@ -1,11 +1,7 @@
 <div class="bg-green">
   <div class="relative setting">
     <%#= image_tag('upload/demo.jpg') %>
-    <div class="r_alert_frame error_messages">
-      <% if flash[:error].present? %>
-        <div class='s_u_alert'> <%= flash[:error] %> </div>
-      <% end %>
-    </div>
+    <%= render(partial: 'shared/error_messages') if flash[:error].present? %>
 
     <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put , :multipart => true}) do |f| %>
       <div class="setting_frame poz_center">

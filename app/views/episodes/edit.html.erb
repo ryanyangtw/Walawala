@@ -1,5 +1,9 @@
  <div class="bg-purple"> 
   <div class="relative edit_episode">
+
+  <%= render(partial: 'shared/error_messages') if flash[:error].present? %>
+
+  
         <div class="e_e_frame poz_center">
             <p class="e_e_title">修改此集</p>
             <div class="e_e_box">

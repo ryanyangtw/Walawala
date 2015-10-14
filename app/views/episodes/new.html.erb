@@ -1,5 +1,10 @@
  <div class="bg-purple">
   <div class="relative upload_episode">
+
+
+    <%= render(partial: 'shared/error_messages') if flash[:error].present? %>
+
+
       <div class="u_e_frame poz_center">
           <p class="u_e_title">上傳新一集</p>
 

@@ -7,6 +7,9 @@
   <div class="bg-green">
     <div class="relative login">
       <div class="l_alert_frame error_messages">
+       <% if flash[:error].present? %>
+        <div class='s_u_alert'> <%= flash[:error] %> </div>
+      <% end %>
       </div>
         <div class="l_frame poz_center">
             <div class="absolute l_title">SIGN IN YOUR ACCOUNT</div>

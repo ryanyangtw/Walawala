@@ -1,7 +1,12 @@
 <div class="bg-green">
  <div class="relative sign_up">
-        <div class="s_u_alert_frame error_messages">
+
+        <div class="l_alert_frame error_messages">
+          <% if flash[:error].present? %>
+            <div class='s_u_alert'> <%= flash[:error] %> </div>
+          <% end %>
         </div>
+
         <div class="s_u_frame poz_center">
             <div class="absolute s_u_title">註冊&nbsp;walawala</div>
             <div class="absolute s_u_sub_title"></div>

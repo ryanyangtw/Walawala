@@ -1,5 +1,7 @@
 <div class="bg-purple">
   <div class="relative upload_program">
+        <%= render(partial: 'shared/error_messages') if flash[:error].present? %>
+        
           <div class="u_p_frame poz_center">
               <p class="u_p_title">建立新節目</p>
 
