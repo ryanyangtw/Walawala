@@ -97,7 +97,7 @@
                   </div>
                   <div class="p_g_item_info">
                       <p>
-                          <%= render_episode_description(episode) %>
+                          <%= render_episode_description_with_limit_length(episode) %>
                       </p>
 
                       <% if user_signed_in? %>

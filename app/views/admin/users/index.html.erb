@@ -49,7 +49,7 @@
                 <% end %>
               </td>
      
-              <td><%= link_to('刪除', admin_user_path(user), method: :delete, class: 'btn btn-danger btn-sm')%></td>
+              <td><%= link_to('刪除', admin_user_path(user), method: :delete, class: 'btn btn-danger btn-sm',  data: {confirm: "此操作無法回朔喔！確定要刪除此帳號？"})%></td>
             </tr>
           
           <%end%> 

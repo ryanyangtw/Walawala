@@ -9,7 +9,11 @@ module EpisodesHelper
   end
 
   def render_episode_description(episode)
-    episode.description
+    simple_format(episode.description)
+  end
+
+  def render_episode_description_with_limit_length(episode)
+    simple_format(truncate(episode.description, length: 100))
   end
 
 
