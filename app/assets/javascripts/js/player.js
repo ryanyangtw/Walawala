@@ -1,4 +1,7 @@
 $(document).ready(function(){
+
+     $('input').attr('autocomplete', 'off');
+
             $("div.volume").on('click',function(){
                 $('.volumeControl').fadeToggle(100);
             });

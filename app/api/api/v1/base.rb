@@ -11,8 +11,10 @@ module API
       helpers API::V1::StatusHelpers
 			mount API::V1::UnauthenticatedRequestsAPI
 	    mount API::V1::AuthenticatedRequestsAPI
-		  add_swagger_documentation api_version: 'v1',
-                                hide_documentation_path: true
+
+      # Hide the api document
+		  # add_swagger_documentation api_version: 'v1',
+    #                             hide_documentation_path: true
 
 
 		end

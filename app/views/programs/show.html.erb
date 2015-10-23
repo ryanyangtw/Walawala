@@ -64,8 +64,21 @@
             <div class="relative p_g_describe"> <%= @program.introduction %> </div>
         </div>
 
-
+        
         <ul class="relative p_g_content">
+          <div class="relative " style="text-align: right;
+    right: -15px;">
+              <%= link_to(path_with_hash_tag(program_path(@program))) do %>
+                <div style="width:20px;display:inline-block;margin-top:0px;height:15px;overflow:hidden;"><img style="width:100%;height:auto;" src="http://cdn.mysitemyway.com/icons-watermarks/simple-blue-gray/bfa/bfa_caret-up/bfa_caret-up_simple-blue-gray_512x512.png" ></div>由新到舊
+              <% end %>
+              <!-- <a href="#"><div style="width:20px;display:inline-block;margin-top:0px;height:15px;overflow:hidden;"><img style="width:100%;height:auto;" src="http://cdn.mysitemyway.com/icons-watermarks/simple-blue-gray/bfa/bfa_caret-up/bfa_caret-up_simple-blue-gray_512x512.png" ></div>由新到舊</a> -->
+
+              <%= link_to(path_with_hash_tag(program_path(@program, order: :asc))) do %>
+                <div style="width:20px;display:inline-block;margin-top:0px;height:15px;overflow:hidden;"><img style="width:100%;height:auto;" src="http://cdn.mysitemyway.com/icons-watermarks/simple-blue-gray/bfa/bfa_caret-down/bfa_caret-down_simple-blue-gray_512x512.png" ></div>由舊到新
+              <% end %>
+              <!-- <a href="#"><div style="width:20px;display:inline-block;margin-top:0px;height:15px;overflow:hidden;"><img style="width:100%;height:auto;" src="http://cdn.mysitemyway.com/icons-watermarks/simple-blue-gray/bfa/bfa_caret-down/bfa_caret-down_simple-blue-gray_512x512.png" ></div>由舊到新</a> -->
+          </div>
+
         	<% @episodes.each do |episode| %>
             <div class="div_episode">
           		<div class="p_g_item">
@@ -73,8 +86,11 @@
                       <div class="p_g_item_name"> <%= render_episode_title(episode) %> </div>
                       <div class="p_g_date"> <%= render_format_time(episode.updated_at) %> </div>
                       <div class="p_g_more hover_opacity">
-                      	<%= image_tag('program/p_g_more_on.png') %>
-                      	<%= image_tag('program/p_g_more_off.png') %>
+
+                      <div class="p_g_more_on"  style="margin: 3px 0px 0px 20px;color:#68A098;">Less</div>
+                      <div class="p_g_more_off" style="margin: 3px 0px 0px 20px;color:#68A098;">More</div>
+                      	<%# image_tag('program/p_g_more_on.png') %>
+                      	<%# image_tag('program/p_g_more_off.png') %>
                           <!-- <img class="p_g_more_on" src="images/program/p_g_more_on.png">
                           <img class="p_g_more_off" src="images/program/p_g_more_off.png"> -->
                       </div>

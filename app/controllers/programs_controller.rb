@@ -14,8 +14,18 @@ class ProgramsController < ApplicationController
 
     #@program = Program.includes(:episodes, :categories).find(params[:id])
     @program = Program.includes(:episodes, :categories, :owner).find(params[:id])
-    @episodes = @program.episodes.order(id: :desc).paginate(page: params[:page], per_page: 20)
-    @comment = Comment.new
+    @comment = Comment.new 
+
+    if params[:order]
+      order = params[:order].to_sym
+      @episodes = @program.episodes.order(id: order).paginate(page: params[:page], per_page: 20)
+    else
+      @episodes = @program.episodes.order(id: :desc).paginate(page: params[:page], per_page: 20)
+    end
+
+    # @program = Program.includes(:episodes, :categories, :owner).find(params[:id])
+    # @episodes = @program.episodes.order(id: :desc).paginate(page: params[:page], per_page: 20)
+    # @comment = Comment.new
     #@episodes = @program.episodes
     #@episodes = [] if(@episodes == nil)
 
